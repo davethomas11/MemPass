@@ -1,0 +1,26 @@
+PODS:
+  - Crashlytics (3.4.1):
+    - Fabric (~> 1.6.0)
+  - Fabric (1.6.1)
+  - R.swift (0.13.0)
+  - SSKeychain (1.2.3)
+  - SWRevealViewController (2.3.0)
+  - Toast (3.0)
+
+DEPENDENCIES:
+  - Crashlytics
+  - Fabric
+  - R.swift
+  - SSKeychain
+  - SWRevealViewController
+  - Toast
+
+SPEC CHECKSUMS:
+  Crashlytics: 41574a245bc6ae10c55d57f385ebd2004e5bee05
+  Fabric: bf0ceb04e7c924090efc5f8c55e4fbcca189e0a0
+  R.swift: 07e0796d2b4d50b875eb7de9bd8e6193e15c6434
+  SSKeychain: 3f42991739c6c60a9cf1bbd4dff6c0d3694bcf3d
+  SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
+  Toast: 32c59229abfcf41850162b83bb9259dc84372473
+
+COCOAPODS: 0.38.2

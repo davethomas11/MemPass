@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Pods.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SSKeychain.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SWRevealViewController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Toast.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>30041BA2C05F40F1081A70370B599E76</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>594434B534C8C8DA75BADFA05F5E996B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7E6DF387BA109B016761212BCB22AB0C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EA3931D121EE165685E6E6C251F033C0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
