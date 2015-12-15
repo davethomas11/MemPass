@@ -13,6 +13,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var memPass: UITextField!
     @IBOutlet weak var memPassResult: UITextView!
     
+    @IBOutlet weak var memPassTitle: UILabel!
+
     
     @IBOutlet weak var showPassword: UIButton!
     @IBOutlet weak var copyToClipbaord: UIButton!
@@ -36,12 +38,28 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "resignText"))
         self.view.userInteractionEnabled = true
         
-        memPass.attributedPlaceholder = NSAttributedString(string: "Enter a simple phrase", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
+        if let font = UIFont(name: "Share-TechMono", size: 22) {
+        
+            memPass.attributedPlaceholder = NSAttributedString(string: "Enter a simple phrase",
+                attributes: [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: font])
+        }
         
         showPassword.layer.cornerRadius = showPassword.bounds.height / 2
         copyToClipbaord.layer.cornerRadius = copyToClipbaord.bounds.height / 2
         showPassword.hidden = true
         copyToClipbaord.hidden = true
+        
+        self.navigationController?.navigationBarHidden = true
+        
+        memPassTitle.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tapTitle:"))
+        
+    }
+    
+    func tapTitle(send: UITapGestureRecognizer) {
+        
+        let loc = send.locationInView(self.view)
+        self.navigationController?.radialPopViewController(self, x: loc.x, y: loc.y, comlititionBlock: {})
+        
     }
     
     func clear() {
@@ -110,6 +128,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             showPassword.show()
             copyToClipbaord.show()
             passHidden = true
+            
+            self.view.makeToast("Generated unique password for your phrase and your device")
             
             return true
         }

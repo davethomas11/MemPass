@@ -28,16 +28,11 @@ struct R {
   
   struct image {
     static var brain: UIImage? { return UIImage(named: "Brain", inBundle: _R.hostingBundle, compatibleWithTraitCollection: nil) }
-    static var brainKey: UIImage? { return UIImage(named: "BrainKey", inBundle: _R.hostingBundle, compatibleWithTraitCollection: nil) }
-    static var memPassBrand2: UIImage? { return UIImage(named: "MemPass Brand2", inBundle: _R.hostingBundle, compatibleWithTraitCollection: nil) }
-    static var memPassName: UIImage? { return UIImage(named: "MemPassName", inBundle: _R.hostingBundle, compatibleWithTraitCollection: nil) }
-    static var pw: UIImage? { return UIImage(named: "pw", inBundle: _R.hostingBundle, compatibleWithTraitCollection: nil) }
-    static var smartPhoneTabletLaptopDesktopImageVectorFileRepresentingSetElectronicDevices36472739: UIImage? { return UIImage(named: "smart-phone-tablet-laptop-desktop-image-vector-file-representing-set-electronic-devices-36472739", inBundle: _R.hostingBundle, compatibleWithTraitCollection: nil) }
-    static var thin0645_atm_passcode_keypad_password_access512: UIImage? { return UIImage(named: "thin-0645_atm_passcode_keypad_password_access-512", inBundle: _R.hostingBundle, compatibleWithTraitCollection: nil) }
+    static var hamby: UIImage? { return UIImage(named: "hamby", inBundle: _R.hostingBundle, compatibleWithTraitCollection: nil) }
   }
   
   struct nib {
-    static var onBoarding1ViewController: _R.nib._OnBoarding1ViewController { return _R.nib._OnBoarding1ViewController() }
+    static var onBoardingViewController: _R.nib._OnBoardingViewController { return _R.nib._OnBoardingViewController() }
     static var view: _R.nib._View { return _R.nib._View() }
   }
   
@@ -64,15 +59,18 @@ struct R {
     }
     
     struct main {
-      static var initialViewController: ViewController? { return instance.instantiateInitialViewController() as? ViewController }
+      static var appViewController: ViewController? { return instance.instantiateViewControllerWithIdentifier("appViewController") as? ViewController }
+      static var initialViewController: UINavigationController? { return instance.instantiateInitialViewController() as? UINavigationController }
       static var instance: UIStoryboard { return UIStoryboard(name: "Main", bundle: _R.hostingBundle) }
+      static var onBoarding: OnBoardingViewController? { return instance.instantiateViewControllerWithIdentifier("onBoarding") as? OnBoardingViewController }
       
       static func validateImages() {
         
       }
       
       static func validateViewControllers() {
-        
+        assert(appViewController != nil, "[R.swift] ViewController with identifier 'appViewController' could not be loaded from storyboard 'Main' as 'ViewController'.")
+        assert(onBoarding != nil, "[R.swift] ViewController with identifier 'onBoarding' could not be loaded from storyboard 'Main' as 'OnBoardingViewController'.")
       }
     }
   }
@@ -82,9 +80,9 @@ struct _R {
   static var hostingBundle: NSBundle? { return NSBundle(identifier: "com.DaveAnthonyThomas.MemPass") }
   
   struct nib {
-    struct _OnBoarding1ViewController: NibResource {
-      var instance: UINib { return UINib.init(nibName: "OnBoarding1ViewController", bundle: _R.hostingBundle) }
-      var name: String { return "OnBoarding1ViewController" }
+    struct _OnBoardingViewController: NibResource {
+      var instance: UINib { return UINib.init(nibName: "OnBoardingViewController", bundle: _R.hostingBundle) }
+      var name: String { return "OnBoardingViewController" }
       
       func firstView(ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]?) -> UIView? {
         return instantiateWithOwner(ownerOrNil, options: optionsOrNil)[0] as? UIView

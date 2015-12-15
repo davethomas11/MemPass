@@ -20,6 +20,7 @@
                 <outlet property="copyToClipbaord" destination="tDK-et-etN" id="tTW-ov-ffE"/>
                 <outlet property="memPass" destination="akp-Xw-EXh" id="fuP-FS-uSe"/>
                 <outlet property="memPassResult" destination="SXu-KQ-NRx" id="5O5-17-JyU"/>
+                <outlet property="memPassTitle" destination="jbX-N6-c6R" id="b1o-gF-Qdb"/>
                 <outlet property="showPassword" destination="3HS-iq-vUx" id="E8I-0f-tpT"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Ibd-Ky-rO0"/>
             </connections>
@@ -43,15 +44,15 @@
                         <outlet property="delegate" destination="-1" id="NDb-5d-ymS"/>
                     </connections>
                 </textField>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MemPass" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jbX-N6-c6R">
-                    <rect key="frame" x="0.0" y="40" width="600" height="84"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="SXu-KQ-NRx">
+                    <rect key="frame" x="15" y="330" width="570" height="60"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="84" id="f8a-4z-dcA"/>
+                        <constraint firstAttribute="height" constant="60" id="PzP-6F-mtf"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="ZrnicRg-Regular" family="Zrnic" pointSize="40"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                    <color key="textColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="Share-TechMono" family="Share-TechMono" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3HS-iq-vUx">
                     <rect key="frame" x="169" y="400" width="53" height="30"/>
                     <color key="backgroundColor" red="0.13725490196078433" green="0.043137254901960784" blue="0.027450980392156862" alpha="1" colorSpace="calibratedRGB"/>
@@ -84,38 +85,54 @@
                         <action selector="copyToClipboard:" destination="-1" eventType="touchUpInside" id="ASL-7a-taY"/>
                     </connections>
                 </button>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="SXu-KQ-NRx">
-                    <rect key="frame" x="15" y="330" width="570" height="60"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AJQ-Ca-ifh">
+                    <rect key="frame" x="522" y="40" width="62" height="55"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="60" id="PzP-6F-mtf"/>
+                        <constraint firstAttribute="width" constant="62" id="5Jd-pF-0tt"/>
+                        <constraint firstAttribute="height" constant="55" id="XDA-or-crb"/>
                     </constraints>
-                    <color key="textColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" name="Share-TechMono" family="Share-TechMono" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                </textView>
+                    <state key="normal" image="hamby"/>
+                </button>
+                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MemPass" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jbX-N6-c6R">
+                    <rect key="frame" x="213" y="26" width="174" height="84"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="174" id="szY-4K-bTH"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="ZrnicRg-Regular" family="Zrnic" pointSize="40"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                    <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <size key="shadowOffset" width="-1" height="1"/>
+                </label>
             </subviews>
-            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="jbX-N6-c6R" firstAttribute="centerY" secondItem="AJQ-Ca-ifh" secondAttribute="centerY" id="2VP-IL-FNJ"/>
                 <constraint firstItem="tDK-et-etN" firstAttribute="top" secondItem="SXu-KQ-NRx" secondAttribute="bottom" constant="10" id="2qc-6T-JHr"/>
                 <constraint firstItem="3HS-iq-vUx" firstAttribute="top" secondItem="SXu-KQ-NRx" secondAttribute="bottom" constant="10" id="89y-3H-qYK"/>
                 <constraint firstItem="3HS-iq-vUx" firstAttribute="leading" secondItem="akp-Xw-EXh" secondAttribute="leading" id="Bfd-Qo-gKU"/>
                 <constraint firstItem="SXu-KQ-NRx" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="JHD-2r-Nkr"/>
-                <constraint firstItem="jbX-N6-c6R" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="40" id="KAj-iy-GmL"/>
                 <constraint firstItem="SXu-KQ-NRx" firstAttribute="top" secondItem="akp-Xw-EXh" secondAttribute="bottom" id="NEK-zn-10R"/>
-                <constraint firstItem="jbX-N6-c6R" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="NS3-qS-aj8"/>
+                <constraint firstItem="AJQ-Ca-ifh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="40" id="Qha-z9-Ntr"/>
                 <constraint firstItem="akp-Xw-EXh" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ZVo-Lc-aHA"/>
+                <constraint firstAttribute="trailing" secondItem="AJQ-Ca-ifh" secondAttribute="trailing" constant="16" id="apX-7d-klr"/>
+                <constraint firstItem="jbX-N6-c6R" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="26" id="kVV-Gf-5j6"/>
+                <constraint firstItem="jbX-N6-c6R" firstAttribute="centerX" secondItem="akp-Xw-EXh" secondAttribute="centerX" id="q9p-FA-AP8"/>
                 <constraint firstItem="tDK-et-etN" firstAttribute="trailing" secondItem="akp-Xw-EXh" secondAttribute="trailing" id="r9x-oQ-Ee7"/>
                 <constraint firstAttribute="trailing" secondItem="SXu-KQ-NRx" secondAttribute="trailing" constant="15" id="wiT-aW-WKe"/>
-                <constraint firstAttribute="trailing" secondItem="jbX-N6-c6R" secondAttribute="trailing" id="xS5-ZM-D7O"/>
                 <constraint firstItem="akp-Xw-EXh" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ymJ-cI-mCR"/>
             </constraints>
+            <point key="canvasLocation" x="697" y="375"/>
         </view>
         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RbB-GJ-jzr">
             <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
             <nil key="highlightedColor"/>
         </label>
     </objects>
+    <resources>
+        <image name="hamby" width="1024" height="768"/>
+    </resources>
 </document>

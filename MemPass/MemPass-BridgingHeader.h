@@ -12,5 +12,7 @@
 #import "SSKeychain.h"
 #import "Sha2.h"
 #import "UIView+Toast.h"
+#import "UINavigationController+RadialTransaction.h"
+
 
 #endif /* MemPass_BridgingHeader_h */
