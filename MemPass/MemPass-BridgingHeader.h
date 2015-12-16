@@ -13,6 +13,6 @@
 #import "Sha2.h"
 #import "UIView+Toast.h"
 #import "UINavigationController+RadialTransaction.h"
-
+#import "SWRevealViewController.h"
 
 #endif /* MemPass_BridgingHeader_h */

@@ -15,10 +15,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var memPassTitle: UILabel!
 
+    @IBOutlet weak var memPassMenuButton: UIButton!
     
     @IBOutlet weak var showPassword: UIButton!
     @IBOutlet weak var copyToClipbaord: UIButton!
     
+    @IBOutlet weak var buttonTouchArea: UIView!
     
     var memPasser:MemPass = MemPass()
     var password:String?
@@ -33,7 +35,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         memPassResult.addGestureRecognizer(resultTap)
         memPassResult.userInteractionEnabled = true
         
-        self.view.backgroundColor = UIColor.gradientFromColor(UIColor.colorFromHex("#4f4a39"), toColor: UIColor.colorFromHex("#685f43"), withHeight: Int(self.view.bounds.height))
+        self.view.backgroundColor = UIColor.gradientFromColor(UIColor.colorFromHex("#31302b"), toColor: UIColor.colorFromHex("#685f43"), withHeight: Int(self.view.bounds.height))
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "resignText"))
         self.view.userInteractionEnabled = true
@@ -52,6 +54,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.navigationController?.navigationBarHidden = true
         
         memPassTitle.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tapTitle:"))
+        
+        if let reveal = self.revealViewController() {
+            
+            self.memPassMenuButton.addTarget(reveal, action: "rightRevealToggle:", forControlEvents: UIControlEvents.TouchUpInside)
+            self.view.addGestureRecognizer(reveal.panGestureRecognizer())
+         
+            buttonTouchArea.userInteractionEnabled = true
+            buttonTouchArea.addGestureRecognizer(UITapGestureRecognizer(target: reveal, action: "rightRevealToggle:"))
+        }
+        
         
     }
     
@@ -128,8 +140,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
             showPassword.show()
             copyToClipbaord.show()
             passHidden = true
-            
-            self.view.makeToast("Generated unique password for your phrase and your device")
             
             return true
         }

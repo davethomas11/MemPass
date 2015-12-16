@@ -27,7 +27,7 @@ class OnBoardingViewController: UIViewController {
     func gotoApp(sender: UITapGestureRecognizer) {
         
         let loc = sender.locationInView(self.view)
-        self.navigationController?.radialPushViewController(R.storyboard.main.appViewController, x: loc.x, y: loc.y, comlititionBlock: {})
+        self.navigationController?.radialPushViewController(R.storyboard.main.swReveal, x: loc.x, y: loc.y, comlititionBlock: {})
     }
 
     override func didReceiveMemoryWarning() {

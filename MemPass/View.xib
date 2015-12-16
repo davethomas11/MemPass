@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Share-TechMono.ttf">
@@ -17,8 +18,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController" customModule="MemPass" customModuleProvider="target">
             <connections>
+                <outlet property="buttonTouchArea" destination="OOG-54-xDt" id="eQw-H0-VDJ"/>
                 <outlet property="copyToClipbaord" destination="tDK-et-etN" id="tTW-ov-ffE"/>
                 <outlet property="memPass" destination="akp-Xw-EXh" id="fuP-FS-uSe"/>
+                <outlet property="memPassMenuButton" destination="AJQ-Ca-ifh" id="fhn-KD-I7S"/>
                 <outlet property="memPassResult" destination="SXu-KQ-NRx" id="5O5-17-JyU"/>
                 <outlet property="memPassTitle" destination="jbX-N6-c6R" id="b1o-gF-Qdb"/>
                 <outlet property="showPassword" destination="3HS-iq-vUx" id="E8I-0f-tpT"/>
@@ -53,6 +56,17 @@
                     <fontDescription key="fontDescription" name="Share-TechMono" family="Share-TechMono" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
+                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MemPass" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jbX-N6-c6R">
+                    <rect key="frame" x="213" y="26" width="174" height="84"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="174" id="szY-4K-bTH"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="ZrnicRg-Regular" family="Zrnic" pointSize="40"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                    <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <size key="shadowOffset" width="-1" height="1"/>
+                </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3HS-iq-vUx">
                     <rect key="frame" x="169" y="400" width="53" height="30"/>
                     <color key="backgroundColor" red="0.13725490196078433" green="0.043137254901960784" blue="0.027450980392156862" alpha="1" colorSpace="calibratedRGB"/>
@@ -85,42 +99,38 @@
                         <action selector="copyToClipboard:" destination="-1" eventType="touchUpInside" id="ASL-7a-taY"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OOG-54-xDt">
+                    <rect key="frame" x="522" y="8" width="78" height="127"/>
+                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AJQ-Ca-ifh">
-                    <rect key="frame" x="522" y="40" width="62" height="55"/>
+                    <rect key="frame" x="537" y="49" width="48" height="37"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="62" id="5Jd-pF-0tt"/>
-                        <constraint firstAttribute="height" constant="55" id="XDA-or-crb"/>
+                        <constraint firstAttribute="width" constant="48" id="E6w-vl-28z"/>
+                        <constraint firstAttribute="height" constant="37" id="ye2-EZ-PZc"/>
                     </constraints>
                     <state key="normal" image="hamby"/>
                 </button>
-                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MemPass" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jbX-N6-c6R">
-                    <rect key="frame" x="213" y="26" width="174" height="84"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="174" id="szY-4K-bTH"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="ZrnicRg-Regular" family="Zrnic" pointSize="40"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                    <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <size key="shadowOffset" width="-1" height="1"/>
-                </label>
             </subviews>
             <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="jbX-N6-c6R" firstAttribute="centerY" secondItem="AJQ-Ca-ifh" secondAttribute="centerY" id="2VP-IL-FNJ"/>
+                <constraint firstItem="OOG-54-xDt" firstAttribute="centerX" secondItem="AJQ-Ca-ifh" secondAttribute="centerX" id="1GT-AU-CJX"/>
                 <constraint firstItem="tDK-et-etN" firstAttribute="top" secondItem="SXu-KQ-NRx" secondAttribute="bottom" constant="10" id="2qc-6T-JHr"/>
                 <constraint firstItem="3HS-iq-vUx" firstAttribute="top" secondItem="SXu-KQ-NRx" secondAttribute="bottom" constant="10" id="89y-3H-qYK"/>
                 <constraint firstItem="3HS-iq-vUx" firstAttribute="leading" secondItem="akp-Xw-EXh" secondAttribute="leading" id="Bfd-Qo-gKU"/>
+                <constraint firstItem="AJQ-Ca-ifh" firstAttribute="centerY" secondItem="jbX-N6-c6R" secondAttribute="centerY" id="FPw-ks-6Cv"/>
                 <constraint firstItem="SXu-KQ-NRx" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="JHD-2r-Nkr"/>
                 <constraint firstItem="SXu-KQ-NRx" firstAttribute="top" secondItem="akp-Xw-EXh" secondAttribute="bottom" id="NEK-zn-10R"/>
-                <constraint firstItem="AJQ-Ca-ifh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="40" id="Qha-z9-Ntr"/>
+                <constraint firstItem="OOG-54-xDt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="Oao-Zb-cga"/>
+                <constraint firstAttribute="bottom" secondItem="OOG-54-xDt" secondAttribute="bottom" constant="465" id="Qoc-Yd-xe6"/>
+                <constraint firstItem="AJQ-Ca-ifh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="49" id="Wvt-Rq-y7c"/>
                 <constraint firstItem="akp-Xw-EXh" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ZVo-Lc-aHA"/>
-                <constraint firstAttribute="trailing" secondItem="AJQ-Ca-ifh" secondAttribute="trailing" constant="16" id="apX-7d-klr"/>
                 <constraint firstItem="jbX-N6-c6R" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="26" id="kVV-Gf-5j6"/>
                 <constraint firstItem="jbX-N6-c6R" firstAttribute="centerX" secondItem="akp-Xw-EXh" secondAttribute="centerX" id="q9p-FA-AP8"/>
                 <constraint firstItem="tDK-et-etN" firstAttribute="trailing" secondItem="akp-Xw-EXh" secondAttribute="trailing" id="r9x-oQ-Ee7"/>
+                <constraint firstAttribute="trailing" secondItem="OOG-54-xDt" secondAttribute="trailing" id="wMT-zL-2HC"/>
                 <constraint firstAttribute="trailing" secondItem="SXu-KQ-NRx" secondAttribute="trailing" constant="15" id="wiT-aW-WKe"/>
                 <constraint firstItem="akp-Xw-EXh" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ymJ-cI-mCR"/>
+                <constraint firstItem="AJQ-Ca-ifh" firstAttribute="trailing" secondItem="SXu-KQ-NRx" secondAttribute="trailing" id="yxj-n0-5W4"/>
             </constraints>
             <point key="canvasLocation" x="697" y="375"/>
         </view>
@@ -133,6 +143,6 @@
         </label>
     </objects>
     <resources>
-        <image name="hamby" width="1024" height="768"/>
+        <image name="hamby" width="600" height="400"/>
     </resources>
 </document>

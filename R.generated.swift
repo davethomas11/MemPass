@@ -37,11 +37,14 @@ struct R {
   }
   
   struct reuseIdentifier {
-    
+    static var sideBarItem: ReuseIdentifier<SideBarTableViewCell> { return ReuseIdentifier(identifier: "sideBarItem") }
   }
   
   struct segue {
-    
+    struct sWRevealViewController {
+      static var sw_front: StoryboardSegueIdentifier<SWRevealViewControllerSegueSetController, SWRevealViewController, UINavigationController> { return StoryboardSegueIdentifier(identifier: "sw_front") }
+      static var sw_right: StoryboardSegueIdentifier<SWRevealViewControllerSegueSetController, SWRevealViewController, SideBarTableControllerTableViewController> { return StoryboardSegueIdentifier(identifier: "sw_right") }
+    }
   }
   
   struct storyboard {
@@ -63,6 +66,7 @@ struct R {
       static var initialViewController: UINavigationController? { return instance.instantiateInitialViewController() as? UINavigationController }
       static var instance: UIStoryboard { return UIStoryboard(name: "Main", bundle: _R.hostingBundle) }
       static var onBoarding: OnBoardingViewController? { return instance.instantiateViewControllerWithIdentifier("onBoarding") as? OnBoardingViewController }
+      static var swReveal: SWRevealViewController? { return instance.instantiateViewControllerWithIdentifier("swReveal") as? SWRevealViewController }
       
       static func validateImages() {
         
@@ -71,6 +75,7 @@ struct R {
       static func validateViewControllers() {
         assert(appViewController != nil, "[R.swift] ViewController with identifier 'appViewController' could not be loaded from storyboard 'Main' as 'ViewController'.")
         assert(onBoarding != nil, "[R.swift] ViewController with identifier 'onBoarding' could not be loaded from storyboard 'Main' as 'OnBoardingViewController'.")
+        assert(swReveal != nil, "[R.swift] ViewController with identifier 'swReveal' could not be loaded from storyboard 'Main' as 'SWRevealViewController'.")
       }
     }
   }

@@ -10,22 +10,19 @@ import UIKit
 
 class MemPass: NSObject {
 
-    private let CLEAN_INSTALL = "ProkChopMcNelly"
+    private let OPTIONS_SET = "{OPTSET}"
     private let SERVICE = "MemPass"
     private let MEMPASS = "mem@pass.com"
-    private let SPECIAL_CHARS = ["!","@","#","$","%","^","`","~","&","*","(",")"]
     
     private var account:String = ""
     private(set) var seed:String = ""
-    
+    var options:MemPassOptions = MemPassOptions()
     
     override init() {
         super.init()
         
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let isNotFreshInstall = defaults.boolForKey(CLEAN_INSTALL)
         
-        if let seed = SSKeychain.passwordForService(SERVICE, account: getAccount()) where isNotFreshInstall {
+        if let seed = SSKeychain.passwordForService(SERVICE, account: getAccount()) {
          
             self.seed = seed
         } else {
@@ -33,8 +30,11 @@ class MemPass: NSObject {
             reSeed()
         }
         
-        defaults.setBool(true, forKey: CLEAN_INSTALL)
-        defaults.synchronize()
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let optionSet = defaults.stringForKey(OPTIONS_SET) {
+            options.loadOptions(optionSet)
+        }
+        
     }
     
     private func getAccount() -> String {
@@ -81,52 +81,126 @@ class MemPass: NSObject {
         
     }
     
+    private func specialCharPass(inS:String) -> String {
+        
+        var occurences = [Character:Int]()
+        var memPass = inS
+        
+        for character in inS.characters {
+            
+            if occurences[character] == nil {
+                occurences[character] = 1
+            } else {
+                occurences[character]!++
+            }
+            
+        }
+        
+        var index = 0
+        var sorted = occurences.sort({ $0.1 < $1.1 })
+        var specialChars = options.specialChars
+
+        while specialChars.count > 0 && sorted.count > 0 {
+            
+            let character = sorted[0].0
+            let scalars = String(character).unicodeScalars
+            let value = Int(scalars[scalars.startIndex].value)
+            var specialCharIndex = value % specialChars.count
+            
+            if specialCharIndex >= specialChars.count || specialCharIndex < 0 {
+                specialCharIndex = 0
+            }
+            
+            let specialChar = specialChars[specialCharIndex]
+            
+            if index % options.capitalLetterMod == 0 {
+                
+                memPass = memPass.stringByReplacingOccurrencesOfString(String(character), withString: specialChar)
+            
+            } else if let range = memPass.rangeOfString(String(character)){
+                
+                 memPass = memPass.stringByReplacingCharactersInRange(range, withString: specialChar)
+            }
+            
+            index++
+            
+            sorted.removeFirst()
+            specialChars.removeAtIndex(specialCharIndex)
+        }
+        
+        return memPass
+    }
+    
+    func capitalLetterPass(inString:String) -> String {
+        
+        var memPassSum = 0
+        for character in inString.characters {
+            let scalars = String(character).unicodeScalars
+            let value = Int(scalars[scalars.startIndex].value)
+            
+            memPassSum += value
+        }
+        
+        let target = memPassSum % options.capitalLetterMod
+        var found = 0
+        
+        var memPass = inString
+        let alpha = NSCharacterSet.letterCharacterSet()
+        var hasUpperCase = false
+        for character in memPass.characters {
+            let unicode = String(character)
+            if let first = unicode.unicodeScalars.first where alpha.longCharacterIsMember(first.value) {
+                
+                memPass = memPass.stringByReplacingOccurrencesOfString(unicode, withString: unicode.uppercaseString, options: NSStringCompareOptions.LiteralSearch, range: memPass.rangeOfString(unicode))
+                hasUpperCase = true
+                
+                found++
+                
+                if (target == found) {
+                    break;
+                }
+            }
+        }
+        
+        if !hasUpperCase {
+            memPass += "A"
+        }
+        
+        return memPass
+    }
+    
+    private func removeNumbersPass(inString:String) -> String {
+        
+        return inString.stringByReplacingOccurrencesOfString(inString, withString: "[0-9]", options: NSStringCompareOptions.RegularExpressionSearch, range: inString.rangeOfString(inString))
+    }
+    
     func generate(memPass:String) -> String? {
         
         let hasher = Sha2()
         
+        
         if let firstPass = hasher.sha256("\(memPass)-\(String(memPass.characters.reverse()))-|\(seed).)") {
             
-            var occurences = [Character:Int]()
             var memPass = firstPass
-            
-            for character in firstPass.characters {
+            if options.specialChars.count > 0 {
                 
-                if occurences[character] == nil {
-                    occurences[character] = 1
-                } else {
-                    occurences[character]!++
-                }
-     
+                memPass = specialCharPass(memPass)
             }
-
-            var index = 0
-            let sorted = occurences.sort({ $0.1 < $1.1 })
-            for (character,_) in sorted  {
+            
+            if options.hasCapital {
                 
-                if index >= SPECIAL_CHARS.count {
-                    break
-                }
-                memPass = memPass.stringByReplacingOccurrencesOfString(String(character), withString: SPECIAL_CHARS[index])
-                index++
+                memPass = capitalLetterPass(memPass)
             }
             
-            let alpha = NSCharacterSet.letterCharacterSet()
-            var hasUpperCase = false
-            for character in memPass.characters {
-                let unicode = String(character)
-                if let first = unicode.unicodeScalars.first where alpha.longCharacterIsMember(first.value) {
-                    
-                    memPass = memPass.stringByReplacingOccurrencesOfString(unicode, withString: unicode.uppercaseString, options: NSStringCompareOptions.LiteralSearch, range: memPass.rangeOfString(unicode))
-                    hasUpperCase = true
-                    break;
-                }
+            if !options.hasNumber {
+                
+                memPass = removeNumbersPass(memPass)
             }
             
-            if !hasUpperCase {
-                memPass += "A"
+            if options.characterLimit > 0 {
+                
+                memPass = memPass.substringToIndex(memPass.startIndex.advancedBy(options.characterLimit))
             }
-            
             
             return memPass
         }
