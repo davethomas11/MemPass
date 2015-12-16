@@ -27,8 +27,8 @@ struct R {
   }
   
   struct image {
-    static var brain: UIImage? { return UIImage(named: "Brain", inBundle: _R.hostingBundle, compatibleWithTraitCollection: nil) }
-    static var hamby: UIImage? { return UIImage(named: "hamby", inBundle: _R.hostingBundle, compatibleWithTraitCollection: nil) }
+    static var brain: UIImage? { if #available(iOS 8.0, *) { return UIImage(named: "Brain", inBundle: _R.hostingBundle, compatibleWithTraitCollection: nil) } else { return UIImage(named: "Brain") } }
+    static var hamby: UIImage? { if #available(iOS 8.0, *) { return UIImage(named: "hamby", inBundle: _R.hostingBundle, compatibleWithTraitCollection: nil) } else { return UIImage(named: "hamby") } }
   }
   
   struct nib {

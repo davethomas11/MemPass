@@ -167,7 +167,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.view.makeToast("Password copied to clipboard")
     }
     
-    @IBAction func reSeed(sender: AnyObject) {
+    /*@IBAction func reSeed(sender: AnyObject) {
         
         let confirm = UIAlertController(title: "ReSeed", message: "Reseed your passwords?", preferredStyle: UIAlertControllerStyle.Alert)
         
@@ -181,7 +181,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         confirm.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
         
         self.presentViewController(confirm, animated: true, completion: nil)
-    }
+    }*/
     
     func tapResult() {
         

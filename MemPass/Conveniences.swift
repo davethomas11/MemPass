@@ -41,23 +41,6 @@ internal func hasInternet() -> Bool {
     
 }
 
-internal func alert(title title:String, message:String, controller:UIViewController) {
-    let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-    
-    let presenter:UIViewController
-    
-    if (controller.navigationController != nil) {
-        presenter = controller.navigationController!
-    } else {
-        presenter = controller
-    }
-    
-    presenter.presentViewController(alert, animated: true, completion: nil)
-    
-    
-}
-
 /**
 * Shows Activity indicator. Returns view to dismiss it
 */
