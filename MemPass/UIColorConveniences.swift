@@ -56,6 +56,30 @@ extension UIColor {
         
     }
     
+    
+    class func radialGradiant (color:UIColor, toColor:UIColor, withHeight height:CGFloat, withWidth width:CGFloat) -> UIColor {
+        
+        let size = CGSize(width:width, height:height)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        
+        let context = UIGraphicsGetCurrentContext()
+        let colorspace = CGColorSpaceCreateDeviceRGB()
+        
+        let colors = NSArray(array: [color.CGColor, toColor.CGColor])
+        
+        let gradient = CGGradientCreateWithColors(colorspace, colors, nil)
+    
+        CGContextDrawRadialGradient(context, gradient, CGPointMake(width / 2, height / 2), 0, CGPointMake(width / 2, height / 2), width + width / 2,  CGGradientDrawingOptions(rawValue:0))
+        
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext();
+        
+        UIGraphicsEndImageContext();
+        
+        return UIColor(patternImage: image)
+        
+    }
+    
     class func gradientFromColor (color:UIColor, toColor:UIColor, withWidth width:Int) -> UIColor {
         
         let size = CGSize(width:width, height:1)

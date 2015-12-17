@@ -35,7 +35,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         memPassResult.addGestureRecognizer(resultTap)
         memPassResult.userInteractionEnabled = true
         
-        self.view.backgroundColor = UIColor.gradientFromColor(UIColor.colorFromHex("#31302b"), toColor: UIColor.colorFromHex("#685f43"), withHeight: Int(self.view.bounds.height))
+        //685f43
+        self.view.backgroundColor = UIColor.gradientFromColor(UIColor.colorFromHex("#31302b"), toColor: UIColor.colorFromHex("#5794f0"), withHeight: Int(self.view.bounds.height))
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "resignText"))
         self.view.userInteractionEnabled = true
@@ -46,8 +47,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 attributes: [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: font])
         }
         
-        showPassword.layer.cornerRadius = showPassword.bounds.height / 2
-        copyToClipbaord.layer.cornerRadius = copyToClipbaord.bounds.height / 2
+        showPassword.layer.cornerRadius = 5
+        copyToClipbaord.layer.cornerRadius = 5
         showPassword.hidden = true
         copyToClipbaord.hidden = true
         
@@ -67,10 +68,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+   
+    
     func tapTitle(send: UITapGestureRecognizer) {
         
         let loc = send.locationInView(self.view)
-        self.navigationController?.radialPopViewController(self, x: loc.x, y: loc.y, comlititionBlock: {})
+        if let  nc = UIApplication.sharedApplication().keyWindow?.rootViewController as? UINavigationController {
+            nc.radialPopViewController(self, x: loc.x, y: loc.y, comlititionBlock: {})
+        }
         
     }
     
@@ -167,21 +172,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.view.makeToast("Password copied to clipboard")
     }
     
-    /*@IBAction func reSeed(sender: AnyObject) {
-        
-        let confirm = UIAlertController(title: "ReSeed", message: "Reseed your passwords?", preferredStyle: UIAlertControllerStyle.Alert)
-        
-        confirm.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: {
-            [weak self]_ in
-            
-            self?.memPasser.reSeed()
-            self?.memPassIt()
-        }))
-        
-        confirm.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
-        
-        self.presentViewController(confirm, animated: true, completion: nil)
-    }*/
+    /**/
     
     func tapResult() {
         

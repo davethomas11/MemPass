@@ -18,18 +18,53 @@ class SideBarOption {
     }
 }
 
+class SideBarAction {
+    static var gotoSeeed:()->Void = {
+        
+        if let window = UIApplication.sharedApplication().keyWindow, let n =
+            window.rootViewController as? UINavigationController, let vc = R.storyboard.main.seedView {
+                
+                n.pushViewController(vc, animated: true)
+        }
+        
+    }
+    
+    
+    static var gotoSettings:()->Void = {
+        
+        if let window = UIApplication.sharedApplication().keyWindow, let n =
+            window.rootViewController as? UINavigationController, let vc = R.storyboard.main.settings {
+                
+                n.pushViewController(vc, animated: true)
+        }
+        
+    }
+}
+
 class SideBarTableControllerTableViewController: UITableViewController {
 
     var options = [
         
         SideBarOption(title: "What is this?", action: {}),
         SideBarOption(title: "Syncing to Desktop", action: {}),
-        SideBarOption(title: "Seed", action: {}),
-        SideBarOption(title: "Settings", action: {})
+        SideBarOption(title: "Seed", action: SideBarAction.gotoSeeed),
+        SideBarOption(title: "Settings", action: SideBarAction.gotoSettings)
         
         
         ]
     
+    
+    
+    
+    static func createItemAction(vc:UIViewController?) -> ()->Void {
+        
+        return {
+            
+            
+            
+        }
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +74,8 @@ class SideBarTableControllerTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,10 +102,22 @@ class SideBarTableControllerTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("sideBarItem", forIndexPath: indexPath) as! SideBarTableViewCell
         
         cell.label.text = options[indexPath.row].title
-       
+        let bg = UIView(frame: cell.bounds)
+        bg.backgroundColor = UIColor.colorFromHex("#230b07")
+        bg.alpha = 0.75
+        cell.selectedBackgroundView = bg
+
         return cell
     }
 
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.revealViewController().rightRevealToggleAnimated(true)
+        options[indexPath.row].action()
+    }
+    
+    
+    
+    
 
     /*
     // Override to support conditional editing of the table view.

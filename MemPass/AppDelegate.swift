@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Fabric.with([Crashlytics.self])
         
+        self.window?.tintColor = UIColor.colorFromHex("#ffcc00")
+        
         return true
     }
 

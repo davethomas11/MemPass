@@ -27,17 +27,22 @@ struct R {
   }
   
   struct image {
-    static var brain: UIImage? { if #available(iOS 8.0, *) { return UIImage(named: "Brain", inBundle: _R.hostingBundle, compatibleWithTraitCollection: nil) } else { return UIImage(named: "Brain") } }
-    static var hamby: UIImage? { if #available(iOS 8.0, *) { return UIImage(named: "hamby", inBundle: _R.hostingBundle, compatibleWithTraitCollection: nil) } else { return UIImage(named: "hamby") } }
+    static var brain: UIImage? { return UIImage(named: "Brain", inBundle: _R.hostingBundle, compatibleWithTraitCollection: nil) }
+    static var hamby: UIImage? { return UIImage(named: "hamby", inBundle: _R.hostingBundle, compatibleWithTraitCollection: nil) }
+    static var refresh: UIImage? { return UIImage(named: "refresh", inBundle: _R.hostingBundle, compatibleWithTraitCollection: nil) }
   }
   
   struct nib {
     static var onBoardingViewController: _R.nib._OnBoardingViewController { return _R.nib._OnBoardingViewController() }
+    static var seedViewController: _R.nib._SeedViewController { return _R.nib._SeedViewController() }
     static var view: _R.nib._View { return _R.nib._View() }
   }
   
   struct reuseIdentifier {
     static var sideBarItem: ReuseIdentifier<SideBarTableViewCell> { return ReuseIdentifier(identifier: "sideBarItem") }
+    static var singleValue: ReuseIdentifier<SettingsSingleValueTableViewCell> { return ReuseIdentifier(identifier: "singleValue") }
+    static var switchCell: ReuseIdentifier<SettingsToggleTableViewCell> { return ReuseIdentifier(identifier: "switchCell") }
+    static var textCell: ReuseIdentifier<SettingsLongTableViewCell> { return ReuseIdentifier(identifier: "textCell") }
   }
   
   struct segue {
@@ -66,6 +71,8 @@ struct R {
       static var initialViewController: UINavigationController? { return instance.instantiateInitialViewController() as? UINavigationController }
       static var instance: UIStoryboard { return UIStoryboard(name: "Main", bundle: _R.hostingBundle) }
       static var onBoarding: OnBoardingViewController? { return instance.instantiateViewControllerWithIdentifier("onBoarding") as? OnBoardingViewController }
+      static var seedView: SeedViewController? { return instance.instantiateViewControllerWithIdentifier("SeedView") as? SeedViewController }
+      static var settings: SettingsTableViewController? { return instance.instantiateViewControllerWithIdentifier("Settings") as? SettingsTableViewController }
       static var swReveal: SWRevealViewController? { return instance.instantiateViewControllerWithIdentifier("swReveal") as? SWRevealViewController }
       
       static func validateImages() {
@@ -74,6 +81,8 @@ struct R {
       
       static func validateViewControllers() {
         assert(appViewController != nil, "[R.swift] ViewController with identifier 'appViewController' could not be loaded from storyboard 'Main' as 'ViewController'.")
+        assert(seedView != nil, "[R.swift] ViewController with identifier 'seedView' could not be loaded from storyboard 'Main' as 'SeedViewController'.")
+        assert(settings != nil, "[R.swift] ViewController with identifier 'settings' could not be loaded from storyboard 'Main' as 'SettingsTableViewController'.")
         assert(onBoarding != nil, "[R.swift] ViewController with identifier 'onBoarding' could not be loaded from storyboard 'Main' as 'OnBoardingViewController'.")
         assert(swReveal != nil, "[R.swift] ViewController with identifier 'swReveal' could not be loaded from storyboard 'Main' as 'SWRevealViewController'.")
       }
@@ -82,12 +91,25 @@ struct R {
 }
 
 struct _R {
-  static var hostingBundle: NSBundle? { return NSBundle(identifier: "com.DaveAnthonyThomas.MemPass") }
+  static var hostingBundle: NSBundle? { return NSBundle(identifier: "com.DTWebSolutions.MemPass") }
   
   struct nib {
     struct _OnBoardingViewController: NibResource {
       var instance: UINib { return UINib.init(nibName: "OnBoardingViewController", bundle: _R.hostingBundle) }
       var name: String { return "OnBoardingViewController" }
+      
+      func firstView(ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]?) -> UIView? {
+        return instantiateWithOwner(ownerOrNil, options: optionsOrNil)[0] as? UIView
+      }
+      
+      func instantiateWithOwner(ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]?) -> [AnyObject] {
+        return instance.instantiateWithOwner(ownerOrNil, options: optionsOrNil)
+      }
+    }
+    
+    struct _SeedViewController: NibResource {
+      var instance: UINib { return UINib.init(nibName: "SeedViewController", bundle: _R.hostingBundle) }
+      var name: String { return "SeedViewController" }
       
       func firstView(ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]?) -> UIView? {
         return instantiateWithOwner(ownerOrNil, options: optionsOrNil)[0] as? UIView

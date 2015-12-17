@@ -36,6 +36,17 @@
 		55A951571C1FDE34005C24AF /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A951561C1FDE34005C24AF /* Reachability.swift */; };
 		55A9515B1C1FF76F005C24AF /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A951591C1FF76F005C24AF /* OnBoardingViewController.swift */; };
 		55A9515C1C1FF76F005C24AF /* OnBoardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55A9515A1C1FF76F005C24AF /* OnBoardingViewController.xib */; };
+		55F1196F1C22710B0084C07B /* SeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55F1196E1C22710B0084C07B /* SeedViewController.xib */; };
+		55F119761C2287CB0084C07B /* QRCodeReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F119711C2287CB0084C07B /* QRCodeReader.swift */; };
+		55F119771C2287CB0084C07B /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F119721C2287CB0084C07B /* QRCodeViewController.swift */; };
+		55F119781C2287CB0084C07B /* ReaderOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F119731C2287CB0084C07B /* ReaderOverlayView.swift */; };
+		55F119791C2287CB0084C07B /* SwitchCameraButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F119741C2287CB0084C07B /* SwitchCameraButton.swift */; };
+		55F1197A1C2287CB0084C07B /* ToggleTorchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F119751C2287CB0084C07B /* ToggleTorchButton.swift */; };
+		55F1197C1C2288750084C07B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55F1197B1C2288750084C07B /* AVFoundation.framework */; };
+		55F1197F1C2294EB0084C07B /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F1197D1C2294EB0084C07B /* SettingsTableViewController.swift */; };
+		55F119821C2298580084C07B /* SettingsSingleValueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F119811C2298580084C07B /* SettingsSingleValueTableViewCell.swift */; };
+		55F119841C2298680084C07B /* SettingsToggleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F119831C2298680084C07B /* SettingsToggleTableViewCell.swift */; };
+		55F119861C2298810084C07B /* SettingsLongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F119851C2298810084C07B /* SettingsLongTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,10 +77,7 @@
 		55A7063E1C1BCBA400063130 /* SeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeedViewController.swift; sourceTree = "<group>"; };
 		55A951341C1E8889005C24AF /* Share-TechMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Share-TechMono.ttf"; sourceTree = "<group>"; };
 		55A951361C1E8AC3005C24AF /* zrnic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = zrnic.ttf; sourceTree = "<group>"; };
-		55A951381C1E95FC005C24AF /* OnBoardingPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnBoardingPageViewController.swift; path = ViewControllers/OnBoardingPageViewController.swift; sourceTree = "<group>"; };
 		55A9513B1C1E9743005C24AF /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
-		55A9513D1C1E97B4005C24AF /* OnBoarding1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnBoarding1ViewController.swift; sourceTree = "<group>"; };
-		55A9513E1C1E97B4005C24AF /* OnBoarding1ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OnBoarding1ViewController.xib; sourceTree = "<group>"; };
 		55A951481C1E9F41005C24AF /* ReplaceVCSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplaceVCSegue.swift; sourceTree = "<group>"; };
 		55A951491C1E9F41005C24AF /* ReplaceRootVCSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplaceRootVCSegue.swift; sourceTree = "<group>"; };
 		55A951501C1FDC0D005C24AF /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
@@ -78,6 +86,17 @@
 		55A951561C1FDE34005C24AF /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		55A951591C1FF76F005C24AF /* OnBoardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnBoardingViewController.swift; path = ViewControllers/OnBoardingViewController.swift; sourceTree = "<group>"; };
 		55A9515A1C1FF76F005C24AF /* OnBoardingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OnBoardingViewController.xib; path = ViewControllers/OnBoardingViewController.xib; sourceTree = "<group>"; };
+		55F1196E1C22710B0084C07B /* SeedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeedViewController.xib; sourceTree = "<group>"; };
+		55F119711C2287CB0084C07B /* QRCodeReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeReader.swift; sourceTree = "<group>"; };
+		55F119721C2287CB0084C07B /* QRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
+		55F119731C2287CB0084C07B /* ReaderOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReaderOverlayView.swift; sourceTree = "<group>"; };
+		55F119741C2287CB0084C07B /* SwitchCameraButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCameraButton.swift; sourceTree = "<group>"; };
+		55F119751C2287CB0084C07B /* ToggleTorchButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToggleTorchButton.swift; sourceTree = "<group>"; };
+		55F1197B1C2288750084C07B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		55F1197D1C2294EB0084C07B /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		55F119811C2298580084C07B /* SettingsSingleValueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSingleValueTableViewCell.swift; sourceTree = "<group>"; };
+		55F119831C2298680084C07B /* SettingsToggleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsToggleTableViewCell.swift; sourceTree = "<group>"; };
+		55F119851C2298810084C07B /* SettingsLongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsLongTableViewCell.swift; sourceTree = "<group>"; };
 		717878017BFA0F3FE9287F53 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		A16B632138B991BCFD1DD840 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -87,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55F1197C1C2288750084C07B /* AVFoundation.framework in Frameworks */,
 				07FED87BE6DE686CDCD6C2DF /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,6 +159,7 @@
 		55A706361C1BC5D900063130 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				55F119701C2287820084C07B /* QRReader */,
 				55A9515D1C1FF908005C24AF /* Radial */,
 				55A706371C1BC5E100063130 /* QRCode */,
 			);
@@ -158,14 +179,18 @@
 		55A9512E1C1E86B9005C24AF /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				55A951471C1E97DA005C24AF /* OnBoarding */,
 				55A7063E1C1BCBA400063130 /* SeedViewController.swift */,
+				55F1196E1C22710B0084C07B /* SeedViewController.xib */,
 				55A706201C1A960600063130 /* ViewController.swift */,
 				55A951501C1FDC0D005C24AF /* View.xib */,
 				55A951591C1FF76F005C24AF /* OnBoardingViewController.swift */,
 				55A9515A1C1FF76F005C24AF /* OnBoardingViewController.xib */,
 				55560BC71C21445B00B29D49 /* SideBarTableControllerTableViewController.swift */,
 				55560BCB1C2144CB00B29D49 /* SideBarTableViewCell.swift */,
+				55F1197D1C2294EB0084C07B /* SettingsTableViewController.swift */,
+				55F119831C2298680084C07B /* SettingsToggleTableViewCell.swift */,
+				55F119811C2298580084C07B /* SettingsSingleValueTableViewCell.swift */,
+				55F119851C2298810084C07B /* SettingsLongTableViewCell.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -181,16 +206,6 @@
 			name = MemPass;
 			sourceTree = "<group>";
 		};
-		55A951471C1E97DA005C24AF /* OnBoarding */ = {
-			isa = PBXGroup;
-			children = (
-				55A951381C1E95FC005C24AF /* OnBoardingPageViewController.swift */,
-				55A9513D1C1E97B4005C24AF /* OnBoarding1ViewController.swift */,
-				55A9513E1C1E97B4005C24AF /* OnBoarding1ViewController.xib */,
-			);
-			name = OnBoarding;
-			sourceTree = "<group>";
-		};
 		55A9515D1C1FF908005C24AF /* Radial */ = {
 			isa = PBXGroup;
 			children = (
@@ -204,9 +219,22 @@
 			name = Radial;
 			sourceTree = "<group>";
 		};
+		55F119701C2287820084C07B /* QRReader */ = {
+			isa = PBXGroup;
+			children = (
+				55F119711C2287CB0084C07B /* QRCodeReader.swift */,
+				55F119721C2287CB0084C07B /* QRCodeViewController.swift */,
+				55F119731C2287CB0084C07B /* ReaderOverlayView.swift */,
+				55F119741C2287CB0084C07B /* SwitchCameraButton.swift */,
+				55F119751C2287CB0084C07B /* ToggleTorchButton.swift */,
+			);
+			name = QRReader;
+			sourceTree = "<group>";
+		};
 		80C243F720417744B7E096A0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				55F1197B1C2288750084C07B /* AVFoundation.framework */,
 				4DDD5A6E90B84503726D0C62 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -257,7 +285,7 @@
 				TargetAttributes = {
 					55A7061A1C1A960600063130 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 674TLB2R9M;
+						DevelopmentTeam = 8L6T7X3BZE;
 					};
 				};
 			};
@@ -291,6 +319,7 @@
 				55A706241C1A960600063130 /* Main.storyboard in Resources */,
 				55A951371C1E8AC3005C24AF /* zrnic.ttf in Resources */,
 				55A9515C1C1FF76F005C24AF /* OnBoardingViewController.xib in Resources */,
+				55F1196F1C22710B0084C07B /* SeedViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,18 +397,27 @@
 				55A7063D1C1BC5F300063130 /* UIImageViewExtension.swift in Sources */,
 				55A951551C1FDC4B005C24AF /* UIColorConveniences.swift in Sources */,
 				55A7063B1C1BC5F300063130 /* CIColorExtension.swift in Sources */,
+				55F119791C2287CB0084C07B /* SwitchCameraButton.swift in Sources */,
 				55560BC61C212C5E00B29D49 /* MemPassOptions.swift in Sources */,
 				55A7063F1C1BCBA400063130 /* SeedViewController.swift in Sources */,
 				55560BC31C1FF98B00B29D49 /* UINavigationController+RadialTransaction.m in Sources */,
 				55A706211C1A960600063130 /* ViewController.swift in Sources */,
 				55560BC41C1FF98B00B29D49 /* UIView+Radial.m in Sources */,
 				55A9514A1C1E9F41005C24AF /* ReplaceVCSegue.swift in Sources */,
+				55F119761C2287CB0084C07B /* QRCodeReader.swift in Sources */,
+				55F119771C2287CB0084C07B /* QRCodeViewController.swift in Sources */,
 				55560BCC1C2144CB00B29D49 /* SideBarTableViewCell.swift in Sources */,
+				55F1197A1C2287CB0084C07B /* ToggleTorchButton.swift in Sources */,
+				55F1197F1C2294EB0084C07B /* SettingsTableViewController.swift in Sources */,
+				55F119841C2298680084C07B /* SettingsToggleTableViewCell.swift in Sources */,
 				55A7061F1C1A960600063130 /* AppDelegate.swift in Sources */,
 				55A706351C1A9FD800063130 /* Sha2.m in Sources */,
 				55A9513C1C1E9743005C24AF /* R.generated.swift in Sources */,
+				55F119781C2287CB0084C07B /* ReaderOverlayView.swift in Sources */,
 				55A951571C1FDE34005C24AF /* Reachability.swift in Sources */,
+				55F119861C2298810084C07B /* SettingsLongTableViewCell.swift in Sources */,
 				55560BC21C1FF98B00B29D49 /* AAPTransitionDirector.m in Sources */,
+				55F119821C2298580084C07B /* SettingsSingleValueTableViewCell.swift in Sources */,
 				55A7063C1C1BC5F300063130 /* QRCode.swift in Sources */,
 				55A9515B1C1FF76F005C24AF /* OnBoardingViewController.swift in Sources */,
 				55560BC81C21445B00B29D49 /* SideBarTableControllerTableViewController.swift in Sources */,
@@ -499,9 +537,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = MemPass/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.DaveAnthonyThomas.MemPass;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DTWebSolutions.MemPass;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -516,9 +554,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = MemPass/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.DaveAnthonyThomas.MemPass;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DTWebSolutions.MemPass;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

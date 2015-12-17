@@ -44,8 +44,14 @@ class MemPassOptions: NSObject {
             
             
         }
-   
         
+        
+    }
+    
+    func getSpecialCharString() -> String {
+        return specialChars.reduce("") {
+            $0 + $1
+        }
     }
     
     func loadDefaults() {
@@ -124,6 +130,8 @@ class MemPassOptions: NSObject {
                     specialChars.append(String(character))
                 }
             }
+            
+            saveDefault()
             
         }
         

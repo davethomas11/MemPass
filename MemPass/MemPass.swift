@@ -58,8 +58,47 @@ class MemPass: NSObject {
     }
     
     
-    func reSeed() -> String {
+    func reSeed(newSeed:String?=nil) -> String {
         
+        if var seed = newSeed {
+            
+            if seed.containsString("|") {
+                
+                seed = parseSeedForOptions(seed)
+            }
+            
+            self.seed = seed
+            
+        } else {
+            
+            self.seed = self.newSeed()
+        }
+        
+        SSKeychain.setPassword(self.seed, forService: SERVICE, account: account)
+        return self.seed
+        
+    }
+    
+    private func parseSeedForOptions(var seed:String) -> String {
+        var parts = seed.componentsSeparatedByString("|")
+        
+        if parts.count > 1 {
+            seed = parts[0]
+            parts.removeFirst()
+            
+            var optsString = parts[0]
+            if parts.count > 1 {
+                optsString = parts.reduce("", combine: { $0 + $1})
+            }
+            
+            options.parseSettingsString(optsString)
+        }
+
+        return seed
+    }
+    
+    
+    private func newSeed() -> String {
         let now = NSDate().timeIntervalSince1970
         let accesible = UIScreen.mainScreen().accessibilityActivate() ? rand() * 32 : rand()
         let battery = UIDevice.currentDevice().batteryLevel
@@ -70,16 +109,13 @@ class MemPass: NSObject {
         let hasher = Sha2()
         if let seed = hasher.sha256("\(now)-\(accesible)-\(battery)-\(model)-\(system)-\(version)[\(account)]") {
             
-            self.seed = seed
+           return seed
         } else {
             
-            self.seed = NSUUID.init().UUIDString
+            return NSUUID.init().UUIDString
         }
-        
-        SSKeychain.setPassword(self.seed, forService: SERVICE, account: account)
-        return self.seed
-        
     }
+    
     
     private func specialCharPass(inS:String) -> String {
         
@@ -209,6 +245,10 @@ class MemPass: NSObject {
         return nil
     }
     
+    func memPassSyncKey() -> String {
+    
+        return seed + "|" + options.settingsString()
+    }
     
     
 }
