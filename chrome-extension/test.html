@@ -1,0 +1,25 @@
+
+<html>
+<head>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	var randomPool = new Uint8Array(32);
+    crypto.getRandomValues(randomPool);
+    var hex = '';
+    for (var i = 0; i < randomPool.length; ++i) {
+        hex += randomPool[i].toString(16);
+    }
+
+    var p = document.getElementById("test");
+
+    alert(p);
+    p.innerHTML = hex;
+});
+</script>
+
+
+</head>
+<body>
+<p id="test"></p>
+</body>
+</html>

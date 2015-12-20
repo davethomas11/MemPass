@@ -14,6 +14,9 @@
 		55560BC61C212C5E00B29D49 /* MemPassOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55560BC51C212C5E00B29D49 /* MemPassOptions.swift */; };
 		55560BC81C21445B00B29D49 /* SideBarTableControllerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55560BC71C21445B00B29D49 /* SideBarTableControllerTableViewController.swift */; };
 		55560BCC1C2144CB00B29D49 /* SideBarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55560BCB1C2144CB00B29D49 /* SideBarTableViewCell.swift */; };
+		558DA4121C27222200538933 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 558DA4101C27222200538933 /* Model.xcdatamodeld */; };
+		558DA4151C27226200538933 /* Word+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558DA4131C27226200538933 /* Word+CoreDataProperties.swift */; };
+		558DA4161C27226200538933 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558DA4141C27226200538933 /* Word.swift */; };
 		55A7061F1C1A960600063130 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A7061E1C1A960600063130 /* AppDelegate.swift */; };
 		55A706211C1A960600063130 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A706201C1A960600063130 /* ViewController.swift */; };
 		55A706241C1A960600063130 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55A706221C1A960600063130 /* Main.storyboard */; };
@@ -60,6 +63,9 @@
 		55560BC51C212C5E00B29D49 /* MemPassOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemPassOptions.swift; sourceTree = "<group>"; };
 		55560BC71C21445B00B29D49 /* SideBarTableControllerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarTableControllerTableViewController.swift; sourceTree = "<group>"; };
 		55560BCB1C2144CB00B29D49 /* SideBarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarTableViewCell.swift; sourceTree = "<group>"; };
+		558DA4111C27222200538933 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		558DA4131C27226200538933 /* Word+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Word+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		558DA4141C27226200538933 /* Word.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		55A7061B1C1A960600063130 /* MemPass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemPass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55A7061E1C1A960600063130 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55A706201C1A960600063130 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -117,6 +123,9 @@
 		55A706121C1A960600063130 = {
 			isa = PBXGroup;
 			children = (
+				558DA4101C27222200538933 /* Model.xcdatamodeld */,
+				558DA4131C27226200538933 /* Word+CoreDataProperties.swift */,
+				558DA4141C27226200538933 /* Word.swift */,
 				55A706361C1BC5D900063130 /* Vendor */,
 				55A7061D1C1A960600063130 /* MemPass */,
 				55A7061C1C1A960600063130 /* Products */,
@@ -406,11 +415,14 @@
 				55A9514A1C1E9F41005C24AF /* ReplaceVCSegue.swift in Sources */,
 				55F119761C2287CB0084C07B /* QRCodeReader.swift in Sources */,
 				55F119771C2287CB0084C07B /* QRCodeViewController.swift in Sources */,
+				558DA4151C27226200538933 /* Word+CoreDataProperties.swift in Sources */,
 				55560BCC1C2144CB00B29D49 /* SideBarTableViewCell.swift in Sources */,
+				558DA4161C27226200538933 /* Word.swift in Sources */,
 				55F1197A1C2287CB0084C07B /* ToggleTorchButton.swift in Sources */,
 				55F1197F1C2294EB0084C07B /* SettingsTableViewController.swift in Sources */,
 				55F119841C2298680084C07B /* SettingsToggleTableViewCell.swift in Sources */,
 				55A7061F1C1A960600063130 /* AppDelegate.swift in Sources */,
+				558DA4121C27222200538933 /* Model.xcdatamodeld in Sources */,
 				55A706351C1A9FD800063130 /* Sha2.m in Sources */,
 				55A9513C1C1E9743005C24AF /* R.generated.swift in Sources */,
 				55F119781C2287CB0084C07B /* ReaderOverlayView.swift in Sources */,
@@ -584,6 +596,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		558DA4101C27222200538933 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				558DA4111C27222200538933 /* Model.xcdatamodel */,
+			);
+			currentVersion = 558DA4111C27222200538933 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 55A706131C1A960600063130 /* Project object */;
 }
