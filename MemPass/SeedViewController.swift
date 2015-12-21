@@ -12,7 +12,7 @@ import AVFoundation
 public class SeedViewController: UIViewController, QRCodeReaderViewControllerDelegate {
 
     @IBOutlet weak var QRImage: UIImageView!
-    var memPass:MemPass = MemPass()
+    var memPass:MemPass = MemPass.sharedInstance()
     
     @IBOutlet weak var navBar: UINavigationBar!
     

@@ -14,15 +14,17 @@
 		55560BC61C212C5E00B29D49 /* MemPassOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55560BC51C212C5E00B29D49 /* MemPassOptions.swift */; };
 		55560BC81C21445B00B29D49 /* SideBarTableControllerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55560BC71C21445B00B29D49 /* SideBarTableControllerTableViewController.swift */; };
 		55560BCC1C2144CB00B29D49 /* SideBarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55560BCB1C2144CB00B29D49 /* SideBarTableViewCell.swift */; };
-		558DA4121C27222200538933 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 558DA4101C27222200538933 /* Model.xcdatamodeld */; };
-		558DA4151C27226200538933 /* Word+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558DA4131C27226200538933 /* Word+CoreDataProperties.swift */; };
-		558DA4161C27226200538933 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558DA4141C27226200538933 /* Word.swift */; };
+		558DA4181C27233300538933 /* MemPassDice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558DA4171C27233300538933 /* MemPassDice.swift */; };
+		558DA4201C27CDBC00538933 /* word.json in Resources */ = {isa = PBXBuildFile; fileRef = 558DA41F1C27CDBC00538933 /* word.json */; };
+		558DA4231C27CDEE00538933 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 558DA4211C27CDEE00538933 /* Model.xcdatamodeld */; };
+		558DA4241C27D13400538933 /* MemPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A706301C1A975100063130 /* MemPass.swift */; };
+		558DA4271C27D37800538933 /* Word+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558DA4251C27D37800538933 /* Word+CoreDataProperties.swift */; };
+		558DA4281C27D37800538933 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558DA4261C27D37800538933 /* Word.swift */; };
 		55A7061F1C1A960600063130 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A7061E1C1A960600063130 /* AppDelegate.swift */; };
 		55A706211C1A960600063130 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A706201C1A960600063130 /* ViewController.swift */; };
 		55A706241C1A960600063130 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55A706221C1A960600063130 /* Main.storyboard */; };
 		55A706261C1A960600063130 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55A706251C1A960600063130 /* Assets.xcassets */; };
 		55A706291C1A960600063130 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55A706271C1A960600063130 /* LaunchScreen.storyboard */; };
-		55A706311C1A975100063130 /* MemPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A706301C1A975100063130 /* MemPass.swift */; };
 		55A706351C1A9FD800063130 /* Sha2.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A706341C1A9FD800063130 /* Sha2.m */; };
 		55A7063B1C1BC5F300063130 /* CIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A706381C1BC5F300063130 /* CIColorExtension.swift */; };
 		55A7063C1C1BC5F300063130 /* QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A706391C1BC5F300063130 /* QRCode.swift */; };
@@ -63,9 +65,11 @@
 		55560BC51C212C5E00B29D49 /* MemPassOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemPassOptions.swift; sourceTree = "<group>"; };
 		55560BC71C21445B00B29D49 /* SideBarTableControllerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarTableControllerTableViewController.swift; sourceTree = "<group>"; };
 		55560BCB1C2144CB00B29D49 /* SideBarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarTableViewCell.swift; sourceTree = "<group>"; };
-		558DA4111C27222200538933 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		558DA4131C27226200538933 /* Word+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Word+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		558DA4141C27226200538933 /* Word.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
+		558DA4171C27233300538933 /* MemPassDice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemPassDice.swift; sourceTree = "<group>"; };
+		558DA41F1C27CDBC00538933 /* word.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = word.json; sourceTree = "<group>"; };
+		558DA4221C27CDEE00538933 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		558DA4251C27D37800538933 /* Word+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Word+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		558DA4261C27D37800538933 /* Word.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		55A7061B1C1A960600063130 /* MemPass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemPass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55A7061E1C1A960600063130 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55A706201C1A960600063130 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -123,9 +127,9 @@
 		55A706121C1A960600063130 = {
 			isa = PBXGroup;
 			children = (
-				558DA4101C27222200538933 /* Model.xcdatamodeld */,
-				558DA4131C27226200538933 /* Word+CoreDataProperties.swift */,
-				558DA4141C27226200538933 /* Word.swift */,
+				558DA4251C27D37800538933 /* Word+CoreDataProperties.swift */,
+				558DA4261C27D37800538933 /* Word.swift */,
+				558DA4211C27CDEE00538933 /* Model.xcdatamodeld */,
 				55A706361C1BC5D900063130 /* Vendor */,
 				55A7061D1C1A960600063130 /* MemPass */,
 				55A7061C1C1A960600063130 /* Products */,
@@ -151,6 +155,7 @@
 				55A9512E1C1E86B9005C24AF /* ViewControllers */,
 				55A7061E1C1A960600063130 /* AppDelegate.swift */,
 				55A706221C1A960600063130 /* Main.storyboard */,
+				558DA41F1C27CDBC00538933 /* word.json */,
 				55A706251C1A960600063130 /* Assets.xcassets */,
 				55A706271C1A960600063130 /* LaunchScreen.storyboard */,
 				55A951341C1E8889005C24AF /* Share-TechMono.ttf */,
@@ -211,6 +216,7 @@
 				55A706331C1A9FD800063130 /* Sha2.h */,
 				55A706341C1A9FD800063130 /* Sha2.m */,
 				55560BC51C212C5E00B29D49 /* MemPassOptions.swift */,
+				558DA4171C27233300538933 /* MemPassDice.swift */,
 			);
 			name = MemPass;
 			sourceTree = "<group>";
@@ -327,6 +333,7 @@
 				55A706261C1A960600063130 /* Assets.xcassets in Resources */,
 				55A706241C1A960600063130 /* Main.storyboard in Resources */,
 				55A951371C1E8AC3005C24AF /* zrnic.ttf in Resources */,
+				558DA4201C27CDBC00538933 /* word.json in Resources */,
 				55A9515C1C1FF76F005C24AF /* OnBoardingViewController.xib in Resources */,
 				55F1196F1C22710B0084C07B /* SeedViewController.xib in Resources */,
 			);
@@ -400,7 +407,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55A706311C1A975100063130 /* MemPass.swift in Sources */,
+				558DA4241C27D13400538933 /* MemPass.swift in Sources */,
 				55A9514B1C1E9F41005C24AF /* ReplaceRootVCSegue.swift in Sources */,
 				55A951541C1FDC4B005C24AF /* Conveniences.swift in Sources */,
 				55A7063D1C1BC5F300063130 /* UIImageViewExtension.swift in Sources */,
@@ -415,15 +422,16 @@
 				55A9514A1C1E9F41005C24AF /* ReplaceVCSegue.swift in Sources */,
 				55F119761C2287CB0084C07B /* QRCodeReader.swift in Sources */,
 				55F119771C2287CB0084C07B /* QRCodeViewController.swift in Sources */,
-				558DA4151C27226200538933 /* Word+CoreDataProperties.swift in Sources */,
+				558DA4231C27CDEE00538933 /* Model.xcdatamodeld in Sources */,
 				55560BCC1C2144CB00B29D49 /* SideBarTableViewCell.swift in Sources */,
-				558DA4161C27226200538933 /* Word.swift in Sources */,
 				55F1197A1C2287CB0084C07B /* ToggleTorchButton.swift in Sources */,
 				55F1197F1C2294EB0084C07B /* SettingsTableViewController.swift in Sources */,
 				55F119841C2298680084C07B /* SettingsToggleTableViewCell.swift in Sources */,
 				55A7061F1C1A960600063130 /* AppDelegate.swift in Sources */,
-				558DA4121C27222200538933 /* Model.xcdatamodeld in Sources */,
+				558DA4281C27D37800538933 /* Word.swift in Sources */,
+				558DA4181C27233300538933 /* MemPassDice.swift in Sources */,
 				55A706351C1A9FD800063130 /* Sha2.m in Sources */,
+				558DA4271C27D37800538933 /* Word+CoreDataProperties.swift in Sources */,
 				55A9513C1C1E9743005C24AF /* R.generated.swift in Sources */,
 				55F119781C2287CB0084C07B /* ReaderOverlayView.swift in Sources */,
 				55A951571C1FDE34005C24AF /* Reachability.swift in Sources */,
@@ -598,12 +606,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		558DA4101C27222200538933 /* Model.xcdatamodeld */ = {
+		558DA4211C27CDEE00538933 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				558DA4111C27222200538933 /* Model.xcdatamodel */,
+				558DA4221C27CDEE00538933 /* Model.xcdatamodel */,
 			);
-			currentVersion = 558DA4111C27222200538933 /* Model.xcdatamodel */;
+			currentVersion = 558DA4221C27CDEE00538933 /* Model.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

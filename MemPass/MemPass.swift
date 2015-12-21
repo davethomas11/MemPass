@@ -17,6 +17,10 @@ class MemPass: NSObject {
     private var account:String = ""
     private(set) var seed:String = ""
     var options:MemPassOptions = MemPassOptions()
+    var dice:MemPassDice = MemPassDice()
+    var phrase:String = ""
+    
+    private static var memPass:MemPass? = nil
     
     override init() {
         super.init()
@@ -33,6 +37,24 @@ class MemPass: NSObject {
         let defaults = NSUserDefaults.standardUserDefaults()
         if let optionSet = defaults.stringForKey(OPTIONS_SET) {
             options.loadOptions(optionSet)
+        }
+        
+        if !dice.databaseAvailable() {
+            options.hasDiceWords = false
+            options.saveDefault()
+        } else {
+            options.hasDiceWords = true
+            options.saveDefault()
+        }
+    }
+    
+    class func sharedInstance() -> MemPass {        
+        
+        if let memPass = memPass {
+            return memPass
+        } else {
+            self.memPass = MemPass()
+            return self.memPass!
         }
         
     }
@@ -167,17 +189,9 @@ class MemPass: NSObject {
         return memPass
     }
     
-    func capitalLetterPass(inString:String) -> String {
+    private func capitalLetterPass(inString:String) -> String {
         
-        var memPassSum = 0
-        for character in inString.characters {
-            let scalars = String(character).unicodeScalars
-            let value = Int(scalars[scalars.startIndex].value)
-            
-            memPassSum += value
-        }
-        
-        let target = memPassSum % options.capitalLetterMod
+        let target = (passwordSum(inString) % options.capitalLetterMod) + 1
         var found = 0
         
         var memPass = inString
@@ -207,13 +221,69 @@ class MemPass: NSObject {
     
     private func removeNumbersPass(inString:String) -> String {
         
-        return inString.stringByReplacingOccurrencesOfString(inString, withString: "[0-9]", options: NSStringCompareOptions.RegularExpressionSearch, range: inString.rangeOfString(inString))
+        return inString.stringByReplacingOccurrencesOfString("[0-9]", withString: "n", options: NSStringCompareOptions.RegularExpressionSearch, range: inString.rangeOfString(inString))
+    }
+    
+    private func diceWordPass(var memPass:String) -> String {
+        
+        let wordCount = dice.getWordCount()
+        let sum = passwordSum(phrase + seed)
+        var characterCount = memPass.characters.count - 1
+        var offset = 100000
+        
+        let target = (sum % options.diceMod) + 1
+
+        var parts = [String]()
+        
+        for _ in 1...target {
+            if characterCount <= 0 {
+                break;
+            }
+            
+            let position = sum % characterCount
+            var wordX = sum * offset % wordCount
+        
+            if wordX <= 0 || wordX >= wordCount {
+                wordX = 1
+            }
+            
+            let range = Range(start: memPass.startIndex, end:memPass.startIndex.advancedBy(position))
+            parts.append(memPass.substringToIndex(memPass.startIndex.advancedBy(position)))
+            memPass = memPass.stringByReplacingCharactersInRange(range, withString: "")
+            
+            let diceWord = dice.wordAt(wordX)
+            
+            if options.specialChars.count > 0 {
+                parts.append("-> \(diceWord) <-")
+            } else {
+                parts.append("\(diceWord)")
+            }
+            
+            characterCount = memPass.characters.count
+            
+            offset--
+        }
+        
+        return parts.reduce("", combine: { $0 + $1 }) + memPass
+    }
+    
+    func passwordSum(pass:String) -> Int {
+        
+        var memPassSum = 0
+        for character in pass.characters {
+            let scalars = String(character).unicodeScalars
+            let value = Int(scalars[scalars.startIndex].value)
+            
+            memPassSum += value
+        }
+        
+        return memPassSum
     }
     
     func generate(memPass:String) -> String? {
         
         let hasher = Sha2()
-        
+        phrase = memPass
         
         if let firstPass = hasher.sha256("\(memPass)-\(String(memPass.characters.reverse()))-|\(seed).)") {
             
@@ -236,6 +306,11 @@ class MemPass: NSObject {
             if options.characterLimit > 0 {
                 
                 memPass = memPass.substringToIndex(memPass.startIndex.advancedBy(options.characterLimit))
+            }
+            
+            if options.hasDiceWords {
+                
+                memPass = diceWordPass(memPass)
             }
             
             return memPass

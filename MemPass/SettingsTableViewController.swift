@@ -66,6 +66,17 @@ class SSetups {
         }
     }
     
+    static var dice:(UITableViewCell,MemPassOptions) -> Void = {
+        cell,opt in
+        
+        if let cell = cell as? SettingsToggleTableViewCell {
+            cell.label.text = "Include Dice Words"
+            cell.toggle.on = opt.hasDiceWords
+            
+        }
+    }
+    
+    
     static var specialChars:(UITableViewCell,MemPassOptions) -> Void = {
         cell,opt in
         
@@ -89,6 +100,8 @@ class SSetups {
             cell.textfield.keyboardType = UIKeyboardType.NumberPad
         }
     }
+    
+    
 }
 
 class SettingsTableViewController: UITableViewController {
@@ -99,6 +112,7 @@ class SettingsTableViewController: UITableViewController {
         
         Setting(o: (SettingType.Toggle, SSetups.captials)),
         Setting(o: (SettingType.Toggle, SSetups.numbers)),
+        Setting(o: (SettingType.Toggle, SSetups.dice)),
         Setting(o: (SettingType.Long, SSetups.specialChars)),
         Setting(o: (SettingType.Short, SSetups.limitLength))
     ]

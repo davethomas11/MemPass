@@ -13,6 +13,7 @@ struct R {
   
   struct file {
     static var shareTechMonoTtf: NSURL? { return _R.hostingBundle?.URLForResource("Share-TechMono", withExtension: "ttf") }
+    static var wordJson: NSURL? { return _R.hostingBundle?.URLForResource("word", withExtension: "json") }
     static var zrnicTtf: NSURL? { return _R.hostingBundle?.URLForResource("zrnic", withExtension: "ttf") }
   }
   

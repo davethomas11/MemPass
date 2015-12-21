@@ -14,6 +14,7 @@ import CoreData
 
 extension Word {
 
+    @NSManaged var position: NSNumber?
     @NSManaged var word: String?
 
 }

@@ -22,7 +22,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var buttonTouchArea: UIView!
     
-    var memPasser:MemPass = MemPass()
+    var memPasser:MemPass = MemPass.sharedInstance()
     var password:String?
     var passHidden = false
     

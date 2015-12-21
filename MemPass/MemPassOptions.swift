@@ -12,10 +12,12 @@ class MemPassOptions: NSObject {
 
     var specialCharMod = 3
     var capitalLetterMod = 7
+    var diceMod = 4
     
     let DEFAULT = "DEFAULT"
     var hasNumber = true
     var hasCapital = true
+    var hasDiceWords = true
     var characterLimit = 0
     var specialChars = ["!","@","#","$","%","^","`","~","&","*","(","=","_","{","+","}"]
     
@@ -42,6 +44,9 @@ class MemPassOptions: NSObject {
                 self.specialChars = specialChars
             }
             
+            if let hasDiceWords = options["hasDiceWords"] as? Bool {
+                self.hasDiceWords = hasDiceWords
+            }
             
         }
         
@@ -68,6 +73,7 @@ class MemPassOptions: NSObject {
         options["hasCapital"] = self.hasCapital
         options["characterLimit"] = self.characterLimit
         options["specialChars"] = self.specialChars
+        options["hasDiceWords"] = self.hasDiceWords
         
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(options, forKey: isDefault ? namedAs : "MemPassOptionSet[\(namedAs)]")
@@ -85,7 +91,8 @@ class MemPassOptions: NSObject {
         return
             "\(hasNumber ? 1 : 0)." +
             "\(hasCapital ? 1 : 0)." +
-                "\(characterLimit)." + (specialChars.count == 0 ? "" :
+            "\(hasDiceWords ? 1 : 0)." +
+            "\(characterLimit)." + (specialChars.count == 0 ? "" :
             "\(specialChars.reduce("", combine: { $0 + $1 }))")
         
     }
@@ -97,34 +104,40 @@ class MemPassOptions: NSObject {
         if parts.count >= 4 {
             
             if parts[0] == "0" {
-                hasNumber = true
-            } else if parts[0] == "1" {
                 hasNumber = false
+            } else if parts[0] == "1" {
+                hasNumber = true
             }
             
             if parts[1] == "0" {
-                hasCapital = true
-            } else if parts[1] == "1" {
                 hasCapital = false
+            } else if parts[1] == "1" {
+                hasCapital = true
             }
             
-            if let limit = Int(parts[2]) {
+            if parts[2] == "0" {
+                hasDiceWords = false
+            } else if parts[2] == "1" {
+                hasDiceWords = true
+            }
+            
+            if let limit = Int(parts[3]) {
                 self.characterLimit = limit
             }
         
             parts.removeFirst()
             parts.removeFirst()
             parts.removeFirst()
-            
-            specialChars.removeAll()
+            parts.removeFirst()
             
             var specialCharsString = parts[0]
             if parts.count > 1 {
+                
                 specialCharsString = parts.reduce("", combine: { $0 + $1 })
             }
             
             if (!specialCharsString.isEmpty) {
-                
+                specialChars.removeAll()
                 
                 for character in specialCharsString.characters {
                     specialChars.append(String(character))
