@@ -13,6 +13,11 @@ class MemPassOptions: NSObject {
     var specialCharMod = 3
     var capitalLetterMod = 7
     var diceMod = 4
+    var numberReplace = "n";
+    var defaultUppercase = "A";
+    var diceOffset = 100000;
+    var diceLeftBrace = "-> ";
+    var diceRightBrace = " <-";
     
     let DEFAULT = "DEFAULT"
     var hasNumber = true

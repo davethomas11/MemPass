@@ -12,8 +12,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var p = document.getElementById("test");
 
-    alert(p);
-    p.innerHTML = hex;
+    
+    var p2 = document.getElementById("test2");
+
+    var uint8array = new TextEncoder("utf-8").encode("Testing");
+
+    alert(["dave","j"].join(""))
 });
 </script>
 
@@ -21,5 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
 </head>
 <body>
 <p id="test"></p>
+<p id="test2"></p>
 </body>
 </html>

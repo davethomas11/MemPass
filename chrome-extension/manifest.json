@@ -5,10 +5,11 @@
 	"version": "1.0",
 	"browser_action": {
 		"default_icon": "icon.png",
-		"default_popup": "popup.html",
+		"default_popup": "mempass.html",
 		"default_title": "Generate Password!"
 	},
 	"permissions": [
+		"storage"
     	"activeTab",
     	"https://ajax.googleapis.com/"
   	]

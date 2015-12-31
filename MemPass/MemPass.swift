@@ -105,13 +105,13 @@ class MemPass: NSObject {
         var parts = seed.componentsSeparatedByString("|")
         
         if parts.count > 1 {
-            seed = parts[0]
-            parts.removeFirst()
             
-            var optsString = parts[0]
+            var optsString = parts[1]
             if parts.count > 1 {
-                optsString = parts.reduce("", combine: { $0 + $1})
+                optsString = seed.stringByReplacingOccurrencesOfString("\(parts[0])|", withString: "")
             }
+            
+            seed = parts[0]
             
             options.parseSettingsString(optsString)
         }
@@ -213,7 +213,7 @@ class MemPass: NSObject {
         }
         
         if !hasUpperCase {
-            memPass += "A"
+            memPass += options.defaultUppercase
         }
         
         return memPass
@@ -221,7 +221,7 @@ class MemPass: NSObject {
     
     private func removeNumbersPass(inString:String) -> String {
         
-        return inString.stringByReplacingOccurrencesOfString("[0-9]", withString: "n", options: NSStringCompareOptions.RegularExpressionSearch, range: inString.rangeOfString(inString))
+        return inString.stringByReplacingOccurrencesOfString("[0-9]", withString: options.numberReplace, options: NSStringCompareOptions.RegularExpressionSearch, range: inString.rangeOfString(inString))
     }
     
     private func diceWordPass(var memPass:String) -> String {
@@ -229,7 +229,7 @@ class MemPass: NSObject {
         let wordCount = dice.getWordCount()
         let sum = passwordSum(phrase + seed)
         var characterCount = memPass.characters.count - 1
-        var offset = 100000
+        var offset = options.diceOffset
         
         let target = (sum % options.diceMod) + 1
 
@@ -241,7 +241,7 @@ class MemPass: NSObject {
             }
             
             let position = sum % characterCount
-            var wordX = sum * offset % wordCount
+            var wordX = (sum * offset) % wordCount
         
             if wordX <= 0 || wordX >= wordCount {
                 wordX = 1
@@ -254,7 +254,7 @@ class MemPass: NSObject {
             let diceWord = dice.wordAt(wordX)
             
             if options.specialChars.count > 0 {
-                parts.append("-> \(diceWord) <-")
+                parts.append("\(options.diceLeftBrace)\(diceWord)\(options.diceRightBrace)")
             } else {
                 parts.append("\(diceWord)")
             }
@@ -303,14 +303,14 @@ class MemPass: NSObject {
                 memPass = removeNumbersPass(memPass)
             }
             
-            if options.characterLimit > 0 {
-                
-                memPass = memPass.substringToIndex(memPass.startIndex.advancedBy(options.characterLimit))
-            }
-            
             if options.hasDiceWords {
                 
                 memPass = diceWordPass(memPass)
+            }
+            
+            if options.characterLimit > 0 && options.characterLimit < memPass.characters.count {
+                
+                memPass = memPass.substringToIndex(memPass.startIndex.advancedBy(options.characterLimit))
             }
             
             return memPass
