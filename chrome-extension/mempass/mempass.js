@@ -1,45 +1,106 @@
+var inNode = false;
+var isChrome = typeof chrome == "undefined" ? false : true;
+
+if (typeof window === 'undefined' && exports) {
+	inNode = true;
+	exports.MemPass = MemPass;
+
+}
 
 
-function MemPass() {
 
+function MemPass(injection) {
+	injection = typeof injection !== 'undefined' ? injection : false;
+
+	var self = this;
 	var options = new MemPassOptions();
-	var dice = new MemPassDice();
+	var dice = new MemPassDice(injection);
 	var phrase = "";
+	var crypto = inNode ? injection.crypto : crypto;
+	crypto.getRandomValues = inNode ?  injection.getRandomValues : crypto.getRandomValues;
 
 	options.loadDefaults();
 
-	this.seed = ""
+	var seed = ""
+
+	this.getSeed = function() {
+		return seed;
+	}
+
+	this.setSeed = function(nseed) {
+		seed = nseed;
+	}
+
+	this.getPhrase = function () {
+		return phrase;
+	}
+
+	this.setPhrase = function (p) {
+		phrase = p;
+	}
+
+	this.getDice = function() {
+		return dice;
+	}
+
+	this.getOptions = function () {
+		return options;
+	}
 
 	this.reSeed = function(seed, callback) {
 
-		if (typeof seed == "undefined") {
+		if (!seed) {
 
-			newSeed(function (err, seed) {
+			self.newSeed(function (err, seed) {
 				
 				if (err) {
-					this.seed = randomValue();
+
+					seed = self.randomValue();
 				} else {
-					this.seed = seed;
+					
+					seed = seed;
 				}
 
-				callback(this.seed);
+				if (callback) {
+					callback(seed);
+				}
 			});
+
 		} else if (seed.indexOf("|")) {
 
-			this.seed = parseSeedForOptions(seed);
-			callback(this.seed);
+			seed = self.parseSeedForOptions(seed);
+
+			if (callback) {
+
+				callback(seed);
+			}
+
 		} else {
 
-			this.seed = seed;
-			callback(this.seed);
+			seed = seed;
+			
+			if (callback) {
+
+				callback(seed);
+			}
 		}
+	}
+
+	this.getIntialValue = function(mempass) {
+
+		return mempass + "-" + self.stringReverse(mempass) + "-|" + seed + ".)";
+	}
+
+	this.getIntialHash = function(mempass, callback) {
+
+		self.sha256(self.getIntialValue(mempass), callback);
 	}
 
 	this.generate = function(mempass, callback) {
 
-		this.phrase = mempass;
+		phrase = mempass;
 
-		sha256(mempass + "-" + reverse(mempass) + "-" + this.seed, function (err, mempass) {
+		self.getIntialHash(mempass, function (err, mempass) {
 
 			if (err) {
 
@@ -48,22 +109,22 @@ function MemPass() {
 
 				if (options.specialChars.length > 0) {
 
-					mempass = specialCharPass(mempass);
+					mempass = self.specialCharPass(mempass);
 				}
 
 				if (options.hasCapital) {
 
-					mempass = capitalLetterPass(mempass);
+					mempass = self.capitalLetterPass(mempass);
 				}
 
 				if (!options.hasNumber) {
 
-					mempass = removeNumberPass(mempass);
+					mempass = self.removeNumberPass(mempass);
 				}
 
 				if (options.hasDiceWords) {
 
-					diceWordPass(mempass, complete);
+					self.diceWordPass(mempass, complete);
 				
 				} else {
 
@@ -88,67 +149,79 @@ function MemPass() {
 
 	this.memPassSyncKey = function () {
 
-		return this.seed + "|" + options.settingsString();
+		return seed + "|" + options.settingsString();
 	}
 
-	function newSeed(callback) {
+	this.newSeed = function(callback) {
 
-		chrome.system.cpu.getInfo(function (info) {
+		var now = new Date().getTime();
+		var random = self.randomValue();
+		var value = random + now;
 
-			var now = new Date().getTime();
-			var random = randomValue();
+		if (isChrome) {
 
-			var value = random + now;
-			value += "_" + info.numOfProcessors;
-			value += "_" + info.archName;
-			value += "_" + info.features.join();
+			chrome.system.cpu.getInfo(function (info) {
 
-			for (p in processors) {
-				value += "_" + processors[p].user;
-				value += "_" + processors[p].kernel;
-				value += "_" + processors[p].idle;
-				value += "_" + processors[p].total;
-			}
+				value += "_" + info.numOfProcessors;
+				value += "_" + info.archName;
+				value += "_" + info.features.join();
 
-			chrome.system.memory.getInfo(function (info)) {
+				for (p in processors) {
+					value += "_" + processors[p].user;
+					value += "_" + processors[p].kernel;
+					value += "_" + processors[p].idle;
+					value += "_" + processors[p].total;
+				}
 
-				value += "_" + info.capacity;
-				value += "_" + info.availableCapacity;
+				chrome.system.memory.getInfo(function (info) {
 
-				chrome.system.storage.getInfo(function (infos)) {
+					value += "_" + info.capacity;
+					value += "_" + info.availableCapacity;
 
-					for (i in infos) {
+					chrome.system.storage.getInfo(function (infos) {
 
-						value += "_" + infos[i].id;
-						value += "_" + infos[i].name;
-						value += "_" + infos[i].type;
-						value += "_" + infos[i].capacity;
+						for (i in infos) {
 
-					}
+							value += "_" + infos[i].id;
+							value += "_" + infos[i].name;
+							value += "_" + infos[i].type;
+							value += "_" + infos[i].capacity;
 
-					sha256(value, callback);
+						}
+
+						self.sha256(value, callback);
+					});
+					
 				});
 				
 			});
-			
-		});
+		} else {
+
+			self.sha256("-" + now + value, callback);
+		}
 	}
 
-	function loadSeed() {
+	this.loadSeed = function() {
 
-		chrome.storage.sync.get("seed", function (items) {
+		if (isChrome) {
 
-			if (typeof items["seed"] != "undefined") {
-				
-				this.seed = items["seed"];
-			} else {
+			chrome.storage.sync.get("seed", function (items) {
 
-				reSeed();
-			}
-		});
-	}();
+				if (typeof items["seed"] != "undefined") {
+					
+					seed = items["seed"];
+				} else {
 
-	function parseSeedForOptions(seed) {
+					self.reSeed();
+				}
+			});
+		} else {
+
+			self.reSeed();
+		}
+	}
+
+	this.parseSeedForOptions = function(seed) {
 
 		var parts = seed.split("|");
 
@@ -167,23 +240,25 @@ function MemPass() {
 		return seed;
 	}
 
-	function specialCharPass(mempass) {
+	this.specialCharPass = function(mempass) {
 
 		var occurences = {};
 
 		for (var i = 0; i < mempass.length; i++) {
 
-			if (typeof occurences[mempass.charAt(i)] === "undefined") {
-				occurences[mempass.charAt(i).toString()] = 0;
+			var character = mempass.charAt(i);
+
+			if (typeof occurences[character] === "undefined") {
+				occurences[character] = 0;
 			} else {
-				occurences[mempass.charAt(i).toString()]++;
+				occurences[character]++;
 			}
 		}
 
 		var index = 0;
 		var sorted = [];
 
-		for i in occurences {
+		for (i in occurences) {
 			sorted.push({
 				character: i,
 				occurences: occurences[i]
@@ -194,9 +269,9 @@ function MemPass() {
 			return a.occurences - b.occurences;
 		});
 
-		var specialChars = options.specialChars;
+		var specialChars = options.specialChars.slice();
 
-		while specialChars.length > 0 && sorted.length > 0 {
+		while (specialChars.length > 0 && sorted.length > 0) {
 
 			var character = sorted[0].character;
 			var value = character.charCodeAt(0);
@@ -210,7 +285,7 @@ function MemPass() {
 
 			if (index % options.capitalLetterMod == 0) {
 
-				mempass = mempass.replace(regexCreate(character, "g"), specialChar);
+				mempass = mempass.replace(self.regexEscape(character, "g"), specialChar);
 			} else {
 
 				mempass = mempass.replace(character, specialChar);
@@ -226,9 +301,9 @@ function MemPass() {
 		return mempass;
 	}
 
-	function capitalLetterPass(mempass) {
+	this.capitalLetterPass = function(mempass) {
 
-		var target = (stringSum(mempass) % options.capitalLetterMod) + 1;
+		var target = (self.stringSum(mempass) % options.capitalLetterMod) + 1;
 		var found = 0;
 		var hasUpperCase = false;
 
@@ -257,20 +332,26 @@ function MemPass() {
 		return mempass;
 	}
 
-	function removeNumberPass(mempass) {
+	this.removeNumberPass = function(mempass) {
 
 		return mempass.replace(/[0-9]/g, options.numberReplace);
 	}
 
-	function diceWordPass(mempass, callback) {
+	this.diceWordPass = function(mempass, callback) {
 
-		var wordCount = dice.getWordCount();
-		var sum = stringSum(this.phrase + this.seed);
+		var wordCount = 0;
+		var sum = self.stringSum(phrase + seed);
 		var characterCount = mempass.length - 1;
 		var offset = options.diceOffset;
 		var target = (sum % options.diceMod) + 1;
 		var parts = [""];
 		var index = 1;
+
+		dice.getWordCount(function (count) {
+			wordCount = count;
+
+			doDiceWord();
+		});		
 
 		function doDiceWord() {
 
@@ -283,18 +364,20 @@ function MemPass() {
 			var position = sum % characterCount;
 			var wordX = (sum * offset) % wordCount;
 
-			if wordX <= 0 || wordX >= wordCount {
+			if (wordX <= 0 || wordX >= wordCount) {
 				wordX = 1;
 			}
 
 			dice.wordAt(wordX, function(word) {
 
 				parts.push(mempass.substring(0, position));
-				mempass = mempass(position, mempass.length);
+				mempass = mempass.substring(position, mempass.length);
 
-				if (options.specialChars.count > 0) {
+				if (options.specialChars.length > 0) {
+
 					parts.push(options.diceLeftBrace + word + options.diceRightBrace);
 				} else {
+
 					parts.push(word);
 				}
 
@@ -310,11 +393,11 @@ function MemPass() {
 					callback(parts.join("") + mempass);
 				}
 			});
-		}();
+		};
 
 	}
 
-	function stringSum(str) {
+	this.stringSum = function(str) {
 
 		var sum = 0;
 		for (var i = 0; i < str.length; i++) {
@@ -325,31 +408,41 @@ function MemPass() {
 		return sum;
 	}
 
-	function randomValue() {
+	this.randomValue = function() {
 		var randomPool = new Uint8Array(32);
     	crypto.getRandomValues(randomPool);
 
-    	return ua2text(randomPool);
+    	return self.ua2text(randomPool);
 	}
 
-	function sha256(value, callback) {
+	this.sha256 = function(value, callback) {
 
-		crypto.subtle.digest({  
+		if (inNode) {
 
-			name: "SHA-256",
-	    
-	    }, text2ua(value)).then(function(hash){
+			var hash = crypto.createHash('sha256');
+			var r = hash.update(value, 'utf8');
 
-		    callback(null, ua2text(new Uint8Array(hash)));
+			callback(null, r.digest('hex'));
 		
-		}).catch(function(err){
+		} else {
 
-		    console.error(err);
-		    callback(err, null);
-		});
+			crypto.subtle.digest({  
+
+				name: "SHA-256",
+		    
+		    }, self.text2ua(value)).then(function(hash){
+
+			    callback(null, self.ua2text(new Uint8Array(hash)));
+			
+			}).catch(function(err){
+
+			    console.error(err);
+			    callback(err, null);
+			});
+		}	
 	}
 
-	function text2ua(s) {
+	this.text2ua = function(s) {
 
 	    var ua = new Uint8Array(s.length);
 
@@ -360,7 +453,7 @@ function MemPass() {
 	    return ua;
 	}
  
-	function ua2text(ua) {
+	this.ua2text = function(ua) {
 
 	    var s = '';
 
@@ -371,10 +464,10 @@ function MemPass() {
 	    return s;
 	}
 
-	var regexSymbolWithCombiningMarks = /([\0-\u02FF\u0370-\u1AAF\u1B00-\u1DBF\u1E00-\u20CF\u2100-\uD7FF\uE000-\uFE1F\uFE30-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])([\u0300-\u036F\u1AB0-\u1AFF\u1DC0-\u1DFF\u20D0-\u20FF\uFE20-\uFE2F]+)/g;
-	var regexSurrogatePair = /([\uD800-\uDBFF])([\uDC00-\uDFFF])/g;
+	this.stringReverse = function(string) {
 
-	var reverse = function(string) {
+		var regexSymbolWithCombiningMarks = /([\0-\u02FF\u0370-\u1AAF\u1B00-\u1DBF\u1E00-\u20CF\u2100-\uD7FF\uE000-\uFE1F\uFE30-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])([\u0300-\u036F\u1AB0-\u1AFF\u1DC0-\u1DFF\u20D0-\u20FF\uFE20-\uFE2F]+)/g;
+		var regexSurrogatePair = /([\uD800-\uDBFF])([\uDC00-\uDFFF])/g;
 		// Step 1: deal with combining marks and astral symbols (surrogate pairs)
 		string = string
 			// Swap symbols with their combining marks so the combining marks go first
@@ -394,29 +487,41 @@ function MemPass() {
 		return result;
 	};
 
-	var regexCreate = function(s,f) {
+	this.regexEscape = function(s,f) {
     	
     	return RegExp(s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), f);
 	};
+
+	self.loadSeed();
 }
 
-function MemPassDice() {
+function MemPassDice(injection) {
 
 	var dbName = "Words";
 	var dbVersion = 1;
-	var isChrome = chrome ? true : false;
+	
 	var objectStore = "words";
 	var indexKey = "wordId";
+	var sqlLiteDb = "words.sqlite3";
+	var sqlite3 = false;
+
+	if (inNode && injection) {
+		
+		sqlite3 = injection.sqlite3;
+	}
 
 	this.getWordCount = function(callback) {
 
 		if (isChrome) {
 
-			return chromeWordCount(callback);
+			chromeWordCount(callback);
 
+		} else if (inNode) {
+
+			nodeWordCount(callback);
 		} else {
 
-			return callback(0);
+			callback(0);
 		}
 	}
 
@@ -425,10 +530,86 @@ function MemPassDice() {
 		if (isChrome) {
 
 			chromeGetWordAt(index, callback);
+		} else if (inNode) {
+
+			nodeWordAt(index, callback);
 		} else {
 
 			callback("");
 		}
+	}
+
+	this.nodeSqlLite3Install = function(filename, callback) {
+
+		db = new sqlite3.Database(sqlLiteDb);
+		db.serialize(function () {
+			db.run("DROP TABLE IF EXISTS words");
+			db.run("CREATE TABLE IF NOT EXISTS words (id INTEGER, word TEXT)");
+
+			var stmt = db.prepare("INSERT INTO words (id, word) VALUES (?,?)");
+
+			var data = require(filename);
+			var index = 1;
+
+			for (i in data) {
+
+				stmt.run(data[i].id, data[i].word);
+
+				var progress = (index / data.length) * 100;
+
+				if (index > 1) {
+					process.stdout.clearLine();
+  					process.stdout.cursorTo(0);
+  				}
+				process.stdout.write('Progress: '+progress+'% | '+index+' of '+data.length+' words done.');
+
+				index++;
+			}
+
+			console.log("Finalizing...");
+			stmt.finalize(callback);
+		});
+		db.close();
+	}
+
+	function nodeWordAt(index, callback) {
+
+		db = new sqlite3.Database(sqlLiteDb);
+		db.serialize(function () {
+
+			db.get("SELECT word FROM words WHERE id = ?", index, function (err, row) {
+
+				if (err) {
+
+					console.log(err);
+					callback("");
+				
+				} else {
+
+					callback(row.word);
+				}
+			});
+		});
+		db.close();
+	}
+
+	function nodeWordCount(callback) {
+
+		db = new sqlite3.Database(sqlLiteDb);
+		db.serialize(function () {
+
+			db.get("SELECT COUNT(*) AS wordCount FROM words", function (err, row) {
+
+				if (err) {
+
+					console.log(err);
+					callback(0);
+				} else {
+
+					callback(row.wordCount);
+				}
+			});
+		})
 	}
 
 	this.chromeInstall = function(callback) {
@@ -527,9 +708,6 @@ function MemPassDice() {
 			}
 		});
 
-
-		
-
 	}
 
 	function openIndexedDB(callback) {
@@ -555,10 +733,8 @@ function MemPassDice() {
 
 function MemPassOptions() {
 
-	var isChrome = chrome ? true : false;
-
 	this.specialCharMod = 3;
-	this.capitalLetterMod = 4;
+	this.capitalLetterMod = 7;
 	this.diceMod = 4;
 	this.numberReplace = "n";
 	this.defaultUppercase = "A";
@@ -572,13 +748,15 @@ function MemPassOptions() {
 	this.characterLimit = 0;
 	this.specialChars = ["!","@","#","$","%","^","`","~","&","*","(","=","_","{","+","}"];
 
+	var self = this;
+
 	var _properties = ["hasNumber", "hasCapital", "hasDiceWords", "characterLimit", "specialChars"];
 
 	this.getSpecialCharString = function() {
 
 		var specCharString = ""
-		for (i in this.specialChars) {
-			specCharString += this.specialChars[i];
+		for (i in self.specialChars) {
+			specCharString += self.specialChars[i];
 		}
 
 		return specCharString;
@@ -592,8 +770,8 @@ function MemPassOptions() {
 				function (items) {
 
 					for (i in _properties) {
-						if (typeof items[_properties[i]] != undefined) {
-							this[_properties[i]] = items[_properties[i]];
+						if (typeof items[_properties[i]] != "undefined") {
+							self[_properties[i]] = items[_properties[i]];
 						}
 					}
 
@@ -606,11 +784,11 @@ function MemPassOptions() {
 		if (isChrome) {
 
 			chrome.storage.sync.set({
-				"hasNumber" : this.hasNumber,
-				"hasCapital" : this.hasCapital,
-				"hasDiceWords" : this.hasDiceWords,
-				"characterLimit" : this.characterLimit,
-				"specialChars" : this.specialChars
+				"hasNumber" : self.hasNumber,
+				"hasCapital" : self.hasCapital,
+				"hasDiceWords" : self.hasDiceWords,
+				"characterLimit" : self.characterLimit,
+				"specialChars" : self.specialChars
 			});
 
 		}
@@ -619,48 +797,54 @@ function MemPassOptions() {
 	this.settingsString = function() {
 
 		var settings = "";
-		settings += this.hasNumber ? 1 : 0;
+		settings += self.hasNumber ? 1 : 0;
 		settings += ".";
-		settings += this.hasCapital ? 1 : 0;
+		settings += self.hasCapital ? 1 : 0;
 		settings += ".";
-		settings += this.hasDiceWords ? 1 : 0;
+		settings += self.hasDiceWords ? 1 : 0;
 		settings += ".";
-		settings += this.characterLimit 
+		settings += self.characterLimit 
 		settings += ".";
-		settings += this.getSpecialCharString();
+		settings += self.getSpecialCharString();
 
-
+		return settings;
 	}
 
-	this.parseSettingsString(settings) = function () {
+	this.parseSettingsString = function (settings) {
 
 		var parts = settings.split(".");
 
-		if parts.length >= 4 {
+		if (parts.length >= 4) {
 
-			if parts[0] === "0" {
-				this.hasNumber = false;
-			} else if parts[0] === "1" {
-				this.hasNumber = true;
+			if (parts[0] === "0") {
+				self.hasNumber = false;
+			} else if (parts[0] === "1") {
+				self.hasNumber = true;
 			}
 
-			if parts[1] === "0" {
-                this.hasCapital = false
-            } else if parts[1] === "1" {
-                this.hasCapital = true
+			if (parts[1] === "0") {
+                self.hasCapital = false;
+            } else if (parts[1] === "1") {
+                self.hasCapital = true;
             }
             
-            if parts[2] === "0" {
-                this.hasDiceWords = false
-            } else if parts[2] === "1" {
-                this.hasDiceWords = true
+            if (parts[2] === "0") {
+                self.hasDiceWords = false;
+            } else if (parts[2] === "1") {
+                self.hasDiceWords = true;
             }
             
-            if let limit = Int(parts[3]) {
-                self.characterLimit = limit
+            if (Number.isInteger(parseInt(parts[3]))) {
+                self.characterLimit = parseInt(parts[3]);
             }
 
-            this.saveDefaults();
+            if (parts.length > 4) {
+            	
+            	self.specialChars = settings.replace(/^([0-9]+.){4}/, "").split("");
+
+        	}
+
+            self.saveDefaults();
 
 		}
 	}

@@ -29,26 +29,26 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		470C1E697F71C04BAA09920D2E92DD6C /* PBXContainerItemProxy */ = {
+		04E278DD071155D2F0F05563C3A2A51D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EA3931D121EE165685E6E6C251F033C0;
+			remoteInfo = SSKeychain;
+		};
+		1A445A241BDD0801E4BA212D802C4A08 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 594434B534C8C8DA75BADFA05F5E996B;
 			remoteInfo = SWRevealViewController;
 		};
-		649BEAC9857905324882831C3ABAC25F /* PBXContainerItemProxy */ = {
+		3164C0E9616A908189DD9C092F16235D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 30041BA2C05F40F1081A70370B599E76;
 			remoteInfo = Toast;
-		};
-		DC595163E755DFA931BBD48B97BB2950 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = EA3931D121EE165685E6E6C251F033C0;
-			remoteInfo = SSKeychain;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -389,9 +389,9 @@
 			buildRules = (
 			);
 			dependencies = (
-				2E229EF0B7C302C399C935E84A36B7F9 /* PBXTargetDependency */,
-				A25F7C0A9EA9E578520AA367A24D11B3 /* PBXTargetDependency */,
-				06FAEEB5DFA6951C5709803A7C7BE4A2 /* PBXTargetDependency */,
+				79312D028D308F647020E42574198AAC /* PBXTargetDependency */,
+				5B3BEED42A10C2322E110F2EAED0EE09 /* PBXTargetDependency */,
+				1A4F9C7D2704408FEC04308AD8B9AE29 /* PBXTargetDependency */,
 			);
 			name = Pods;
 			productName = Pods;
@@ -484,23 +484,23 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		06FAEEB5DFA6951C5709803A7C7BE4A2 /* PBXTargetDependency */ = {
+		1A4F9C7D2704408FEC04308AD8B9AE29 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Toast;
 			target = 30041BA2C05F40F1081A70370B599E76 /* Toast */;
-			targetProxy = 649BEAC9857905324882831C3ABAC25F /* PBXContainerItemProxy */;
+			targetProxy = 3164C0E9616A908189DD9C092F16235D /* PBXContainerItemProxy */;
 		};
-		2E229EF0B7C302C399C935E84A36B7F9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SSKeychain;
-			target = EA3931D121EE165685E6E6C251F033C0 /* SSKeychain */;
-			targetProxy = DC595163E755DFA931BBD48B97BB2950 /* PBXContainerItemProxy */;
-		};
-		A25F7C0A9EA9E578520AA367A24D11B3 /* PBXTargetDependency */ = {
+		5B3BEED42A10C2322E110F2EAED0EE09 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SWRevealViewController;
 			target = 594434B534C8C8DA75BADFA05F5E996B /* SWRevealViewController */;
-			targetProxy = 470C1E697F71C04BAA09920D2E92DD6C /* PBXContainerItemProxy */;
+			targetProxy = 1A445A241BDD0801E4BA212D802C4A08 /* PBXContainerItemProxy */;
+		};
+		79312D028D308F647020E42574198AAC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SSKeychain;
+			target = EA3931D121EE165685E6E6C251F033C0 /* SSKeychain */;
+			targetProxy = 04E278DD071155D2F0F05563C3A2A51D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

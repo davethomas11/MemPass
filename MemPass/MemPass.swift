@@ -59,7 +59,7 @@ class MemPass: NSObject {
         
     }
     
-    private func getAccount() -> String {
+    func getAccount() -> String {
         
         if let account = SSKeychain.passwordForService(SERVICE, account: MEMPASS) {
             
@@ -101,7 +101,7 @@ class MemPass: NSObject {
         
     }
     
-    private func parseSeedForOptions(var seed:String) -> String {
+    func parseSeedForOptions(var seed:String) -> String {
         var parts = seed.componentsSeparatedByString("|")
         
         if parts.count > 1 {
@@ -120,7 +120,7 @@ class MemPass: NSObject {
     }
     
     
-    private func newSeed() -> String {
+    func newSeed() -> String {
         let now = NSDate().timeIntervalSince1970
         let accesible = UIScreen.mainScreen().accessibilityActivate() ? rand() * 32 : rand()
         let battery = UIDevice.currentDevice().batteryLevel
@@ -139,7 +139,7 @@ class MemPass: NSObject {
     }
     
     
-    private func specialCharPass(inS:String) -> String {
+    func specialCharPass(inS:String) -> String {
         
         var occurences = [Character:Int]()
         var memPass = inS
@@ -189,7 +189,7 @@ class MemPass: NSObject {
         return memPass
     }
     
-    private func capitalLetterPass(inString:String) -> String {
+    func capitalLetterPass(inString:String) -> String {
         
         let target = (passwordSum(inString) % options.capitalLetterMod) + 1
         var found = 0
@@ -219,12 +219,12 @@ class MemPass: NSObject {
         return memPass
     }
     
-    private func removeNumbersPass(inString:String) -> String {
+    func removeNumbersPass(inString:String) -> String {
         
         return inString.stringByReplacingOccurrencesOfString("[0-9]", withString: options.numberReplace, options: NSStringCompareOptions.RegularExpressionSearch, range: inString.rangeOfString(inString))
     }
     
-    private func diceWordPass(var memPass:String) -> String {
+    func diceWordPass(var memPass:String) -> String {
         
         let wordCount = dice.getWordCount()
         let sum = passwordSum(phrase + seed)
@@ -280,12 +280,23 @@ class MemPass: NSObject {
         return memPassSum
     }
     
-    func generate(memPass:String) -> String? {
+    func getIntialValue(memPass:String) -> String {
+        
+        return "\(memPass)-\(String(memPass.characters.reverse()))-|\(seed).)"
+    }
+    
+    func getIntialHash(memPass:String) -> String? {
         
         let hasher = Sha2()
+        return hasher.sha256(getIntialValue(memPass))
+    }
+    
+    
+    func generate(memPass:String) -> String? {
+        
         phrase = memPass
         
-        if let firstPass = hasher.sha256("\(memPass)-\(String(memPass.characters.reverse()))-|\(seed).)") {
+        if let firstPass = getIntialHash(memPass) {
             
             var memPass = firstPass
             if options.specialChars.count > 0 {

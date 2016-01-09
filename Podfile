@@ -8,3 +8,5 @@ pod 'Fabric'
 pod 'Crashlytics'
 
 xcodeproj 'MemPass'
+
+link_with 'MemPass', 'MemPassTests'
