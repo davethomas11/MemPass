@@ -36,7 +36,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         memPassResult.userInteractionEnabled = true
         
         //685f43
-        self.view.backgroundColor = UIColor.gradientFromColor(UIColor.colorFromHex("#31302b"), toColor: UIColor.colorFromHex("#5794f0"), withHeight: Int(self.view.bounds.height))
+        self.view.backgroundColor = UIColor.gradientFromColor(UIColor.colorFromHex("#292d33"), toColor: UIColor.colorFromHex("#3fb2ee"), withHeight: Int(self.view.bounds.height))
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "resignText"))
         self.view.userInteractionEnabled = true

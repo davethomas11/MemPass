@@ -77,14 +77,13 @@ class MemPassDice {
             print(dataPath)
             let words = try NSJSONSerialization.JSONObjectWithData(NSData(contentsOfFile: dataPath!)!, options: NSJSONReadingOptions.AllowFragments)
             
-            var position = 1
+           
             for word in words as! NSArray {
                 
                 let wc = NSEntityDescription.insertNewObjectForEntityForName("Word", inManagedObjectContext: context!) as? Word
                 wc?.word = word["word"] as? String
-                wc?.position = position
+                wc?.position = word["id"] as? Int
                 
-                position++
             }
             
             

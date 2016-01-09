@@ -69,7 +69,7 @@ class MemPassTests: XCTestCase {
     }
     
     func testSpecialCharReplace() {
-        XCTAssertEqual(memPass!.specialCharPass("mempass-mempass-mempass"), "+=m&}~s{mempass{mempass")
+        XCTAssertEqual(memPass!.specialCharPass("mempass-mempass-mempass"), "@$m(~&s{mempass{mempass")
     }
     
     func testDiceWordAt5() {
@@ -77,7 +77,7 @@ class MemPassTests: XCTestCase {
     }
     
     func testDiceWordCount() {
-        
+        XCTAssertEqual(40638, memPass!.dice.getWordCount())
     }
     
     /*func testExample() {

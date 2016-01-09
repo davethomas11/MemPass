@@ -155,7 +155,16 @@ class MemPass: NSObject {
         }
         
         var index = 0
-        var sorted = occurences.sort({ $0.1 < $1.1 })
+        var sorted = occurences.sort({
+        
+            if ($0.1 == $1.1) {
+                
+                return $0.0 < $1.0
+            } else {
+            
+                return $0.1 < $1.1
+            }
+        })
         var specialChars = options.specialChars
 
         while specialChars.count > 0 && sorted.count > 0 {

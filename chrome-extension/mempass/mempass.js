@@ -249,7 +249,7 @@ function MemPass(injection) {
 			var character = mempass.charAt(i);
 
 			if (typeof occurences[character] === "undefined") {
-				occurences[character] = 0;
+				occurences[character] = 1;
 			} else {
 				occurences[character]++;
 			}
@@ -266,6 +266,10 @@ function MemPass(injection) {
 		}
 
 		sorted.sort(function (a, b) {
+			if (a.occurences == b.occurences) {
+				return a.character > b.character;
+			}
+
 			return a.occurences - b.occurences;
 		});
 
