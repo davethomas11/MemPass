@@ -15,10 +15,17 @@
     },
 	"permissions": [
 		"storage",
-		"contextMenus"
+		"contextMenus",
+		"https://ajax.googleapis.com/",
+		"system.cpu",
+		"system.memory",
+		"system.storage"
   	],
   	"background" : {
-  		"scripts": [ "mempass/mempass.js", "mempass-context.js"]
+  		"scripts": [ 
+  			"mempass/mempass.js", 
+  			"mempass-install.js", 
+  			"mempass-context.js"]
   	},
   	"content_scripts" : [
   		{

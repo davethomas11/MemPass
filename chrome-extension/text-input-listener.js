@@ -8,7 +8,9 @@ document.addEventListener("mousedown", function(event){
 }, true);
 
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
-    if(request == "getClickedEl") {
+    if(request === "getClickedEl") {
         sendResponse({value: clickedEl.value});
+    } else if (request.type == "setClickedEl") {
+    	clickedEl.value = request.value;
     }
 });

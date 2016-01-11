@@ -1,0 +1,38 @@
+<!doctype html>
+
+<html>
+  <head>
+    <title>Installing MemPass</title>
+    <style>
+      body {
+        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+        font-size: 100%;
+      }
+      div {
+        /* avoid an excessively wide status text */
+        white-space: pre;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 400px;
+      }
+      #close {
+        display:none;
+      }
+    </style>
+
+    <script src="vendor/jquery.min.js"></script>
+    <link rel="stylesheet" href="vendor/jquery-ui.css">
+    <script src="vendor/jquery-ui.min.js"></script>
+    <script src="install-progress.js"></script>
+  </head>
+  <body>
+    <div id="title">Installing MemPass...</div>
+    <br/>
+    <div id="progressbar"></div>
+    <div id="status"></div>
+    <br/>
+    <pre id="action"></pre>
+    <button id="close">Close</button>
+  </body>
+</html>
+

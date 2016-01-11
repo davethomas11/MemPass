@@ -5,9 +5,7 @@ if (typeof window === 'undefined' && exports) {
 	inNode = true;
 	exports.MemPass = MemPass;
 
-}
-
-
+} 
 
 function MemPass(injection) {
 	injection = typeof injection !== 'undefined' ? injection : false;
@@ -16,12 +14,16 @@ function MemPass(injection) {
 	var options = new MemPassOptions();
 	var dice = new MemPassDice(injection);
 	var phrase = "";
-	var crypto = inNode ? injection.crypto : crypto;
-	crypto.getRandomValues = inNode ?  injection.getRandomValues : crypto.getRandomValues;
+
+	var cryp = inNode ? injection.crypto : crypto;
+
+	if (inNode) {
+		cryp.getRandomValues = injection.getRandomValues;
+	}
 
 	options.loadDefaults();
 
-	var seed = ""
+	var seed = "";
 
 	this.getSeed = function() {
 		return seed;
@@ -166,6 +168,8 @@ function MemPass(injection) {
 				value += "_" + info.archName;
 				value += "_" + info.features.join();
 
+				var processors = info.processors;
+
 				for (p in processors) {
 					value += "_" + processors[p].user;
 					value += "_" + processors[p].kernel;
@@ -280,6 +284,8 @@ function MemPass(injection) {
 			var character = sorted[0].character;
 			var value = character.charCodeAt(0);
 			var specialCharIndex = value % specialChars.length;
+			console.log("Value "+value+" leng"+specialChars.length+ " ind "+specialCharIndex);
+			console.log(JSON.stringify(specialChars));
 
 			if (specialCharIndex >= specialChars.length || specialCharIndex < 0) {
 				specialCharIndex = 0;
@@ -414,7 +420,7 @@ function MemPass(injection) {
 
 	this.randomValue = function() {
 		var randomPool = new Uint8Array(32);
-    	crypto.getRandomValues(randomPool);
+    	cryp.getRandomValues(randomPool);
 
     	return self.ua2text(randomPool);
 	}
@@ -423,27 +429,42 @@ function MemPass(injection) {
 
 		if (inNode) {
 
-			var hash = crypto.createHash('sha256');
+			var hash = cryp.createHash('sha256');
 			var r = hash.update(value, 'utf8');
 
 			callback(null, r.digest('hex'));
 		
 		} else {
 
-			crypto.subtle.digest({  
-
-				name: "SHA-256",
-		    
-		    }, self.text2ua(value)).then(function(hash){
-
-			    callback(null, self.ua2text(new Uint8Array(hash)));
-			
-			}).catch(function(err){
-
-			    console.error(err);
-			    callback(err, null);
+			_sha256(value).then(function(digest) {
+				callback(null, digest);
 			});
 		}	
+	}
+
+	function _sha256(str) {
+
+		var buffer = new TextEncoder("utf-8").encode(str);
+		return crypto.subtle.digest("SHA-256", buffer).then(function (hash) {
+	    	return hex(hash);
+	  	});
+	}
+
+	function hex(buffer) {
+		var hexCodes = [];
+		var view = new DataView(buffer);
+		for (var i = 0; i < view.byteLength; i += 4) {
+		   
+			var value = view.getUint32(i)
+
+			var stringValue = value.toString(16)
+
+			var padding = '00000000'
+			var paddedValue = (padding + stringValue).slice(-padding.length)
+			hexCodes.push(paddedValue);
+		}
+
+	  	return hexCodes.join("");
 	}
 
 	this.text2ua = function(s) {
@@ -455,6 +476,17 @@ function MemPass(injection) {
 	    }
 
 	    return ua;
+	}
+
+	this.ua2hex = function(ua) {
+
+		var s = '';
+
+		for (var i = 0; i < ua.length; i++) {
+			s += ua[i].toString(16);
+		}
+
+		return s;
 	}
  
 	this.ua2text = function(ua) {
@@ -512,6 +544,7 @@ function MemPassDice(injection) {
 	if (inNode && injection) {
 		
 		sqlite3 = injection.sqlite3;
+		sqlLiteDb = injection.sqlite3Path;
 	}
 
 	this.getWordCount = function(callback) {
@@ -616,7 +649,7 @@ function MemPassDice(injection) {
 		})
 	}
 
-	this.chromeInstall = function(callback) {
+	this.chromeInstall = function(callback, eventStatus) {
 
 		openIndexedDB(function (err, connection) {
 
@@ -632,25 +665,56 @@ function MemPassDice(injection) {
 				var xhr = new XMLHttpRequest();
 				xhr.onload = function(event) {
 					
-					var data = event.target.response;
-					var trans = connection.tranasaction(objectStore, "readwrite");
+					var data = JSON.parse(event.target.response);
+					var len = data.length;
 
-					for (i in data) {
+					function transaction(i) {
+
+						if (i == data.length) {
+							installComplete();
+							return;
+						}
+
+						var trans = connection.transaction(objectStore, "readwrite");
+						var store = trans.objectStore(objectStore);
+
+						var word = data[i].word;
+						var id = data[i].id;
+
+						var item = {word:word, id:id};
+						var storeReq = store.add(item);
 
 						
-						var store = trans.objectStore(objectStore);
-						store.put({word:data[i].word, id:data[i].id});
+						storeReq.onsuccess = function (event) {
+							if (eventStatus) {
+								eventStatus(item, id / len);
+							}
+
+							transaction(++i);
+						}
+
+						storeReq.onerror = function (event) {
+
+							console.log(event.target.error);
+							callback(event.target.error, null);
+						}
 					}
+					
+					transaction(0);
 
-					connection.closePending = true;
+					function installComplete() {
 
-					if (callback) {
-						callback(null, true);
+						connection.close();
+
+						if (callback) {
+							callback(null, true);
+						}
 					}
 				}
 			
-				xhr.open("GET", chrome.extension.getURL('/word.json'), true);
 				xhr.type="json";
+				xhr.open("GET", chrome.extension.getURL('/word.json'), true);
+				
 				xhr.send();
 
 			}
@@ -674,8 +738,19 @@ function MemPassDice(injection) {
 				var words = transaction.objectStore(objectStore);
 				var index = words.index(indexKey);
 				
-				callback(index.count());
-				connection.closePending = true;
+				var req = index.count();
+
+				req.onsuccess = function () {
+					callback(req.result);
+					connection.close();
+				};
+
+				req.onerror = function () {
+					console.log(req.error);
+					callback(0);
+					connection.close();
+				};
+				
 
 			}
  		});
@@ -695,18 +770,19 @@ function MemPassDice(injection) {
 				var trans = connection.transaction(objectStore, "readonly");
 				var words = trans.objectStore(objectStore);
 				var index = words.index(indexKey);
+				
 				var req = index.get(id);
 				
-				req.onSuccess = function () {
+				req.onsuccess = function () {
 
 					callback(req.result.word);
-					connection.closePending = true;
+					connection.close();
 				};
 
-				req.onError = function () {
+				req.onerror = function () {
 					
 					callback("");
-					connection.closePending = true;
+					connection.close();
 				};
 
 			}
@@ -717,17 +793,27 @@ function MemPassDice(injection) {
 	function openIndexedDB(callback) {
 
 		var req = indexedDB.open(dbName, dbVersion);
-		req.onUpgradeNeeded = function(event) {
-			var db = event.target;
-			var store = db.createObjectStore(objectStore);
-			store.createIndex(indexKey, "id", {unique:true});
+
+		req.onupgradeneeded = function(event) {
+			var db = event.target.result;
+
+			if (!db.objectStoreNames.contains(objectStore)) {
+				var store = db.createObjectStore(objectStore, { keyPath: "id"});
+				store.createIndex(indexKey, "id", {unique:true});
+
+			} 
+
 		}
 
-		req.onSuccess = function() {
-			callback(null, req);
+		req.onsuccess = function() {
+
+			callback(null, req.result);
 		}
 
-		req.onError = function() {
+		req.onerror = function() {
+
+			console.log(req.error);
+
 			req.closePending = true;
 			callback(req.error, null);
 		}
@@ -755,6 +841,18 @@ function MemPassOptions() {
 	var self = this;
 
 	var _properties = ["hasNumber", "hasCapital", "hasDiceWords", "characterLimit", "specialChars"];
+
+	this.reset = function () {
+
+		self.hasNumber = true;
+		self.hasCapital = true;
+		self.hasDiceWords = true;
+		self.characterLimit = 0;
+		self.specialChars = ["!","@","#","$","%","^","`","~","&","*","(","=","_","{","+","}"];
+
+		self.saveDefaults();
+
+	}
 
 	this.getSpecialCharString = function() {
 
@@ -814,7 +912,7 @@ function MemPassOptions() {
 		return settings;
 	}
 
-	this.parseSettingsString = function (settings) {
+	this.parseSettingsString = function (settings, save) {
 
 		var parts = settings.split(".");
 
@@ -848,7 +946,9 @@ function MemPassOptions() {
 
         	}
 
-            self.saveDefaults();
+        	if (save !== false) {
+            	self.saveDefaults();
+        	}
 
 		}
 	}

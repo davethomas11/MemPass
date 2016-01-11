@@ -1,30 +1,21 @@
-
+<!DOCTYPE html>
 <html>
 <head>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-	var randomPool = new Uint8Array(32);
-    crypto.getRandomValues(randomPool);
-    var hex = '';
-    for (var i = 0; i < randomPool.length; ++i) {
-        hex += randomPool[i].toString(16);
-    }
-
-    var p = document.getElementById("test");
-
-    
-    var p2 = document.getElementById("test2");
-
-    var uint8array = new TextEncoder("utf-8").encode("Testing");
-
-    alert(["dave","j"].join(""))
-});
-</script>
-
-
+  <meta charset="utf-8">
+  <title>MemPass tests</title>
+  <link rel="stylesheet" media="all" href="vendor/mocha.css">
 </head>
 <body>
-<p id="test"></p>
-<p id="test2"></p>
+  <div id="mocha"><p><a href=".">Index</a></p></div>
+  <div id="messages"></div>
+  <div id="fixtures"></div>
+  <script src="vendor/mocha.js"></script>
+  <script src="vendor/unit.js"></script>
+  <script src="mempass/mempass.js"></script>
+  <script src="setup-test.js"></script>
+  <script src="tests/mempass_tests.js"></script>
+  <script src="tests/dice_tests.js"></script>
+  <script src="tests/options_tests.js"></script>
+  <script src="start-test.js"></script>
 </body>
 </html>
