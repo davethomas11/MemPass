@@ -4,14 +4,14 @@
 	"description": "Complex passwords, remembered by a simple phrase.",
 	"version": "1.0",
 	"browser_action": {
-		"default_icon": "chrome_opt_icon.png",
-		"default_popup": "mempass.html",
+		"default_icon": "icons/chrome_opt_icon.png",
+		"default_popup": "tabs.html",
 		"default_title": "MemPass"
 	},
 	"icons": {
-          "16": "icon-bitty.png",
-          "48": "icon-small.png",
-          "128": "icon-large.png"
+          "16": "icons/icon-bitty.png",
+          "48": "icons/icon-small.png",
+          "128": "icons/icon-large.png"
     },
 	"permissions": [
 		"storage",
@@ -24,13 +24,13 @@
   	"background" : {
   		"scripts": [ 
   			"mempass/mempass.js", 
-  			"mempass-install.js", 
-  			"mempass-context.js"]
+  			"js/mempass-install.js", 
+  			"js/mempass-context.js"]
   	},
   	"content_scripts" : [
   		{
   			"matches" : ["<all_urls>"],
-  			"js": [ "text-input-listener.js" ]
+  			"js": [ "js/text-input-listener.js" ]
   		}
 
   	]

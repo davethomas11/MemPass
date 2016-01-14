@@ -13,14 +13,27 @@ var seed = "2289146dc04e35c66958e75792142c2edb9793072002aa160ea08ae664ee95c0";
 var expected = "=&#F!+}^~de2+_2&d8{(&3d2@f+eb3f2c+cd5e&*23-> less <-a&bd%`cd$d&d3e8019a9bf";
 var value = "mempass";
 
-mempass.setSeed(seed);
-mempass.getOptions().reset();
+
+
 
 describe("MemPass Tests", function () {
 
 	var passwordResult = null;
 	var sha256result = null;
 	var intialHash = null;
+	var newSeed = null;
+
+	before(function(done) {
+
+		while (mempass.readyState() != mempass.READY) {
+
+		}
+
+		mempass.setSeed(seed);
+		mempass.getOptions().reset();
+
+		done();
+	});
 
 	before(function(done) {
 
@@ -59,6 +72,20 @@ describe("MemPass Tests", function () {
 			}
 			done();
 		});
+	});
+
+	before(function(done) {
+
+		mempass.newSeed(function (err, value) {
+
+			newSeed = value;
+			done();
+		});
+	});
+
+	it("Check New Seed", function () {
+
+		test.string(newSeed).isNotEmpty();
 	});
 
 	it("Check Intial Value", function () {

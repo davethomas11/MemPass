@@ -1,0 +1,1 @@
+var mempass = new MemPass();

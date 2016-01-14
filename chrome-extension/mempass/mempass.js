@@ -15,6 +15,8 @@ function MemPass(injection) {
 	var dice = new MemPassDice(injection);
 	var phrase = "";
 
+	var loading = true;
+
 	var cryp = inNode ? injection.crypto : crypto;
 
 	if (inNode) {
@@ -24,6 +26,14 @@ function MemPass(injection) {
 	options.loadDefaults();
 
 	var seed = "";
+
+	this.READY = "READY";
+	this.PENDING = "PENDING";
+
+
+	this.readyState = function() {
+		return loading ? "PENDING" : "READY";
+	}
 
 	this.getSeed = function() {
 		return seed;
@@ -49,42 +59,47 @@ function MemPass(injection) {
 		return options;
 	}
 
-	this.reSeed = function(seed, callback) {
+	this.reSeed = function(reSeed, callback) {
 
-		if (!seed) {
+		function done() {
 
-			self.newSeed(function (err, seed) {
+			chrome.storage.sync.set({"seed":seed});
+
+			if (callback) {
+				callback(seed);
+			}
+		}
+
+		if (!reSeed) {
+
+			self.newSeed(function (err, s) {
 				
-				if (err) {
+				if (s) {
+					
+					seed = s;
+				} else {
 
 					seed = self.randomValue();
-				} else {
-					
-					seed = seed;
 				}
 
-				if (callback) {
-					callback(seed);
-				}
+				done();
 			});
 
-		} else if (seed.indexOf("|")) {
+		} else if (reSeed.indexOf("|")) {
 
-			seed = self.parseSeedForOptions(seed);
+			seed = self.parseSeedForOptions(reSeed);
 
-			if (callback) {
+			done();
 
-				callback(seed);
-			}
+		} else if (reSeed) {
 
-		} else {
-
-			seed = seed;
+			seed = reSeed;
 			
-			if (callback) {
+			done();
 
-				callback(seed);
-			}
+		} else if (callback) {
+
+			callback(seed);
 		}
 	}
 
@@ -214,14 +229,21 @@ function MemPass(injection) {
 				if (typeof items["seed"] != "undefined") {
 					
 					seed = items["seed"];
+					loading = false;
 				} else {
 
-					self.reSeed();
+					noseed();
 				}
 			});
 		} else {
 
-			self.reSeed();
+			noseed();
+		}
+
+		function noseed() {
+			self.reSeed(null, function () {
+						loading = false;
+					});
 		}
 	}
 
@@ -284,8 +306,7 @@ function MemPass(injection) {
 			var character = sorted[0].character;
 			var value = character.charCodeAt(0);
 			var specialCharIndex = value % specialChars.length;
-			console.log("Value "+value+" leng"+specialChars.length+ " ind "+specialCharIndex);
-			console.log(JSON.stringify(specialChars));
+			
 
 			if (specialCharIndex >= specialChars.length || specialCharIndex < 0) {
 				specialCharIndex = 0;

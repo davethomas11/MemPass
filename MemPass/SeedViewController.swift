@@ -24,7 +24,7 @@ public class SeedViewController: UIViewController, QRCodeReaderViewControllerDel
         
         refreshQR()
         
-        self.view.backgroundColor = UIColor.radialGradiant(UIColor.colorFromHex("#ffcc00"), toColor: UIColor.colorFromHex("#230b07"), withHeight: self.view.bounds.height, withWidth: self.view.bounds.width)
+        //self.view.backgroundColor = UIColor.radialGradiant(UIColor.colorFromHex("#292d33"), toColor: UIColor.colorFromHex("#3fb2ee"), withHeight: self.view.bounds.height, withWidth: self.view.bounds.width)
         
         self.navigationController?.navigationBarHidden = false
         

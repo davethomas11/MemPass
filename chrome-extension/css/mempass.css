@@ -1,0 +1,82 @@
+@font-face {
+	font-family: "Zrnic";
+	src: url("../fonts/zrnic.woff");
+}
+
+@font-face {
+	font-family: "Share-TechMono";
+	src: url("../fonts/Share-TechMono.woff");
+}
+
+body {
+	background-color: #292d33;
+}
+
+#tabs .ui-tabs-panel {
+	padding:2px;
+}
+
+#tabs ul.ui-tabs-nav > li {
+	font-family: "Zrnic";
+}
+
+#mempass-phrase-entry {
+	background: linear-gradient(#292d33, #3fb2ee);
+	width:270px;
+	height:260px;
+	text-align: center;
+	border-radius: 2px;
+}
+
+#mempass-phrase-entry input[type=password] {
+	background:none;
+	border:none;
+	color:white;
+	font-family: "Share-TechMono";
+	font-size:16px;
+	height:30px;
+	width:190px;
+	margin-top: 100px;
+	text-align: center;
+}
+
+::-webkit-input-placeholder {
+	color:white;
+}
+
+#mempassResult {
+	font-family: "Share-TechMono";
+	font-size:14px;
+	color:white;
+	display:none;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+
+#mempass-phrase-entry form {
+	margin-right: auto;
+	margin-left: auto;
+}
+
+#buttons {
+	margin-top: 25px;
+	width:190px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#show {
+	display: none;
+	font-family: "Zrnic";
+	color: #3fb2ee;
+	float:left;
+
+}
+
+#copyToClipboard {
+	display: none;
+	font-family: "Zrnic";
+	color: #3fb2ee;
+	float:right;
+}
