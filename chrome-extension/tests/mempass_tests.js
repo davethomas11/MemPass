@@ -9,6 +9,7 @@ if (typeof require == "function") {
 	test = unitjs;
 }
 
+var reseed = "2289146dc04e35c66958e75792142c2edb9793072002aa160ea08ae664ee95c0|1.1.1.0.!@#$%^`~&*(=_{+}";
 var seed = "2289146dc04e35c66958e75792142c2edb9793072002aa160ea08ae664ee95c0";
 var expected = "=&#F!+}^~de2+_2&d8{(&3d2@f+eb3f2c+cd5e&*23-> less <-a&bd%`cd$d&d3e8019a9bf";
 var value = "mempass";
@@ -146,6 +147,13 @@ describe("MemPass Tests", function () {
 	it("Check Special Char Pass", function () {
 
 		test.string(mempass.specialCharPass("mempass-mempass-mempass")).is("@$m(~&s{mempass{mempass");
+	});
+
+	it("Check Parse Seed String", function () {
+
+		var seedOut = mempass.parseSeedForOptions(reseed);
+
+		test.string(seedOut).is(seed);
 	});
 
 

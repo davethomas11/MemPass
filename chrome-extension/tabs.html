@@ -2,13 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>jQuery UI Tabs - Default functionality</title>
+  <title>MemPass</title>
+
   <link rel="stylesheet" href="vendor/jquery-ui.min.css">
   <link rel="stylesheet" href="css/mempass.css">
+  <link rel="stylesheet" href="vendor/toastr.min.css">
+  
   <script src="vendor/jquery.min.js"></script>
   <script src="vendor/jquery-ui.min.js"></script> 
   <script src="vendor/qrcode.min.js"></script>
+  <script src="js/html5-qrcode.js"></script>
   <script src="vendor/addclear.min.js"></script>
+  <script src="vendor/toastr.min.js"></script>
   <script src="mempass/mempass.js"></script>
   <script src="js/mempass-load.js"></script>
   <script src="js/tabs.js"></script>
@@ -22,11 +27,23 @@
     <li><a href="mempass.html">MemPass</a></li>
     <li><a href="seed.html">Seed</a></li>
     <li><a href="settings.html">Settings</a></li>
+    <li><a href="app.html">App</a></li>
   </ul>
   
   
 </div>
- 
- 
+<div id="qrScanner">
+  <h1>MemPass QR-Scan Sync</h1>
+  <div id="closeScanner">
+  </div>
+  <div  class="center" id="reader">
+  </div>
+
+</div> 
+<div id="dialog-confirm"></div>
+<div id="dialog-enter-seed" style="display:none;">
+  <p>Enter your seed:</p>
+  <input type="text" id="enteredSeed" />
+</div>
 </body>
 </html>

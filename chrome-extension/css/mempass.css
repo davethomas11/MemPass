@@ -22,8 +22,8 @@ body {
 
 #mempass-phrase-entry {
 	background: linear-gradient(#292d33, #3fb2ee);
-	width:270px;
-	height:260px;
+	width:300px;
+	height:300px;
 	text-align: center;
 	border-radius: 2px;
 }
@@ -42,6 +42,12 @@ body {
 
 ::-webkit-input-placeholder {
 	color:white;
+}
+
+.toast-message {
+	font-family: "Share-TechMono";
+	letter-spacing: 1px;
+	font-size: 12pt;
 }
 
 #mempassResult {
@@ -79,4 +85,126 @@ body {
 	font-family: "Zrnic";
 	color: #3fb2ee;
 	float:right;
+}
+
+#seed-content {
+	background: white;
+	color: #292d33;
+	width: 400px;
+	height: 450px;
+	text-align: center;
+	padding: 7px;
+	position: relative;
+}
+
+#seedQR {
+	width:256px;
+	margin-left: auto;
+	margin-right:auto;
+}
+
+#CopySeed, #ViewSeed {
+	text-align: center;
+	font-family: "Share-TechMono";
+	font-size: 8pt;
+
+}
+
+#CopySeed {
+	margin-top: 15px;
+}
+#CopySeed:hover, #ViewSeed:hover {
+	cursor: pointer;
+}
+#CopySeed:active, #ViewSeed:active {
+	opacity: .8;
+}
+#ViewSeed {
+	margin-top: 50px;
+	margin-bottom: 10px;
+}
+
+#EnterSeed {
+	float: left;
+	font-family: "Share-TechMono";
+	font-size: 14pt;
+	cursor: pointer;
+}
+
+#ScanSeed {
+	float: right;
+	font-family: "Share-TechMono";
+	font-size: 14pt;
+	cursor: pointer;
+}
+
+#seedBottomLeft {
+	position: absolute;
+	bottom: -7px;
+	left: 9px;
+	width: 200px;
+	font-family: arial;
+	text-align: left;
+	line-height: 17px;
+	letter-spacing: 2px;
+
+}
+
+#seedBottomRight {
+	position: absolute;
+	bottom: -7px;
+	right: 9px;
+	font-family: "Zrnic"
+}
+
+#seedBottomRight img {
+	width:25px;
+	height:25px;
+}
+
+#seedBottomRight:hover {
+	cursor:pointer;
+}
+#seedBottomRight:active img {
+	opacity: .8;
+}
+
+#settings {
+	width:280px;
+	padding-left: 35px;
+	padding-right: 35px;
+	padding-bottom: 15px;
+	font-family: "Share-TechMono";
+}
+
+#app {
+	width:280px;
+	height:300px;
+}
+
+#qrScanner {
+	width: 450px;
+	height: 520px;
+	position:absolute;
+	bottom:-520px;
+	background: linear-gradient(#292d33, #3fb2ee);
+	text-align: center;
+}
+#qrScanner h1 {
+	font-family: "Zrnic";
+	color:white;
+	letter-spacing: 4px;
+}
+#reader {
+	width: 450px;
+	height: 450px;
+	margin-left: auto;
+	margin-right: auto;
+}
+#closeScanner {
+	position: absolute;
+	bottom: 15px;
+	right:30px;
+	z-index: 9999;
+	cursor: pointer;
 }

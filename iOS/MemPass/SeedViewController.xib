@@ -29,36 +29,6 @@
                         <constraint firstAttribute="width" secondItem="Gpn-DZ-5b1" secondAttribute="height" multiplier="1:1" id="pjk-S6-OD4"/>
                     </constraints>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3dg-kF-oqQ">
-                    <rect key="frame" x="523" y="519" width="46" height="44"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="44" id="6dp-6q-UWC"/>
-                        <constraint firstAttribute="width" constant="46" id="X3w-1g-B5n"/>
-                    </constraints>
-                    <state key="normal" image="refresh"/>
-                    <connections>
-                        <action selector="reSeed:" destination="-1" eventType="touchUpInside" id="NQQ-UF-Mpl"/>
-                    </connections>
-                </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="reseed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="at3-Wr-dA0">
-                    <rect key="frame" x="523" y="571" width="53" height="21"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="21" id="2Sq-I2-mwz"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="ZrnicRg-Regular" family="Zrnic" pointSize="16"/>
-                    <color key="textColor" red="0.16078431372549018" green="0.1764705882352941" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="* warning reseeding will change all your passwords" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a2L-lO-UCV">
-                    <rect key="frame" x="8" y="565" width="149" height="27"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="149" id="I7m-PU-I8o"/>
-                        <constraint firstAttribute="height" constant="27" id="MTK-fw-MYJ"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                    <color key="textColor" red="0.16078431372549018" green="0.1764705882352941" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="190-ew-saT">
                     <rect key="frame" x="264" y="62" width="73" height="30"/>
                     <constraints>
@@ -86,22 +56,40 @@
                         <action selector="copyToClipboard:" destination="-1" eventType="touchUpInside" id="d5D-3K-wwi"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3dg-kF-oqQ">
+                    <rect key="frame" x="524" y="531" width="46" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="46" id="gvT-4f-Q1b"/>
+                        <constraint firstAttribute="height" constant="44" id="iIX-fQ-4bK"/>
+                    </constraints>
+                    <state key="normal" image="refresh"/>
+                    <connections>
+                        <action selector="reSeed:" destination="-1" eventType="touchUpInside" id="NQQ-UF-Mpl"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="reseed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="at3-Wr-dA0">
+                    <rect key="frame" x="514" y="508" width="64" height="15"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="15" id="3Tk-4z-Kz0"/>
+                        <constraint firstAttribute="width" constant="64" id="SJd-ye-aQK"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="ZrnicRg-Regular" family="Zrnic" pointSize="16"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="3dg-kF-oqQ" secondAttribute="trailing" constant="30" id="6x7-Mp-N3O"/>
                 <constraint firstItem="Gpn-DZ-5b1" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="BC3-Kp-RBW"/>
-                <constraint firstAttribute="bottom" secondItem="a2L-lO-UCV" secondAttribute="bottom" constant="8" id="EI3-RZ-yL6"/>
                 <constraint firstItem="QUd-H9-Pde" firstAttribute="centerX" secondItem="Gpn-DZ-5b1" secondAttribute="centerX" id="EPT-Z9-kqu"/>
                 <constraint firstItem="Gpn-DZ-5b1" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="G2n-L0-X0j"/>
-                <constraint firstItem="3dg-kF-oqQ" firstAttribute="leading" secondItem="at3-Wr-dA0" secondAttribute="leading" id="Mdc-Bf-l56"/>
+                <constraint firstItem="at3-Wr-dA0" firstAttribute="centerX" secondItem="3dg-kF-oqQ" secondAttribute="centerX" constant="-1" id="HGD-zE-TrP"/>
+                <constraint firstItem="3dg-kF-oqQ" firstAttribute="top" secondItem="at3-Wr-dA0" secondAttribute="bottom" constant="8" id="IK6-7w-QyQ"/>
                 <constraint firstItem="Gpn-DZ-5b1" firstAttribute="top" secondItem="190-ew-saT" secondAttribute="bottom" constant="8" symbolic="YES" id="Wi9-La-wyg"/>
-                <constraint firstItem="at3-Wr-dA0" firstAttribute="top" secondItem="3dg-kF-oqQ" secondAttribute="bottom" constant="8" symbolic="YES" id="eod-cf-ycv"/>
                 <constraint firstItem="Gpn-DZ-5b1" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="1:1.5" id="gmO-Hr-wCv"/>
-                <constraint firstAttribute="trailing" secondItem="3dg-kF-oqQ" secondAttribute="trailing" constant="31" id="jV8-M7-68F"/>
-                <constraint firstItem="at3-Wr-dA0" firstAttribute="bottom" secondItem="a2L-lO-UCV" secondAttribute="bottom" id="nie-ba-X5k"/>
-                <constraint firstItem="a2L-lO-UCV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="pK8-sO-r6Q"/>
+                <constraint firstAttribute="bottom" secondItem="3dg-kF-oqQ" secondAttribute="bottom" constant="25" id="oBu-dN-kkg"/>
                 <constraint firstItem="QUd-H9-Pde" firstAttribute="top" secondItem="Gpn-DZ-5b1" secondAttribute="bottom" constant="8" symbolic="YES" id="qk3-yG-bln"/>
-                <constraint firstAttribute="trailing" secondItem="at3-Wr-dA0" secondAttribute="trailing" constant="24" id="raS-Vt-JPC"/>
                 <constraint firstItem="Gpn-DZ-5b1" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="tp2-58-rxV"/>
                 <constraint firstItem="190-ew-saT" firstAttribute="centerX" secondItem="Gpn-DZ-5b1" secondAttribute="centerX" id="wmK-Ph-riM"/>
             </constraints>

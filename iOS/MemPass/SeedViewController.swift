@@ -120,7 +120,7 @@ public class SeedViewController: UIViewController, QRCodeReaderViewControllerDel
     
     @IBAction func reSeed(sender: AnyObject) {
         
-        let confirm = UIAlertController(title: "ReSeed", message: "Reseed your passwords?", preferredStyle: UIAlertControllerStyle.Alert)
+        let confirm = UIAlertController(title: "ReSeed", message: "Warning! This will change all your passwords. Reseed your passwords?", preferredStyle: UIAlertControllerStyle.Alert)
 
         
         

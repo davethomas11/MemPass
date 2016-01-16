@@ -1,12 +1,28 @@
-$(document).ready(function(){
-	$('#reader').html5_qrcode(function(data){
-		alert(data);
-			$('#read').html(data);
+$(document).ready(function () {
+
+	$('#reader').html5_qrcode({
+
+		videoStart : function () {
+			alert("Video start");
 		},
-		function(error){
+
+		qrcodeSuccess : function(data){
+			
+			alert(data);
+			$('#read').html(data);
+			
+		},
+
+		qrcodeError : function(error){
+			
 			$('#read_error').html(error);
-		}, function(videoError){
+		}, 
+
+		videoError: function(videoError){
+			
 			$('#vid_error').html(videoError);
 		}
-	);
+
+	});
+	
 });
