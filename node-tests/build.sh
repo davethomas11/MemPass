@@ -1,0 +1,2 @@
+cd ../MemPassJS
+grunt

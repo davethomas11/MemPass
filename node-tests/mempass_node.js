@@ -1,4 +1,4 @@
-var MemPass = require('../chrome-extension/mempass/mempass.js').MemPass;
+var MemPass = require('../chrome-extension/mempass/mempass.min.js').MemPass;
 
 var memPass = new MemPass(
 	{
