@@ -19,25 +19,46 @@ class SideBarOption {
 }
 
 class SideBarAction {
-    static var gotoSeeed:()->Void = {
+    static var gotoSeeed:()->Void {
         
-        if let window = UIApplication.sharedApplication().keyWindow, let n =
-            window.rootViewController as? UINavigationController, let vc = R.storyboard.main.seedView {
-                
-                n.pushViewController(vc, animated: true)
+        get {
+            return createViewPushFunction(R.storyboard.main.seedView)
         }
         
     }
     
     
-    static var gotoSettings:()->Void = {
+    static var gotoSettings:()->Void {
         
-        if let window = UIApplication.sharedApplication().keyWindow, let n =
-            window.rootViewController as? UINavigationController, let vc = R.storyboard.main.settings {
-                
-                n.pushViewController(vc, animated: true)
+        get {
+            return createViewPushFunction(R.storyboard.main.settings)
         }
         
+    }
+    
+    static var gotoSync:()->Void {
+        
+        get {
+            return createViewPushFunction(R.storyboard.main.syncView)
+        }
+    }
+    
+    static var gotoAbout:()->Void {
+        
+        get {
+            return createViewPushFunction(R.storyboard.main.aboutView)
+        }
+    }
+    
+    static func createViewPushFunction(vc:UIViewController?) -> ()->Void {
+    
+        return {
+            if let window = UIApplication.sharedApplication().keyWindow, let n =
+                window.rootViewController as? UINavigationController, let vc = vc {
+                
+                n.pushViewController(vc, animated: true)
+            }
+        }
     }
 }
 
@@ -45,8 +66,8 @@ class SideBarTableControllerTableViewController: UITableViewController {
 
     var options = [
         
-        SideBarOption(title: "What is this?", action: {}),
-        SideBarOption(title: "Syncing to Desktop", action: {}),
+        SideBarOption(title: "What is this?", action: SideBarAction.gotoAbout),
+        SideBarOption(title: "Syncing to Desktop", action: SideBarAction.gotoSync),
         SideBarOption(title: "Seed", action: SideBarAction.gotoSeeed),
         SideBarOption(title: "Settings", action: SideBarAction.gotoSettings)
         

@@ -8,10 +8,13 @@
 
 import UIKit
 
-class SettingsLongTableViewCell: UITableViewCell {
+class SettingsLongTableViewCell: UITableViewCell, UITextFieldDelegate, SettingsCellProtocol {
 
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var textfield: UITextField!
+    
+    var textChanged: ((value:String?) -> Void)?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -23,4 +26,23 @@ class SettingsLongTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    func valueChanged() {
+        if let textChanged = self.textChanged {
+            textChanged(value: textfield.text)
+        }
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        
+        valueChanged()
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textfield.resignFirstResponder()
+        return true
+    }
+    
+    func resignTextField() {
+        textfield.resignFirstResponder()
+    }
 }

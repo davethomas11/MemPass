@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Odd-vW-NwY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Odd-vW-NwY">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -43,6 +43,28 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NTj-uj-ARW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1010" y="934"/>
+        </scene>
+        <!--Sync View Controller-->
+        <scene sceneID="33s-cu-4dg">
+            <objects>
+                <viewController storyboardIdentifier="SyncView" id="X90-I0-cDj" customClass="SyncViewController" customModule="MemPass" customModuleProvider="target" sceneMemberID="viewController">
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="200" height="200"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eEB-TW-93d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1010" y="1190"/>
+        </scene>
+        <!--About View Controller-->
+        <scene sceneID="4bv-J4-Jbc">
+            <objects>
+                <viewController storyboardIdentifier="AboutView" id="MAl-Hu-5Ui" customClass="AboutViewController" customModule="MemPass" customModuleProvider="target" sceneMemberID="viewController">
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="200" height="200"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mee-Ym-pjU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1245" y="1190"/>
         </scene>
         <!--Settings Table View Controller-->
         <scene sceneID="TOY-K2-Xtq">
@@ -98,9 +120,12 @@
                                     <subviews>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qys-rP-pNk">
                                             <rect key="frame" x="8" y="10" width="51" height="31"/>
-                                            <color key="tintColor" red="1" green="0.89411764709999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="onTintColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="tintColor" red="0.93725490199999995" green="0.38823529410000002" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="onTintColor" red="0.93725490199999995" green="0.38823529410000002" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="thumbTintColor" red="0.070588235289999995" green="0.070588235289999995" blue="0.1146689967" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="valueChanged:" destination="FZ6-oY-cjb" eventType="valueChanged" id="8DD-47-rxK"/>
+                                            </connections>
                                         </switch>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pMV-Tn-n3L">
                                             <rect key="frame" x="72" y="12" width="118" height="26"/>
@@ -133,6 +158,9 @@
                                             <rect key="frame" x="8" y="46" width="184" height="30"/>
                                             <fontDescription key="fontDescription" name="Share-TechMono" family="Share-TechMono" pointSize="18"/>
                                             <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="yg9-7W-PNh" id="zub-Ej-z3m"/>
+                                            </connections>
                                         </textField>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bga-pU-IY4">
                                             <rect key="frame" x="8" y="17" width="184" height="21"/>
@@ -172,6 +200,9 @@
                                             </constraints>
                                             <fontDescription key="fontDescription" name="Share-TechMono" family="Share-TechMono" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="Asm-ZN-imF" id="h9q-zH-QA3"/>
+                                            </connections>
                                         </textField>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nX1-Ha-DL3">
                                             <rect key="frame" x="47" y="15" width="145" height="21"/>
@@ -260,7 +291,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" red="0.83257092927631571" green="0.14625308388157876" blue="0.30746299342105265" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.93725490199999995" green="0.38823529410000002" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="tintColor" red="1" green="0.89411764705882346" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstItem="92I-nK-LSI" firstAttribute="leading" secondItem="X9i-0E-Jhj" secondAttribute="leadingMargin" constant="10" id="BIH-dL-RON"/>

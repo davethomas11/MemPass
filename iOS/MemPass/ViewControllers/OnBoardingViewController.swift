@@ -20,6 +20,13 @@ class OnBoardingViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: "OnBoardingView")
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])    }
+    
     func tellUserToTap() {
         self.view.makeToast("Tap the screen to begin!")
     }

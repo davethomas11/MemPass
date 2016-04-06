@@ -20,6 +20,7 @@ class MemPassTests: XCTestCase {
         
         memPass = MemPass()
         memPass.reSeed(seed)
+        memPass.options.setToDefaults();
         memPass.phrase = "mempass"
     }
     
@@ -33,6 +34,27 @@ class MemPassTests: XCTestCase {
         let result = sha.sha256("mempass")
         XCTAssertEqual(result, "15c0358bdf1c6c662fa77f7ad8118ed01aa8f2a4b16e7dcb9f5c881f19ee1f4c");
         
+    }
+    
+    func testMemPass() {
+        
+        let value = memPass.generate("mempass")
+        let expected = "=&#F!+}^~dE2+_2&d8{(&3d2@f+eb3f2c+cd5e&*23-> less <-a&bd%`cd$d&d3e8019a9bf";
+        XCTAssertEqual(expected, value)
+    }
+    
+    func testMemPass2() {
+        
+        let value = memPass.generate("johny")
+        let expected = "#~(^{`%$47229=+_&D*+4466d-> Nark <-}5735!e+2+@b55d58bd3a56&3a@+7+f-> Kahn <-e9384&-> French <-&5";
+        XCTAssertEqual(expected, value)
+    }
+    
+    func testMemPass3() {
+        
+        let value = memPass.generate("cat 5% arb")
+        let expected = "+*72$%=_A{^@08(2}70&7~}3636&&6`}B9Ab!}bfd&&%&3e&eadb7f}d336-> flavin <-af2-> Cowper <-af";
+        XCTAssertEqual(expected, value)
     }
     
     func testIntialValue() {
@@ -61,35 +83,45 @@ class MemPassTests: XCTestCase {
     }
     
     func testCapitalLetterPass() {
-        XCTAssertEqual(memPass!.capitalLetterPass("abcDEFg"), "ABCDEFg")
+        XCTAssertEqual(memPass!.capitalLetterPass("abcDEFg"), "AbCdEFg")
     }
     
     func testCapitalLetterPass2() {
-        XCTAssertEqual(memPass!.capitalLetterPass("12345"), "12345A")
+        XCTAssertEqual(memPass!.capitalLetterPass("12345"), "12345An")
     }
     
     func testSpecialCharReplace() {
         XCTAssertEqual(memPass!.specialCharPass("mempass-mempass-mempass"), "@$m(~&s{mempass{mempass")
     }
     
+    func testSpecialCharReplace2() {
+        XCTAssertEqual(memPass!.specialCharPass("mempassroadrabbit-mempass"), "#@m^+!s$&a(ra}b~={mem^ass")
+    }
+    
+    func testSpecialCharReplace3() {
+        XCTAssertEqual(memPass!.specialCharPass("mempassrig^&8s-mempass"), "%_m#+$s&(=^`@s!memp+ss")
+    }
+    
     func testDiceWordAt5() {
         XCTAssertEqual(memPass!.dice.wordAt(5), "Aalost")
+    }
+    
+    func testDiceWordAt40005() {
+        XCTAssertEqual(memPass!.dice.wordAt(40005), "woodsy")
     }
     
     func testDiceWordCount() {
         XCTAssertEqual(40638, memPass!.dice.getWordCount())
     }
     
-    /*func testExample() {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+    func testOptions() {
+        
+        let test_options_string = "0.1.0.1.0.~`!@|.$%()0";
+        let options = MemPassOptions()
+        options.parseSettingsString(test_options_string);
+        
+        XCTAssertEqual(options.settingsString(), test_options_string);
     
-    func testPerformanceExample() {
-    // This is an example of a performance test case.
-    self.measureBlock {
-    // Put the code you want to measure the time of here.
     }
-    }*/
     
 }

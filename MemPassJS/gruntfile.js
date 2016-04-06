@@ -26,9 +26,9 @@ module.exports = function(grunt) {
                 files: [
                   // includes files within path
                   {expand: true, src: ['mempass.min.js'], dest: '../chrome-extension/mempass', filter: 'isFile'},
-
-                ],
-            },
+                  {expand: true, src: ['mempass.min.js'], dest: '../website/js', filter: 'isFile'},
+                ]
+            }
         }
     });
 

@@ -23,6 +23,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window?.tintColor = UIColor.colorFromHex("#ffcc00")
         
+        // Configure tracker from GoogleService-Info.plist.
+        var configureError:NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        
+        // Optional: configure GAI options.
+        let gai = GAI.sharedInstance()
+        gai.trackUncaughtExceptions = true  // report uncaught exceptions
+        
         return true
     }
 

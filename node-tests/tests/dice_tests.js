@@ -1,5 +1,5 @@
 
-var mempass = require('../mempass_node').mempass;
+var mempass = require('../mempass_node').mempass();
 var test = require('unit.js');
 
 

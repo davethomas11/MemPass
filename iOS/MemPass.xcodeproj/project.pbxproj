@@ -8,12 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		07FED87BE6DE686CDCD6C2DF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDD5A6E90B84503726D0C62 /* libPods.a */; };
+		55326E2C1C94CB2500AC3228 /* SettingsCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55326E2B1C94CB2500AC3228 /* SettingsCellProtocol.swift */; };
+		55326E2F1C9625AD00AC3228 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55326E2D1C9625AD00AC3228 /* AboutViewController.swift */; };
+		55326E301C9625AD00AC3228 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55326E2E1C9625AD00AC3228 /* AboutViewController.xib */; };
+		55326E331C9625C300AC3228 /* SyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55326E311C9625C300AC3228 /* SyncViewController.swift */; };
+		55326E341C9625C300AC3228 /* SyncViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55326E321C9625C300AC3228 /* SyncViewController.xib */; };
 		55560BC21C1FF98B00B29D49 /* AAPTransitionDirector.m in Sources */ = {isa = PBXBuildFile; fileRef = 55560BBD1C1FF98B00B29D49 /* AAPTransitionDirector.m */; };
 		55560BC31C1FF98B00B29D49 /* UINavigationController+RadialTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 55560BBF1C1FF98B00B29D49 /* UINavigationController+RadialTransaction.m */; };
 		55560BC41C1FF98B00B29D49 /* UIView+Radial.m in Sources */ = {isa = PBXBuildFile; fileRef = 55560BC11C1FF98B00B29D49 /* UIView+Radial.m */; };
 		55560BC61C212C5E00B29D49 /* MemPassOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55560BC51C212C5E00B29D49 /* MemPassOptions.swift */; };
 		55560BC81C21445B00B29D49 /* SideBarTableControllerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55560BC71C21445B00B29D49 /* SideBarTableControllerTableViewController.swift */; };
 		55560BCC1C2144CB00B29D49 /* SideBarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55560BCB1C2144CB00B29D49 /* SideBarTableViewCell.swift */; };
+		555724F71CB1C80700DA91CE /* sync.html in Resources */ = {isa = PBXBuildFile; fileRef = 555724F61CB1C80700DA91CE /* sync.html */; };
+		555724F91CB206A900DA91CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 555724F81CB206A900DA91CE /* GoogleService-Info.plist */; };
 		558DA4181C27233300538933 /* MemPassDice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558DA4171C27233300538933 /* MemPassDice.swift */; };
 		558DA4201C27CDBC00538933 /* word.json in Resources */ = {isa = PBXBuildFile; fileRef = 558DA41F1C27CDBC00538933 /* word.json */; };
 		558DA4231C27CDEE00538933 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 558DA4211C27CDEE00538933 /* Model.xcdatamodeld */; };
@@ -41,6 +48,9 @@
 		55A951571C1FDE34005C24AF /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A951561C1FDE34005C24AF /* Reachability.swift */; };
 		55A9515B1C1FF76F005C24AF /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A951591C1FF76F005C24AF /* OnBoardingViewController.swift */; };
 		55A9515C1C1FF76F005C24AF /* OnBoardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55A9515A1C1FF76F005C24AF /* OnBoardingViewController.xib */; };
+		55DE27991C9DE41100E2B01B /* MemPassOptionChangesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DE27981C9DE41100E2B01B /* MemPassOptionChangesTests.swift */; };
+		55DE279B1C9E09C000E2B01B /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55DE279A1C9E09C000E2B01B /* iAd.framework */; };
+		55DE279D1C9E138200E2B01B /* about.html in Resources */ = {isa = PBXBuildFile; fileRef = 55DE279C1C9E138200E2B01B /* about.html */; };
 		55F1196F1C22710B0084C07B /* SeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55F1196E1C22710B0084C07B /* SeedViewController.xib */; };
 		55F119761C2287CB0084C07B /* QRCodeReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F119711C2287CB0084C07B /* QRCodeReader.swift */; };
 		55F119771C2287CB0084C07B /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F119721C2287CB0084C07B /* QRCodeViewController.swift */; };
@@ -68,6 +78,11 @@
 
 /* Begin PBXFileReference section */
 		4DDD5A6E90B84503726D0C62 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		55326E2B1C94CB2500AC3228 /* SettingsCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCellProtocol.swift; sourceTree = "<group>"; };
+		55326E2D1C9625AD00AC3228 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		55326E2E1C9625AD00AC3228 /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
+		55326E311C9625C300AC3228 /* SyncViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncViewController.swift; sourceTree = "<group>"; };
+		55326E321C9625C300AC3228 /* SyncViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SyncViewController.xib; sourceTree = "<group>"; };
 		55560BBC1C1FF98B00B29D49 /* AAPTransitionDirector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPTransitionDirector.h; sourceTree = "<group>"; };
 		55560BBD1C1FF98B00B29D49 /* AAPTransitionDirector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPTransitionDirector.m; sourceTree = "<group>"; };
 		55560BBE1C1FF98B00B29D49 /* UINavigationController+RadialTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+RadialTransaction.h"; sourceTree = "<group>"; };
@@ -77,6 +92,8 @@
 		55560BC51C212C5E00B29D49 /* MemPassOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemPassOptions.swift; sourceTree = "<group>"; };
 		55560BC71C21445B00B29D49 /* SideBarTableControllerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarTableControllerTableViewController.swift; sourceTree = "<group>"; };
 		55560BCB1C2144CB00B29D49 /* SideBarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarTableViewCell.swift; sourceTree = "<group>"; };
+		555724F61CB1C80700DA91CE /* sync.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sync.html; sourceTree = "<group>"; };
+		555724F81CB206A900DA91CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		558DA4171C27233300538933 /* MemPassDice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemPassDice.swift; sourceTree = "<group>"; };
 		558DA41F1C27CDBC00538933 /* word.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = word.json; sourceTree = "<group>"; };
 		558DA4221C27CDEE00538933 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -108,6 +125,9 @@
 		55A951561C1FDE34005C24AF /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		55A951591C1FF76F005C24AF /* OnBoardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnBoardingViewController.swift; path = ViewControllers/OnBoardingViewController.swift; sourceTree = "<group>"; };
 		55A9515A1C1FF76F005C24AF /* OnBoardingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OnBoardingViewController.xib; path = ViewControllers/OnBoardingViewController.xib; sourceTree = "<group>"; };
+		55DE27981C9DE41100E2B01B /* MemPassOptionChangesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemPassOptionChangesTests.swift; sourceTree = "<group>"; };
+		55DE279A1C9E09C000E2B01B /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		55DE279C1C9E138200E2B01B /* about.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = about.html; sourceTree = "<group>"; };
 		55F1196E1C22710B0084C07B /* SeedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeedViewController.xib; sourceTree = "<group>"; };
 		55F119711C2287CB0084C07B /* QRCodeReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeReader.swift; sourceTree = "<group>"; };
 		55F119721C2287CB0084C07B /* QRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +151,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55DE279B1C9E09C000E2B01B /* iAd.framework in Frameworks */,
 				55F1197C1C2288750084C07B /* AVFoundation.framework in Frameworks */,
 				07FED87BE6DE686CDCD6C2DF /* libPods.a in Frameworks */,
 			);
@@ -150,6 +171,7 @@
 		55A706121C1A960600063130 = {
 			isa = PBXGroup;
 			children = (
+				555724F81CB206A900DA91CE /* GoogleService-Info.plist */,
 				558DA4251C27D37800538933 /* Word+CoreDataProperties.swift */,
 				558DA4261C27D37800538933 /* Word.swift */,
 				558DA4211C27CDEE00538933 /* Model.xcdatamodeld */,
@@ -191,6 +213,8 @@
 				55A951521C1FDC4B005C24AF /* Conveniences.swift */,
 				55A951561C1FDE34005C24AF /* Reachability.swift */,
 				55A951531C1FDC4B005C24AF /* UIColorConveniences.swift */,
+				55DE279C1C9E138200E2B01B /* about.html */,
+				555724F61CB1C80700DA91CE /* sync.html */,
 			);
 			path = MemPass;
 			sourceTree = "<group>";
@@ -230,6 +254,11 @@
 				55F119831C2298680084C07B /* SettingsToggleTableViewCell.swift */,
 				55F119811C2298580084C07B /* SettingsSingleValueTableViewCell.swift */,
 				55F119851C2298810084C07B /* SettingsLongTableViewCell.swift */,
+				55326E2B1C94CB2500AC3228 /* SettingsCellProtocol.swift */,
+				55326E2D1C9625AD00AC3228 /* AboutViewController.swift */,
+				55326E2E1C9625AD00AC3228 /* AboutViewController.xib */,
+				55326E311C9625C300AC3228 /* SyncViewController.swift */,
+				55326E321C9625C300AC3228 /* SyncViewController.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -276,6 +305,7 @@
 			children = (
 				55FB08861C38CC9900191F51 /* MemPassTests.swift */,
 				55FB08881C38CC9900191F51 /* Info.plist */,
+				55DE27981C9DE41100E2B01B /* MemPassOptionChangesTests.swift */,
 			);
 			path = MemPassTests;
 			sourceTree = "<group>";
@@ -283,6 +313,7 @@
 		80C243F720417744B7E096A0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				55DE279A1C9E09C000E2B01B /* iAd.framework */,
 				55F1197B1C2288750084C07B /* AVFoundation.framework */,
 				4DDD5A6E90B84503726D0C62 /* libPods.a */,
 			);
@@ -386,15 +417,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55DE279D1C9E138200E2B01B /* about.html in Resources */,
 				55A951511C1FDC0D005C24AF /* View.xib in Resources */,
 				55A951351C1E8918005C24AF /* Share-TechMono.ttf in Resources */,
 				55A706291C1A960600063130 /* LaunchScreen.storyboard in Resources */,
 				55A706261C1A960600063130 /* Assets.xcassets in Resources */,
+				55326E301C9625AD00AC3228 /* AboutViewController.xib in Resources */,
 				55A706241C1A960600063130 /* Main.storyboard in Resources */,
 				55A951371C1E8AC3005C24AF /* zrnic.ttf in Resources */,
+				55326E341C9625C300AC3228 /* SyncViewController.xib in Resources */,
 				558DA4201C27CDBC00538933 /* word.json in Resources */,
+				555724F71CB1C80700DA91CE /* sync.html in Resources */,
 				55A9515C1C1FF76F005C24AF /* OnBoardingViewController.xib in Resources */,
 				55F1196F1C22710B0084C07B /* SeedViewController.xib in Resources */,
+				555724F91CB206A900DA91CE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,6 +559,7 @@
 				55F1197A1C2287CB0084C07B /* ToggleTorchButton.swift in Sources */,
 				55F1197F1C2294EB0084C07B /* SettingsTableViewController.swift in Sources */,
 				55F119841C2298680084C07B /* SettingsToggleTableViewCell.swift in Sources */,
+				55326E2C1C94CB2500AC3228 /* SettingsCellProtocol.swift in Sources */,
 				55A7061F1C1A960600063130 /* AppDelegate.swift in Sources */,
 				558DA4281C27D37800538933 /* Word.swift in Sources */,
 				558DA4181C27233300538933 /* MemPassDice.swift in Sources */,
@@ -532,11 +569,13 @@
 				55F119781C2287CB0084C07B /* ReaderOverlayView.swift in Sources */,
 				55A951571C1FDE34005C24AF /* Reachability.swift in Sources */,
 				55F119861C2298810084C07B /* SettingsLongTableViewCell.swift in Sources */,
+				55326E2F1C9625AD00AC3228 /* AboutViewController.swift in Sources */,
 				55560BC21C1FF98B00B29D49 /* AAPTransitionDirector.m in Sources */,
 				55F119821C2298580084C07B /* SettingsSingleValueTableViewCell.swift in Sources */,
 				55A7063C1C1BC5F300063130 /* QRCode.swift in Sources */,
 				55A9515B1C1FF76F005C24AF /* OnBoardingViewController.swift in Sources */,
 				55560BC81C21445B00B29D49 /* SideBarTableControllerTableViewController.swift in Sources */,
+				55326E331C9625C300AC3228 /* SyncViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -545,6 +584,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55FB08871C38CC9900191F51 /* MemPassTests.swift in Sources */,
+				55DE27991C9DE41100E2B01B /* MemPassOptionChangesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -614,6 +654,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -653,6 +694,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;

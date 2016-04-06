@@ -1,7 +1,7 @@
 toastr.options = {
     "positionClass": "toast-bottom-center",
     "preventDuplicates": true
-}
+};
 var qr = null;
 var scanning = false;
 
@@ -23,18 +23,72 @@ $(function() {
 
             var opts = mempass.getOptions();
 
-            $('#includeCapitals').attr('checked', opts.hasCapital);
-            $('#includeNumbers').attr('checked', opts.hasNumber);
-            $('#includeDiceWords').attr('checked', opts.hasDiceWords);
-            $('#specialCharacters').val(opts.getSpecialCharString());
-            if (opts.characterLimit > 0) {
-                $('#characterLimit').val(opts.characterLimit);
-            }
+            setupSettings(false, opts);
+
+            $('#optionReset').click(function () {
+                customConfirm("Reset settings?", "Reset", function () {
+                    opts.reset();
+                    setupSettings(true, opts);
+
+                });
+            })
     	}
     });
 
     
  });
+
+function setupSettings(nobind, opts) {
+
+    setupBooleanSetting("applyLimitBeforeDice", opts, nobind);
+    setupBooleanSetting("hasCapital", opts, nobind);
+    setupBooleanSetting("hasNumber", opts, nobind);
+    setupBooleanSetting("hasDiceWords", opts, nobind);
+
+    $('#specialCharacters').val(opts.getSpecialCharString());
+    if (opts.characterLimit > 0) {
+        $('#characterLimit').val(opts.characterLimit);
+    } else{
+        $('#characterLimit').val("");
+    }
+
+    if (!nobind) {
+        $('#characterLimit').bind('keyup change', function () {
+
+            if (parseInt($(this).val()) > 0) {
+                opts['characterLimit'] = parseInt($(this).val());
+                opts.saveDefaults();
+            }
+
+        });
+
+        $('#specialCharacters').keyup(function () {
+
+            if ($(this).val()) {
+                opts.specialChars = $(this).val().split("");
+                opts.saveDefaults();
+            } else {
+                opts.specialChars = [];
+                opts.saveDefaults();
+            }
+
+        });
+    }
+}
+
+function setupBooleanSetting(name, options, nobind) {
+
+    var id = "#" + name;
+
+    $(id).prop('checked', options[name]);
+
+    if (!nobind) {
+        $(id).change(function () {
+            options[name] = $(this).is(":checked");
+            options.saveDefaults();
+        });
+    }
+}
 
 function enterSeed() {
     var seed = null;
@@ -74,8 +128,7 @@ function scanSeed() {
         },
 
         qrcodeSuccess : function(data, stream){
-            
-            console.log(data);
+
             reSeed(data);
             closeScan();
         }, 
@@ -107,30 +160,34 @@ function scanSeed() {
     }
 }
 
-function confirmReSeed() {
-
-    
+function customConfirm(message, title, confirm) {
     $("#dialog-confirm").html(
         '<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>'+
-        "Warning! This will change all your passwords. ReSeed passwords?</p>");
+        message+"</p>");
 
     $("#dialog-confirm").dialog({
         resizable: false,
         modal: true,
-        title: "ReSeed",
+        title: title,
         height: 170,
         width: 240,
         buttons: {
             "Yes": function () {
                 $(this).dialog('close');
-                reSeed();
+                confirm();
             },
             "No": function () {
                 $(this).dialog('close');
             }
         }
     });
-        
+}
+
+function confirmReSeed() {
+
+    customConfirm("Warning! This will change all your passwords. ReSeed passwords?",
+        "ReSeed", reSeed);
+
     
 }
 
@@ -141,7 +198,7 @@ function reSeed(newSeed) {
             showSeed();
         }
 
-        qr.makeCode(seed);
+        qr.makeCode(mempass.memPassSyncKey());
     });
 }
 

@@ -10,7 +10,7 @@ import UIKit
 
 class MemPassOptions: NSObject {
 
-    var specialCharMod = 3
+    var specialCharMod = 7
     var capitalLetterMod = 7
     var diceMod = 4
     var numberReplace = "n";
@@ -20,11 +20,21 @@ class MemPassOptions: NSObject {
     var diceRightBrace = " <-";
     
     let DEFAULT = "DEFAULT"
+    var applyLimitBeforeDice = false
     var hasNumber = true
     var hasCapital = true
     var hasDiceWords = true
     var characterLimit = 0
     var specialChars = ["!","@","#","$","%","^","`","~","&","*","(","=","_","{","+","}"]
+    
+    func setToDefaults() {
+        self.hasNumber = true
+        self.hasCapital = true
+        self.hasDiceWords = true
+        self.characterLimit = 0
+        self.applyLimitBeforeDice = false
+        self.specialChars = ["!","@","#","$","%","^","`","~","&","*","(","=","_","{","+","}"]
+    }
     
     
     func loadOptions(named:String) {
@@ -32,6 +42,10 @@ class MemPassOptions: NSObject {
         let defaults = NSUserDefaults.standardUserDefaults()
         
         if let options = defaults.objectForKey("MemPassOptionSet[\(named)]") as? [String:AnyObject] {
+            
+            if let applyLimitBeforeDice = options["applyLimitBeforeDice"] as? Bool {
+                self.applyLimitBeforeDice = applyLimitBeforeDice
+            }
             
             if let hasNumber = options["hasNumber"] as? Bool {
                 self.hasNumber = hasNumber
@@ -64,9 +78,19 @@ class MemPassOptions: NSObject {
         }
     }
     
+    func setSpecialCharString(value: String?) {
+        specialChars.removeAll()
+        
+        if let value = value where !value.isEmpty {
+            for character in value.characters {
+                specialChars.append(String(character))
+            }
+        }
+    }
+    
     func loadDefaults() {
         
-        loadOptions(DEFAULT)        
+        loadOptions(DEFAULT)
     }
     
     func saveOptions(namedAs:String, isDefault:Bool=false) -> Bool {
@@ -74,6 +98,7 @@ class MemPassOptions: NSObject {
         
         var options = [String:AnyObject]()
         
+        options["applyLimitBeforeDice"] = self.applyLimitBeforeDice
         options["hasNumber"] = self.hasNumber
         options["hasCapital"] = self.hasCapital
         options["characterLimit"] = self.characterLimit
@@ -94,6 +119,7 @@ class MemPassOptions: NSObject {
     func settingsString() -> String {
         
         return
+            "\(applyLimitBeforeDice ? 1: 0)." +
             "\(hasNumber ? 1 : 0)." +
             "\(hasCapital ? 1 : 0)." +
             "\(hasDiceWords ? 1 : 0)." +
@@ -106,47 +132,42 @@ class MemPassOptions: NSObject {
         
         var parts = settingsString.componentsSeparatedByString(".")
         
-        if parts.count >= 4 {
+        if parts.count >= 5 {
             
             if parts[0] == "0" {
-                hasNumber = false
+                applyLimitBeforeDice = false
             } else if parts[0] == "1" {
-                hasNumber = true
+                applyLimitBeforeDice = true
             }
             
             if parts[1] == "0" {
-                hasCapital = false
+                hasNumber = false
             } else if parts[1] == "1" {
-                hasCapital = true
+                hasNumber = true
             }
             
             if parts[2] == "0" {
-                hasDiceWords = false
+                hasCapital = false
             } else if parts[2] == "1" {
+                hasCapital = true
+            }
+            
+            if parts[3] == "0" {
+                hasDiceWords = false
+            } else if parts[3] == "1" {
                 hasDiceWords = true
             }
             
-            if let limit = Int(parts[3]) {
+            if let limit = Int(parts[4]) {
                 self.characterLimit = limit
             }
-        
-            parts.removeFirst()
-            parts.removeFirst()
-            parts.removeFirst()
-            parts.removeFirst()
             
-            var specialCharsString = parts[0]
-            if parts.count > 1 {
-                
-                specialCharsString = parts.reduce("", combine: { $0 + $1 })
-            }
+            let specialCharsString = settingsString.stringByReplacingOccurrencesOfString("^([0-9]+.){5}", withString: "", options: NSStringCompareOptions.RegularExpressionSearch)
             
+            specialChars.removeAll()
             if (!specialCharsString.isEmpty) {
-                specialChars.removeAll()
                 
-                for character in specialCharsString.characters {
-                    specialChars.append(String(character))
-                }
+                self.setSpecialCharString(specialCharsString)
             }
             
             saveDefault()

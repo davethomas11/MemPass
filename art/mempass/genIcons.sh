@@ -1,8 +1,8 @@
 
 if [ -z "$1" ]; then file="MemPassIcon"; else file="$1"; fi
 
-sizes=(29 40 60)
-multiples=(2 3)
+sizes=(29 40 50 57 60 72 76 83.5)
+multiples=(1 2 3)
 icon=MemPassIcon.png
 
 for size in ${sizes[@]}

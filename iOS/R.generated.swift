@@ -12,7 +12,10 @@ struct R {
   }
   
   struct file {
+    static var aboutHtml: NSURL? { return _R.hostingBundle?.URLForResource("about", withExtension: "html") }
+    static var googleServiceInfoPlist: NSURL? { return _R.hostingBundle?.URLForResource("GoogleService-Info", withExtension: "plist") }
     static var shareTechMonoTtf: NSURL? { return _R.hostingBundle?.URLForResource("Share-TechMono", withExtension: "ttf") }
+    static var syncHtml: NSURL? { return _R.hostingBundle?.URLForResource("sync", withExtension: "html") }
     static var wordJson: NSURL? { return _R.hostingBundle?.URLForResource("word", withExtension: "json") }
     static var zrnicTtf: NSURL? { return _R.hostingBundle?.URLForResource("zrnic", withExtension: "ttf") }
   }
@@ -34,8 +37,10 @@ struct R {
   }
   
   struct nib {
+    static var aboutViewController: _R.nib._AboutViewController { return _R.nib._AboutViewController() }
     static var onBoardingViewController: _R.nib._OnBoardingViewController { return _R.nib._OnBoardingViewController() }
     static var seedViewController: _R.nib._SeedViewController { return _R.nib._SeedViewController() }
+    static var syncViewController: _R.nib._SyncViewController { return _R.nib._SyncViewController() }
     static var view: _R.nib._View { return _R.nib._View() }
   }
   
@@ -68,6 +73,7 @@ struct R {
     }
     
     struct main {
+      static var aboutView: AboutViewController? { return instance.instantiateViewControllerWithIdentifier("AboutView") as? AboutViewController }
       static var appViewController: ViewController? { return instance.instantiateViewControllerWithIdentifier("appViewController") as? ViewController }
       static var initialViewController: UINavigationController? { return instance.instantiateInitialViewController() as? UINavigationController }
       static var instance: UIStoryboard { return UIStoryboard(name: "Main", bundle: _R.hostingBundle) }
@@ -75,6 +81,7 @@ struct R {
       static var seedView: SeedViewController? { return instance.instantiateViewControllerWithIdentifier("SeedView") as? SeedViewController }
       static var settings: SettingsTableViewController? { return instance.instantiateViewControllerWithIdentifier("Settings") as? SettingsTableViewController }
       static var swReveal: SWRevealViewController? { return instance.instantiateViewControllerWithIdentifier("swReveal") as? SWRevealViewController }
+      static var syncView: SyncViewController? { return instance.instantiateViewControllerWithIdentifier("SyncView") as? SyncViewController }
       
       static func validateImages() {
         
@@ -83,6 +90,8 @@ struct R {
       static func validateViewControllers() {
         assert(appViewController != nil, "[R.swift] ViewController with identifier 'appViewController' could not be loaded from storyboard 'Main' as 'ViewController'.")
         assert(seedView != nil, "[R.swift] ViewController with identifier 'seedView' could not be loaded from storyboard 'Main' as 'SeedViewController'.")
+        assert(syncView != nil, "[R.swift] ViewController with identifier 'syncView' could not be loaded from storyboard 'Main' as 'SyncViewController'.")
+        assert(aboutView != nil, "[R.swift] ViewController with identifier 'aboutView' could not be loaded from storyboard 'Main' as 'AboutViewController'.")
         assert(settings != nil, "[R.swift] ViewController with identifier 'settings' could not be loaded from storyboard 'Main' as 'SettingsTableViewController'.")
         assert(onBoarding != nil, "[R.swift] ViewController with identifier 'onBoarding' could not be loaded from storyboard 'Main' as 'OnBoardingViewController'.")
         assert(swReveal != nil, "[R.swift] ViewController with identifier 'swReveal' could not be loaded from storyboard 'Main' as 'SWRevealViewController'.")
@@ -95,6 +104,19 @@ struct _R {
   static var hostingBundle: NSBundle? { return NSBundle(identifier: "com.DTWebSolutions.MemPass") }
   
   struct nib {
+    struct _AboutViewController: NibResource {
+      var instance: UINib { return UINib.init(nibName: "AboutViewController", bundle: _R.hostingBundle) }
+      var name: String { return "AboutViewController" }
+      
+      func firstView(ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]?) -> UIView? {
+        return instantiateWithOwner(ownerOrNil, options: optionsOrNil)[0] as? UIView
+      }
+      
+      func instantiateWithOwner(ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]?) -> [AnyObject] {
+        return instance.instantiateWithOwner(ownerOrNil, options: optionsOrNil)
+      }
+    }
+    
     struct _OnBoardingViewController: NibResource {
       var instance: UINib { return UINib.init(nibName: "OnBoardingViewController", bundle: _R.hostingBundle) }
       var name: String { return "OnBoardingViewController" }
@@ -111,6 +133,19 @@ struct _R {
     struct _SeedViewController: NibResource {
       var instance: UINib { return UINib.init(nibName: "SeedViewController", bundle: _R.hostingBundle) }
       var name: String { return "SeedViewController" }
+      
+      func firstView(ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]?) -> UIView? {
+        return instantiateWithOwner(ownerOrNil, options: optionsOrNil)[0] as? UIView
+      }
+      
+      func instantiateWithOwner(ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]?) -> [AnyObject] {
+        return instance.instantiateWithOwner(ownerOrNil, options: optionsOrNil)
+      }
+    }
+    
+    struct _SyncViewController: NibResource {
+      var instance: UINib { return UINib.init(nibName: "SyncViewController", bundle: _R.hostingBundle) }
+      var name: String { return "SyncViewController" }
       
       func firstView(ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]?) -> UIView? {
         return instantiateWithOwner(ownerOrNil, options: optionsOrNil)[0] as? UIView

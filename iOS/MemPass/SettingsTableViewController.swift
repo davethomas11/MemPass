@@ -48,12 +48,35 @@ class Setting {
 
 class SSetups {
     
+    static var limitBeforeDice:(UITableViewCell, MemPassOptions) -> Void = {
+        cell, opt in
+        
+        if let cell = cell as? SettingsToggleTableViewCell {
+            cell.label.text = "Limit Before Dice"
+            cell.toggle.on = opt.applyLimitBeforeDice
+            
+            cell.didToggle = {
+                toggled in
+                
+                opt.applyLimitBeforeDice = toggled
+                opt.saveDefault();
+            }
+        }
+    }
+    
     static var captials:(UITableViewCell,MemPassOptions) -> Void = {
         cell,opt in
         
         if let cell = cell as? SettingsToggleTableViewCell {
             cell.label.text = "Include Capitals"
             cell.toggle.on = opt.hasCapital
+            
+            cell.didToggle = {
+                toggled in
+                
+                opt.hasCapital = toggled
+                opt.saveDefault();
+            }
         }
     }
     
@@ -63,6 +86,13 @@ class SSetups {
         if let cell = cell as? SettingsToggleTableViewCell {
             cell.label.text = "Include Numbers"
             cell.toggle.on = opt.hasNumber
+            
+            cell.didToggle = {
+                toggled in
+                
+                opt.hasNumber = toggled
+                opt.saveDefault();
+            }
         }
     }
     
@@ -72,6 +102,13 @@ class SSetups {
         if let cell = cell as? SettingsToggleTableViewCell {
             cell.label.text = "Include Dice Words"
             cell.toggle.on = opt.hasDiceWords
+            
+            cell.didToggle = {
+                toggled in
+                
+                opt.hasDiceWords = toggled
+                opt.saveDefault();
+            }
             
         }
     }
@@ -84,6 +121,13 @@ class SSetups {
             cell.label.text = "Sepcial Characters"
             cell.textfield.placeholder = "None"
             cell.textfield.text = opt.getSpecialCharString()
+            
+            cell.textChanged = {
+                value in
+                
+                opt.setSpecialCharString(value)
+                opt.saveDefault()
+            }
             
         }
     }
@@ -98,6 +142,15 @@ class SSetups {
                 cell.textfield.text = "\(opt.characterLimit)"
             }
             cell.textfield.keyboardType = UIKeyboardType.NumberPad
+            
+            cell.textChanged = {
+                value in
+                
+                if let v = value, i = Int(v) {
+                    opt.characterLimit = i
+                    opt.saveDefault()
+                }
+            }
         }
     }
     
@@ -106,15 +159,19 @@ class SSetups {
 
 class SettingsTableViewController: UITableViewController {
     
-    var options = MemPass().options
+    var options = MemPass.sharedInstance().options
+    var textCells = [SettingsCellProtocol]()
     
     var settings = [
+        
         
         Setting(o: (SettingType.Toggle, SSetups.captials)),
         Setting(o: (SettingType.Toggle, SSetups.numbers)),
         Setting(o: (SettingType.Toggle, SSetups.dice)),
+        Setting(o: (SettingType.Toggle, SSetups.limitBeforeDice)),
         Setting(o: (SettingType.Long, SSetups.specialChars)),
-        Setting(o: (SettingType.Short, SSetups.limitLength))
+        Setting(o: (SettingType.Short, SSetups.limitLength)),
+        
     ]
     
     override func viewDidLoad() {
@@ -125,13 +182,35 @@ class SettingsTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "resignText"))
+        self.view.userInteractionEnabled = true
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        
         self.navigationController?.navigationBarHidden = false
         
         self.navigationItem.title = "Settings"
         
         self.navigationController?.navigationBar.tintColor =
-            UIColor.colorFromHex("#ffcc00")
+            UIColor.colorFromHex("#EF6340")
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
+        
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: "SettingsView")
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
+        
+    }
+    
+    func resignText() {
+        for cell in textCells {
+            cell.resignTextField()
+        }
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -172,53 +251,12 @@ class SettingsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(setting.type.reUseId(), forIndexPath: indexPath)
         setting.setup(cell: cell,opts: options)
         
+        if let settingCell = cell as? SettingsCellProtocol {
+            textCells.append(settingCell)
+        }
+        
         return cell
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
 }

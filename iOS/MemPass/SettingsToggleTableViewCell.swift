@@ -14,6 +14,8 @@ class SettingsToggleTableViewCell: UITableViewCell {
     @IBOutlet weak var toggle: UISwitch!
     @IBOutlet weak var label: UILabel!
     
+    var didToggle: ((toggled:Bool) -> Void)?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -25,4 +27,11 @@ class SettingsToggleTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    
+    @IBAction func valueChanged(sender: AnyObject) {
+        
+        if let didToggle = self.didToggle {
+            didToggle(toggled: self.toggle.on)
+        }
+    }
 }

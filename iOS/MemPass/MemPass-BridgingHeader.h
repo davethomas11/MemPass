@@ -14,5 +14,6 @@
 #import "UIView+Toast.h"
 #import "UINavigationController+RadialTransaction.h"
 #import "SWRevealViewController.h"
+#import <Google/Analytics.h>
 
 #endif /* MemPass_BridgingHeader_h */

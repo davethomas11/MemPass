@@ -2,14 +2,21 @@
 	<p><small>Algorithm v1.0</small></p>
 	<hr/>
 
-	<input type="checkbox" id="includeCapitals" /><label>Include Capitals</label>
+
+	<input type="checkbox" id="hasCapital" /><label>Include Capitals</label>
 	<hr/>
-	<input type="checkbox" id="includeNumbers" /><label>Include Numbers</label>
+	<input type="checkbox" id="hasNumber" /><label>Include Numbers</label>
 	<hr/>
-	<input type="checkbox" id="includeDiceWords" /><label>Include Dice Words</label>
+	<input type="checkbox" id="hasDiceWords" /><label>Include Dice Words</label>
+	<hr/>
+	<input type="checkbox" id="applyLimitBeforeDice" /><label>Apply Limit Before Dice Words</label>
 	<hr/>
 	<p> Special Characters </p>
 	<input type="text" id="specialCharacters" />
 	<hr/>
-	<input type="number" min="0" max="350" placeholder="No" size="4" /> <label>Password Length Limit</label>
+	<input type="number" min="0" max="350" placeholder="No" size="4" id="characterLimit" />
+    <label>Password Length Limit</label>
+
+    <hr/>
+    <button id="optionReset">Reset to defaults</button>
 </div>

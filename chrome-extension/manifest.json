@@ -23,8 +23,7 @@
   	],
   	"background" : {
   		"scripts": [ 
-  			"mempass/mempass.js", 
-  			"js/mempass-install.js", 
+  			"mempass/mempass.min.js", 
   			"js/mempass-context.js"]
   	},
   	"content_scripts" : [

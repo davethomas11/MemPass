@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -23,14 +23,8 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gpn-DZ-5b1">
-                    <rect key="frame" x="100" y="100" width="400" height="400"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="Gpn-DZ-5b1" secondAttribute="height" multiplier="1:1" id="pjk-S6-OD4"/>
-                    </constraints>
-                </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="190-ew-saT">
-                    <rect key="frame" x="264" y="62" width="73" height="30"/>
+                    <rect key="frame" x="264" y="127" width="73" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="ewN-6l-IFC"/>
                         <constraint firstAttribute="width" constant="73" id="jTm-Bv-syY"/>
@@ -44,7 +38,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QUd-H9-Pde">
-                    <rect key="frame" x="239" y="508" width="123" height="30"/>
+                    <rect key="frame" x="239" y="443" width="123" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="YVD-wK-4LN"/>
                     </constraints>
@@ -74,9 +68,15 @@
                         <constraint firstAttribute="width" constant="64" id="SJd-ye-aQK"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="ZrnicRg-Regular" family="Zrnic" pointSize="16"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gpn-DZ-5b1">
+                    <rect key="frame" x="165" y="165" width="270" height="270"/>
+                    <constraints>
+                        <constraint firstAttribute="height" secondItem="Gpn-DZ-5b1" secondAttribute="width" multiplier="1:1" id="pjk-S6-OD4"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
@@ -87,7 +87,7 @@
                 <constraint firstItem="at3-Wr-dA0" firstAttribute="centerX" secondItem="3dg-kF-oqQ" secondAttribute="centerX" constant="-1" id="HGD-zE-TrP"/>
                 <constraint firstItem="3dg-kF-oqQ" firstAttribute="top" secondItem="at3-Wr-dA0" secondAttribute="bottom" constant="8" id="IK6-7w-QyQ"/>
                 <constraint firstItem="Gpn-DZ-5b1" firstAttribute="top" secondItem="190-ew-saT" secondAttribute="bottom" constant="8" symbolic="YES" id="Wi9-La-wyg"/>
-                <constraint firstItem="Gpn-DZ-5b1" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="1:1.5" id="gmO-Hr-wCv"/>
+                <constraint firstItem="Gpn-DZ-5b1" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.45:1" id="gmO-Hr-wCv"/>
                 <constraint firstAttribute="bottom" secondItem="3dg-kF-oqQ" secondAttribute="bottom" constant="25" id="oBu-dN-kkg"/>
                 <constraint firstItem="QUd-H9-Pde" firstAttribute="top" secondItem="Gpn-DZ-5b1" secondAttribute="bottom" constant="8" symbolic="YES" id="qk3-yG-bln"/>
                 <constraint firstItem="Gpn-DZ-5b1" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="tp2-58-rxV"/>

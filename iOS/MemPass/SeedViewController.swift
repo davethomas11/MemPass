@@ -26,17 +26,28 @@ public class SeedViewController: UIViewController, QRCodeReaderViewControllerDel
         
         //self.view.backgroundColor = UIColor.radialGradiant(UIColor.colorFromHex("#292d33"), toColor: UIColor.colorFromHex("#3fb2ee"), withHeight: self.view.bounds.height, withWidth: self.view.bounds.width)
         
+        
+    }
+    
+    public override func viewWillAppear(animated: Bool) {
+        
         self.navigationController?.navigationBarHidden = false
         
         self.navigationItem.title = "Seed"
-     
+        
         self.navigationController?.navigationBar.tintColor =
-            UIColor.colorFromHex("#ffcc00")
+            UIColor.colorFromHex("#EF6340")
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
         
-    
+        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Scan QR", style: UIBarButtonItemStyle.Plain, target: self, action: "scanQR")
-        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.colorFromHex("#ffcc00")
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.colorFromHex("#EF6340")
+        
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: "SeedView")
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
         
     }
     

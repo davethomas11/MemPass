@@ -1,19 +1,25 @@
-var mempass = require('../mempass_node').mempass;
+var mempass = require('../mempass_node').mempass();
 var test = require('unit.js');
 var seed = "2289146dc04e35c66958e75792142c2edb9793072002aa160ea08ae664ee95c0";
-var expected = "=&#F!+}^~de2+_2&d8{(&3d2@f+eb3f2c+cd5e&*23-> less <-a&bd%`cd$d&d3e8019a9bf";
+var expected = "=&#F!+}^~dE2+_2&d8{(&3d2@f+eb3f2c+cd5e&*23-> less <-a&bd%`cd$d&d3e8019a9bf";
+var expected2 = "#~(^{`%$47229=+_&D*+4466d-> Nark <-}5735!e+2+@b55d58bd3a56&3a@+7+f-> Kahn <-e9384&-> French <-&5";
+var expected3 = "+*72$%=_A{^@08(2}70&7~}3636&&6`}B9Ab!}bfd&&%&3e&eadb7f}d336-> flavin <-af2-> Cowper <-af";
 var value = "mempass";
 
 mempass.setSeed(seed);
+mempass.getOptions().reset();
 
 describe("MemPass Tests", function () {
 
 	var passwordResult = null;
+    var passwordResult2 = null;
+    var passwordResult3 = null;
 	var sha256result = null;
 	var intialHash = null;
 
 	before(function(done) {
 
+        mempass.getOptions().reset();
 		mempass.getIntialHash(value, function (err, result) {
 
 			intialHash = result;
@@ -23,21 +29,55 @@ describe("MemPass Tests", function () {
 
 	before(function(done) {
 
-		mempass.generate(value, function (err, result) {
+        mempass.getOptions().reset();
+		mempass.generate("johny", function (err, result) {
 
 			if (err) {
 
-				passwordResult = err;
+				passwordResult2 = err;
 			} else {
 				
-				passwordResult = result;
+				passwordResult2 = result;
 			}
 			done();
 		});
 	});
 
+    before(function(done) {
+
+        mempass.getOptions().reset();
+        mempass.generate("cat 5% arb", function (err, result) {
+
+            if (err) {
+
+                passwordResult3 = err;
+            } else {
+
+                passwordResult3 = result;
+            }
+            done();
+        });
+    });
+
+    before(function(done) {
+
+        mempass.getOptions().reset();
+        mempass.generate(value, function (err, result) {
+
+            if (err) {
+
+                passwordResult = err;
+            } else {
+
+                passwordResult = result;
+            }
+            done();
+        });
+    });
+
 	before(function(done) {
 
+        mempass.getOptions().reset();
 		mempass.sha256(value, function (err, result) {
 
 			if (err) {
@@ -50,6 +90,8 @@ describe("MemPass Tests", function () {
 			done();
 		});
 	});
+
+
 
 	it("Check Intial Value", function () {
 
@@ -76,6 +118,16 @@ describe("MemPass Tests", function () {
 		test.string(passwordResult).is(expected);
 	});
 
+    it("Check Basic Algorythm 2", function () {
+
+        test.string(passwordResult2).is(expected2);
+    });
+
+    it("Check Basic Algorythm 3", function () {
+
+        test.string(passwordResult3).is(expected3);
+    });
+
 	it("Check String Reverse", function () {
 
 		test.string(mempass.stringReverse("Reversed String Value *")).is("* eulaV gnirtS desreveR");
@@ -98,18 +150,28 @@ describe("MemPass Tests", function () {
 
 	it("Check Capital Letter Pass", function () {
 
-		test.string(mempass.capitalLetterPass("abcDEFg")).is("ABCDEFg");
+		test.string(mempass.capitalLetterPass("abcDEFg")).is("AbCdEFg");
 	});
 
 	it("Check Capital Letter Pass 2", function () {
 
-		test.string(mempass.capitalLetterPass("12345")).is("12345A");
+		test.string(mempass.capitalLetterPass("12345")).is("12345An");
 	});
 
 	it("Check Special Char Pass", function () {
 
 		test.string(mempass.specialCharPass("mempass-mempass-mempass")).is("@$m(~&s{mempass{mempass");
 	});
+
+    it("Check Special Char Pass 2", function () {
+
+        test.string(mempass.specialCharPass("mempassroadrabbit-mempass")).is("#@m^+!s$&a(ra}b~={mem^ass");
+    });
+
+    it("Check Special Char Pass 3", function () {
+
+        test.string(mempass.specialCharPass("mempassrig^&8s-mempass")).is("%_m#+$s&(=^`@s!memp+ss");
+    });
 
 
 });

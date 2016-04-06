@@ -57,6 +57,7 @@ body {
 	display:none;
 	padding-left: 5px;
 	padding-right: 5px;
+    word-wrap:break-word;
 }
 
 
@@ -208,3 +209,4 @@ body {
 	z-index: 9999;
 	cursor: pointer;
 }
+

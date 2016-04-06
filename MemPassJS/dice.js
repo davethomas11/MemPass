@@ -1,5 +1,11 @@
 function MemPassDice(injection) {
 
+    if (!inNode && typeof XMLHttpRequest != 'undefined' && (!chrome || !chrome.storage)) {
+        loadWordJSON();
+    }
+
+    var staticLoadedJSON = null;
+
 	var dbName = "Words";
 	var dbVersion = 1;
 	
@@ -16,32 +22,71 @@ function MemPassDice(injection) {
 
 	this.getWordCount = function(callback) {
 
-		if (isChrome) {
+		if (isChrome && chrome.storage) {
 
-			chromeWordCount(callback);
+			chrome.storage.local.get("mempassDatabaseInstalled", function (items) {
+				if (items.mempassDatabaseInstalled) {
+					chromeWordCount(callback);
+				} else {
+					staticWordCount(callback);
+				}
+			});
+			
 
 		} else if (inNode) {
 
-			nodeWordCount(callback);
+			var fs = require('fs'); 
+
+			fs.stat(sqlLiteDb, function (err, stat) {
+
+				if (err) {
+
+					nodeStaticWordCount(callback);
+					
+				} else {
+				
+					nodeWordCount(callback);
+				}
+			});
+
 		} else {
 
-			callback(0);
+			staticWordCount(callback);
 		}
-	}
+	};
 
 	this.wordAt = function(index, callback) {
 
-		if (isChrome) {
+		if (isChrome && chrome.storage) {
 
-			chromeGetWordAt(index, callback);
+			chrome.storage.local.get("mempassDatabaseInstalled", function (items) {
+				if (items.mempassDatabaseInstalled) {
+					chromeGetWordAt(index, callback);
+				} else {
+					staticGetWordAt(index, callback);
+				}
+			});
+			
 		} else if (inNode) {
 
-			nodeWordAt(index, callback);
+			var fs = require('fs'); 
+
+			fs.stat(sqlLiteDb, function (err, stat) {
+
+				if (err) {
+
+					nodeStaticGetWordAt(index, callback);
+				} else {
+
+					nodeWordAt(index, callback);
+				}
+			});	
+			
 		} else {
 
-			callback("");
+			staticGetWordAt(index, callback);
 		}
-	}
+	};
 
 	this.nodeSqlLite3Install = function(filename, callback) {
 
@@ -74,7 +119,7 @@ function MemPassDice(injection) {
 			stmt.finalize(callback);
 		});
 		db.close();
-	}
+	};
 
 	function nodeWordAt(index, callback) {
 
@@ -115,6 +160,144 @@ function MemPassDice(injection) {
 			});
 		})
 	}
+
+	function nodeStaticWordCount(callback) {
+
+        var data = null;
+        if (!staticLoadedJSON) {
+            data = require(injection.wordJSONPath);
+            staticLoadedJSON = data;
+        } else {
+            data = staticLoadedJSON;
+        }
+
+		if (data) {
+			callback(data.length);
+		} else {
+			callback(0);
+		}
+		
+	}
+
+	function nodeStaticGetWordAt(index, callback) {
+
+        var data = null;
+        if (!staticLoadedJSON) {
+            data = require(injection.wordJSONPath);
+            staticLoadedJSON = data;
+        } else {
+            data = staticLoadedJSON;
+        }
+
+		if (data) {
+			var i = index - 1;
+			if (i >= 0 && i < data.length) {
+				callback(data[i].word);
+			} else {
+				console.log("Word index out of bounds: " + i);
+				callback("");
+			}
+		} else {
+			callback("");
+		}
+	}
+
+	function staticWordCount(callback) {
+
+        if (staticLoadedJSON) {
+            callback(staticLoadedJSON.length);
+            return;
+        }
+
+		var xhr = new XMLHttpRequest();
+		xhr.onload = function (event) {
+
+			var data = JSON.parse(event.target.response);
+            staticLoadedJSON = data;
+			callback(data.length);
+		};
+
+		xhr.onerror = function (event) {
+			console.log(event.error);
+			callback(0);
+		};
+
+		xhr.type = "json";
+
+		if (chrome && chrome.extension) {
+			xhr.open("GET", chrome.extension.getURL('/word.json'), true);
+		} else {
+			xhr.open("GET", 'js/word.json', true);
+		}
+
+		xhr.send();
+	}
+
+	function staticGetWordAt(index, callback) {
+
+        if (staticLoadedJSON) {
+            var i = index - 1;
+            if (i < 0 || i >= staticLoadedJSON.length) {
+                console.log("Word index out of bounds: " + i);
+                callback("");
+            } else {
+                callback(staticLoadedJSON[i].word);
+            }
+            return;
+        }
+
+		var xhr = new XMLHttpRequest();
+		xhr.onload = function(event) {
+					
+			var data = JSON.parse(event.target.response);
+            staticLoadedJSON = data;
+			var i = index - 1;
+
+			if (i >= 0 && i < data.length) {
+				callback(data[i].word);
+			} else {
+				console.log("Word index out of bounds: " + i);
+				callback("");
+			}
+		};
+
+		xhr.onerror = function(event) {
+			console.log(event.error);
+			callback("");
+		};
+
+		xhr.type="json";
+
+		if (chrome && chrome.extension) {
+			xhr.open("GET", chrome.extension.getURL('/word.json'), true);
+		} else {
+			xhr.open("GET", 'js/word.json', true);
+		}
+
+		xhr.send();
+	}
+
+    function loadWordJSON() {
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function(event) {
+
+            staticLoadedJSON = JSON.parse(event.target.response);
+        };
+
+        xhr.onerror = function(event) {
+            console.log(event.error);
+        };
+
+        xhr.type="json";
+
+        if (chrome && chrome.extension) {
+            xhr.open("GET", chrome.extension.getURL('/word.json'), true);
+        } else {
+            xhr.open("GET", 'js/word.json', true);
+        }
+
+        xhr.send();
+    }
 
 	this.chromeInstall = function(callback, eventStatus) {
 

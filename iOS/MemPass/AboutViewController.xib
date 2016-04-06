@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="zrnic.ttf">
+            <string>ZrnicRg-Regular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AboutViewController" customModule="MemPass" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="webView" destination="BV2-ua-QJO" id="z7x-pn-aeY"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MemPass" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ehy-sc-ysT">
+                    <rect key="frame" x="213" y="50" width="174" height="84"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="174" id="Ahs-VN-RYZ"/>
+                        <constraint firstAttribute="height" constant="84" id="yaf-fr-9sw"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="ZrnicRg-Regular" family="Zrnic" pointSize="40"/>
+                    <nil key="highlightedColor"/>
+                    <size key="shadowOffset" width="-1" height="1"/>
+                </label>
+                <webView contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="BV2-ua-QJO">
+                    <rect key="frame" x="0.0" y="134" width="600" height="466"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </webView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="ehy-sc-ysT" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="50" id="8FM-nc-g5G"/>
+                <constraint firstAttribute="trailing" secondItem="BV2-ua-QJO" secondAttribute="trailing" id="CL7-3L-vdC"/>
+                <constraint firstItem="ehy-sc-ysT" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="OvD-Ij-927"/>
+                <constraint firstItem="BV2-ua-QJO" firstAttribute="top" secondItem="ehy-sc-ysT" secondAttribute="bottom" id="PkI-eF-pLB"/>
+                <constraint firstAttribute="bottom" secondItem="BV2-ua-QJO" secondAttribute="bottom" id="lko-lb-qTt"/>
+                <constraint firstItem="BV2-ua-QJO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="mdK-xM-xQ7"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

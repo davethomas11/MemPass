@@ -8,10 +8,12 @@
 
 import UIKit
 
-class SettingsSingleValueTableViewCell: UITableViewCell {
+class SettingsSingleValueTableViewCell: UITableViewCell, UITextFieldDelegate, SettingsCellProtocol {
 
     @IBOutlet weak var textfield: UITextField!
     @IBOutlet weak var label: UILabel!
+    
+    var textChanged: ((value:String?) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,4 +28,24 @@ class SettingsSingleValueTableViewCell: UITableViewCell {
         
     }
 
+    func valueChanged() {
+        if let textChanged = self.textChanged {
+            textChanged(value: textfield.text)
+        }
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        
+        valueChanged()
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textfield.resignFirstResponder()
+        return true
+    }
+    
+    func resignTextField() {
+        textfield.resignFirstResponder()
+    }
+   
 }

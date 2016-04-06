@@ -68,6 +68,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    
+    
    
     
     func tapTitle(send: UITapGestureRecognizer) {
@@ -102,6 +104,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         passHidden = true
         memPass.text = ""
         memPassResult.text = ""
+        
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: "MemPassView")
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
     }
     
     func resignText () {
@@ -145,6 +153,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             showPassword.show()
             copyToClipbaord.show()
             passHidden = true
+            showPassword.setTitle("Show", forState: UIControlState.Normal)
             
             return true
         }

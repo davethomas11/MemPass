@@ -65,39 +65,75 @@ section {
 #section1 {
 	height:600px;
 	background-color: #025772;
+    text-align:center;
+}
+
+#section2 {
+    height:600px;
+    background-color: #EF6340;
+    position:relative;
+}
+
+#section2 p.copy {
+    position:absolute;
+    font-family: "Zrnic";
+    bottom:15px;
+    left:0;
+    right:0;
+    color:#025772;
+}
+#section2 a {
+    color:white;
 }
 
 #phone {
 	background-image: url("../img/phonebg.png");
-	background-position: center 70px;
+	background-position: center bottom;
 	background-repeat: no-repeat;
-	width:600px;
+    background-size: contain;
 	margin-right: auto;
 	margin-left: auto;
-	height: 600px;
+    height: 100%;
 	text-align: center;
 	position: relative;
-
 	-webkit-transform-style: preserve-3d;
   	-moz-transform-style: preserve-3d;
   	transform-style: preserve-3d;
 }
 
-#phone input {
+
+
+#phone #space {
+    height:340px;
+    position:relative;
+    width:80%;
+    max-width:400px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+
+
+
+#phone form {
+}
+
+#phone form span {
+
+}
+
+#phone form span input {
 	background:none;
 	border:none;
 	color:white;
 	font-family: "Share-TechMono";
 	font-size:16pt;
 	height:30px;
-	width:65%;
-	display:block;
+	width:80%;
+    max-width:300px;
 	text-align: center;
 	margin-right: auto;
 	margin-left: auto;
-	position: relative;
-  	top: 65%;
-  	transform: translateY(-50%);
 
 }
 
@@ -105,7 +141,264 @@ section {
 	color:white;
 }
 
-#section2 {
-	height:600px;
-	background-color: #EF6340;
+
+
+.toast-message {
+    font-family: "Share-TechMono";
+    letter-spacing: 1px;
+    font-size: 16pt;
+}
+
+#mempassResult {
+    font-family: "Share-TechMono";
+    font-size:14pt;
+    color:white;
+    display:none;
+    padding-left: 5px;
+    padding-right: 5px;
+    width:80%;
+    max-width:300px;
+    margin-left: auto;
+    margin-right: auto;
+    word-wrap:break-word;
+}
+
+
+#mempass-phrase-entry form {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#buttons {
+    margin-top: 25px;
+    width:80%;
+    max-width:300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#show {
+    display: none;
+    font-family: "Zrnic";
+    color: #3fb2ee;
+    float:left;
+    font-size:16pt;
+
+}
+
+#copyToClipboard {
+    display: none;
+    font-family: "Zrnic";
+    color: #3fb2ee;
+    float:right;
+    font-size:16pt;
+}
+
+.menu-btn div {
+    font-size:12px;
+    font-family: arial;
+    color: #fff;
+    opacity: .8;
+}
+.menu-btn  {
+    position: absolute;
+    right: 0px;
+    top: 49%;
+    padding-right: 8px;
+    margin-top: -0.50em;
+    line-height: 1.2;
+    font-size: 18px;
+    font-weight: 200;
+    vertical-align: middle;
+    z-index: 99;
+    width:50px;
+    text-align: center;
+    cursor: pointer;
+}
+.menu-btn:hover span {
+    background: whitesmoke;
+    opacity: .8;
+}
+
+.menu-btn span {
+    display: block;
+    width: 19px;
+    height: 3px;
+    margin: 4px 0;
+    margin-left:auto;
+    margin-right:auto;
+    background: #fff;
+    z-index: 99;
+}
+
+#contextMenu {
+    display: none;
+    position:absolute;
+    width: 50%;
+    top: 59%;
+    right: 10px;
+    max-width: 200px;
+    background-color:white;
+    border-radius:5px;
+    border: 1px solid midnightblue;
+
+    z-index: 100;
+}
+#contextMenu ul li {
+    list-style: none;
+    margin:0;
+    padding:10px;
+    font-family: "Share-TechMono";
+    letter-spacing: 1px;
+    font-size: 16pt;
+    border-radius:5px;
+    cursor: pointer;
+}
+
+#contextMenu ul li:hover {
+    background-color:whitesmoke;
+}
+#contextMenu ul {
+    margin:0;
+    padding:0;
+}
+
+
+@media (max-width:480px) {
+    #section1 {
+        height: 400px;
+    }
+
+    #phone #space {
+        height:220px;
+    }
+
+    .menu-btn > div {
+        opacity: 0;
+    }
+
+    #contextMenu {
+        top: 68%;
+    }
+}
+
+#seedview {
+    position:absolute;
+    bottom:0;
+    margin-left: auto;
+    margin-right: auto;
+    left:0;
+    right:0;
+    width:300px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-top:2px solid #1a001a;
+    border-left:2px solid #1a001a;
+    border-right:2px solid #1a001a;
+    background: whitesmoke;
+    text-align: center;
+    z-index:125;
+}
+
+#seedview small {
+    font-family: arial;
+    font-size:10px;
+    opacity: .8;
+}
+
+#seedQR {
+    width:256px;
+    margin-left: auto;
+    margin-right:auto;
+}
+
+#CopySeed, #ViewSeed {
+    text-align: center;
+    font-family: "Share-TechMono";
+    font-size: 12pt;
+
+    word-wrap:break-word;
+
+}
+
+#CopySeed {
+    margin-top: 15px;
+}
+#CopySeed:hover, #ViewSeed:hover {
+    cursor: pointer;
+}
+#CopySeed:active, #ViewSeed:active {
+    opacity: .8;
+}
+#ViewSeed {
+    margin-top: 50px;
+    margin-bottom: 10px;
+}
+#closeseedview {
+    cursor:pointer;
+    font-size:16pt;
+    font-family: arial;
+    position:absolute;
+    right:10px;
+    top:0px;
+}
+#closeseedview:hover {
+    color:#EF6340;
+}
+
+#qrScanner {
+    width: 100vw;
+    height: 100vh;
+    position:absolute;
+    max-width:600px;
+    max-height:600px;
+    background: linear-gradient(#292d33, #3fb2ee);
+    text-align: center;
+    margin-left: auto;
+    margin-right:auto;
+    border-radius: 10px;
+    box-shadow: #0a0a0a 3px 3px 3px;
+    left:0;
+    right:0;
+    z-index:999;
+}
+
+#qrScanner h1 {
+    font-family: "Zrnic";
+    color:white;
+    letter-spacing: 4px;
+}
+#reader {
+    width: 450px;
+    height: 450px;
+    margin-left: auto;
+    margin-right: auto;
+
+
+}
+#closeScanner {
+    position: absolute;
+    bottom: 15px;
+    right:30px;
+    z-index: 9999;
+    cursor: pointer;
+}
+
+@media (max-width:480px) {
+    #qrScanner {
+        position:fixed;
+    }
+    #reader {
+        width: 300px;
+        height: 300px;
+        border-radius: 0px;
+    }
+}
+
+#section2 small {
+    color:white;
+    padding-top:12px;
+    display:inline-block;
+    font-family: arial;
+    opacity: .25;
 }

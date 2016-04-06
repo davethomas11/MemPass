@@ -34,17 +34,17 @@ class MemPass: NSObject {
             reSeed()
         }
         
-        let defaults = NSUserDefaults.standardUserDefaults()
-        if let optionSet = defaults.stringForKey(OPTIONS_SET) {
-            options.loadOptions(optionSet)
-        }
-        
         if !dice.databaseAvailable() {
             options.hasDiceWords = false
             options.saveDefault()
         } else {
             options.hasDiceWords = true
             options.saveDefault()
+        }
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let optionSet = defaults.stringForKey(OPTIONS_SET) {
+            options.loadOptions(optionSet)
         }
     }
     
@@ -180,13 +180,13 @@ class MemPass: NSObject {
             
             let specialChar = specialChars[specialCharIndex]
             
-            if index % options.capitalLetterMod == 0 {
+            if index % options.specialCharMod == 0 {
                 
                 memPass = memPass.stringByReplacingOccurrencesOfString(String(character), withString: specialChar)
             
             } else if let range = memPass.rangeOfString(String(character)){
                 
-                 memPass = memPass.stringByReplacingCharactersInRange(range, withString: specialChar)
+                memPass = memPass.stringByReplacingCharactersInRange(range, withString: specialChar)
             }
             
             index++
@@ -200,18 +200,29 @@ class MemPass: NSObject {
     
     func capitalLetterPass(inString:String) -> String {
         
-        let target = (passwordSum(inString) % options.capitalLetterMod) + 1
+        let target = (passwordSum(inString) % options.capitalLetterMod) + 2
         var found = 0
         
         var memPass = inString
         let alpha = NSCharacterSet.letterCharacterSet()
         var hasUpperCase = false
+        var hasLowerCase = false
+        
         for character in memPass.characters {
             let unicode = String(character)
             if let first = unicode.unicodeScalars.first where alpha.longCharacterIsMember(first.value) {
                 
-                memPass = memPass.stringByReplacingOccurrencesOfString(unicode, withString: unicode.uppercaseString, options: NSStringCompareOptions.LiteralSearch, range: memPass.rangeOfString(unicode))
-                hasUpperCase = true
+                if (found % 2 == 0) {
+                
+                    memPass = memPass.stringByReplacingOccurrencesOfString(unicode, withString: unicode.uppercaseString, options: NSStringCompareOptions.LiteralSearch, range: memPass.rangeOfString(unicode))
+                    hasUpperCase = true
+                    
+                } else {
+                    
+                    memPass = memPass.stringByReplacingOccurrencesOfString(unicode, withString: unicode.lowercaseString, options: NSStringCompareOptions.LiteralSearch, range: memPass.rangeOfString(unicode))
+                    hasLowerCase = true
+                    
+                }
                 
                 found++
                 
@@ -223,6 +234,10 @@ class MemPass: NSObject {
         
         if !hasUpperCase {
             memPass += options.defaultUppercase
+        }
+        
+        if !hasLowerCase {
+            memPass += options.numberReplace
         }
         
         return memPass
@@ -313,14 +328,9 @@ class MemPass: NSObject {
                 memPass = specialCharPass(memPass)
             }
             
-            if options.hasCapital {
+            if options.applyLimitBeforeDice {
                 
-                memPass = capitalLetterPass(memPass)
-            }
-            
-            if !options.hasNumber {
-                
-                memPass = removeNumbersPass(memPass)
+                memPass = limit(memPass)
             }
             
             if options.hasDiceWords {
@@ -328,9 +338,22 @@ class MemPass: NSObject {
                 memPass = diceWordPass(memPass)
             }
             
-            if options.characterLimit > 0 && options.characterLimit < memPass.characters.count {
+            if !options.hasNumber {
                 
-                memPass = memPass.substringToIndex(memPass.startIndex.advancedBy(options.characterLimit))
+                memPass = removeNumbersPass(memPass)
+            }
+            
+            if !options.applyLimitBeforeDice {
+                
+                memPass = limit(memPass)
+            }
+            
+            if !options.hasCapital {
+                
+                memPass = memPass.lowercaseString
+            } else {
+                
+                memPass = capitalLetterPass(memPass)
             }
             
             return memPass
@@ -338,6 +361,16 @@ class MemPass: NSObject {
         
         
         return nil
+    }
+    
+    func limit(mempass:String) -> String {
+        if options.characterLimit > 0 && options.characterLimit < mempass.characters.count {
+            
+            return mempass.substringToIndex(mempass.startIndex.advancedBy(options.characterLimit))
+        } else {
+            
+            return mempass
+        }
     }
     
     func memPassSyncKey() -> String {
