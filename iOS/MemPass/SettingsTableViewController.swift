@@ -187,7 +187,31 @@ class SettingsTableViewController: UITableViewController {
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "resignText"))
         self.view.userInteractionEnabled = true
         
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SettingsTableViewController.keyboardDidShow(_:)), name: UIKeyboardDidShowNotification, object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SettingsTableViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
     }
+    
+    func keyboardDidShow(notification:NSNotification) {
+        
+        if let info = notification.userInfo as? Dictionary<String,AnyObject>,
+            let rect = info[UIKeyboardFrameBeginUserInfoKey] as? CGRect {
+            
+            let size = rect.size
+            let contentInsets = UIEdgeInsetsMake(0, 0, size.height, 0)
+            self.tableView.contentInset = contentInsets
+            self.tableView.scrollIndicatorInsets = contentInsets
+            
+            let rect =
+        }
+        
+    }
+    
+    func keyboardWillHide(notification:NSNotification) {
+        
+    }
+    
     
     override func viewWillAppear(animated: Bool) {
         

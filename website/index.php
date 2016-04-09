@@ -78,12 +78,13 @@
 
     <br/>
     <br/>
-    <a href="https://chrome.google.com/webstore/detail/mempass/hnlodhabpchholkbhgajfjabhokbglnn">
-        <img src="img/ChromeWebStore_BadgeWBorder_v2_340x96.png"/>
+    <a href="https://itunes.apple.com/us/app/mempass/id1068402284?ls=1&mt=8" target="_blank">
+        <img src="img/Download_on_the_App_Store_Badge_US-UK_135x40.svg" width="340" height="96" />
     </a>
+
     <br/>
-    <a href="https://itunes.apple.com/us/app/mempass/id1068402284?ls=1&mt=8">
-        <img src="img/Download_on_the_App_Store_Badge_US-UK_135x40.svg" />
+    <a href="https://chrome.google.com/webstore/detail/mempass/hnlodhabpchholkbhgajfjabhokbglnn" target="_blank">
+        <img src="img/ChromeWebStore_BadgeWBorder_v2_340x96.png" width="340" height="96"/>
     </a>
 
     <br/>

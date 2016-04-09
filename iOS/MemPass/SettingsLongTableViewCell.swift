@@ -14,6 +14,7 @@ class SettingsLongTableViewCell: UITableViewCell, UITextFieldDelegate, SettingsC
     @IBOutlet weak var textfield: UITextField!
     
     var textChanged: ((value:String?) -> Void)?
+    var isActive: Bool
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -44,5 +45,9 @@ class SettingsLongTableViewCell: UITableViewCell, UITextFieldDelegate, SettingsC
     
     func resignTextField() {
         textfield.resignFirstResponder()
+    }
+    
+    func isCurrentlyActive() -> Bool {
+        return isActive
     }
 }

@@ -11,5 +11,5 @@ import Foundation
 protocol SettingsCellProtocol {
     
     func resignTextField()
-    
+    func isCurrentlyActive() -> Bool
 }

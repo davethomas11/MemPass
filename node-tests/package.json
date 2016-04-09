@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "get-random-values": "^1.1.1",
-    "sqlite3": "^3.1.1"
+    "mocha": "^2.4.5",
+    "sqlite3": "^3.1.1",
+    "unit.js": "^2.0.0"
   }
 }

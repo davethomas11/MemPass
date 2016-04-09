@@ -15,6 +15,8 @@ class SettingsSingleValueTableViewCell: UITableViewCell, UITextFieldDelegate, Se
     
     var textChanged: ((value:String?) -> Void)?
     
+    var isActive: Bool = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -41,11 +43,22 @@ class SettingsSingleValueTableViewCell: UITableViewCell, UITextFieldDelegate, Se
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textfield.resignFirstResponder()
+        isActive = false
         return true
     }
     
     func resignTextField() {
         textfield.resignFirstResponder()
+        isActive = false
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        
+        isActive = true;
+    }
+    
+    func isCurrentlyActive() -> Bool {
+        return isActive
     }
    
 }
