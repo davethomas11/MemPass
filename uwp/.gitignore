@@ -1,0 +1,10 @@
+# User-specific files
+*.user
+
+# Visual Studio generated
+.vs/*
+obj/*
+project.lock.json
+
+# Misc.
+*.pfx
