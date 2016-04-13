@@ -7,20 +7,29 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Pivot x:Name="rootPivot">
-            <PivotItem Header="MemPass">
-                <TextBlock Text="Enter a Simple Phrase" />
-            </PivotItem>
-            <PivotItem Header="Seed">
-                <TextBlock Text="Enter or Scan Seed" />
-            </PivotItem>
-            <PivotItem Header="Settings">
-                <TextBlock Text="Settings go here" />
-            </PivotItem>
-            <PivotItem Header="About">
-                <TextBlock Text="Written by the all mighty Davos Seaworth (a.k.a: Sir Dave Grohl, a.k.a: Dave Thomas)" />
-            </PivotItem>
-        </Pivot>
-    </Grid>
+    <Pivot x:Name="rootPivot">
+        <Pivot.Background>
+            <SolidColorBrush Color="#FF4A4A4A" />
+        </Pivot.Background>
+        <PivotItem Header="MemPass">
+            <PivotItem.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF292D33" Offset="0"/>
+                    <GradientStop Color="#FF3FB2EE" Offset="1"/>
+                </LinearGradientBrush>
+            </PivotItem.Background>
+            <TextBox HorizontalAlignment="Center"
+                            Text="Enter a Simple Phrase"
+                            VerticalAlignment="Center" Foreground="White" />
+        </PivotItem>
+        <PivotItem Header="Seed">
+            <TextBlock Text="Enter or Scan Seed" />
+        </PivotItem>
+        <PivotItem Header="Settings">
+            <TextBlock Text="Settings go here" />
+        </PivotItem>
+        <PivotItem Header="About">
+            <TextBlock Text="Written by the all mighty Davos Seaworth (a.k.a: Sir Dave Grohl, a.k.a: Dave Thomas)" />
+        </PivotItem>
+    </Pivot>
 </Page>
