@@ -8,14 +8,13 @@
 
 import UIKit
 
-class SettingsSingleValueTableViewCell: UITableViewCell, UITextFieldDelegate, SettingsCellProtocol {
+class SettingsSingleValueTableViewCell: UITableViewCell,  SettingsTextProtocol {
 
     @IBOutlet weak var textfield: UITextField!
     @IBOutlet weak var label: UILabel!
     
     var textChanged: ((value:String?) -> Void)?
     
-    var isActive: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -43,22 +42,12 @@ class SettingsSingleValueTableViewCell: UITableViewCell, UITextFieldDelegate, Se
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textfield.resignFirstResponder()
-        isActive = false
         return true
     }
     
-    func resignTextField() {
-        textfield.resignFirstResponder()
-        isActive = false
-    }
-    
-    func textFieldDidBeginEditing(textField: UITextField) {
-        
-        isActive = true;
-    }
-    
-    func isCurrentlyActive() -> Bool {
-        return isActive
+   
+    func getTextField() -> UITextField {
+        return textfield
     }
    
 }

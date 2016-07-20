@@ -157,10 +157,9 @@ class SSetups {
     
 }
 
-class SettingsTableViewController: UITableViewController {
+class SettingsTableViewController: UITableViewController, UITextFieldDelegate {
     
     var options = MemPass.sharedInstance().options
-    var textCells = [SettingsCellProtocol]()
     
     var settings = [
         
@@ -184,7 +183,7 @@ class SettingsTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "resignText"))
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(SettingsTableViewController.resignText)))
         self.view.userInteractionEnabled = true
         
         
@@ -203,7 +202,9 @@ class SettingsTableViewController: UITableViewController {
             self.tableView.contentInset = contentInsets
             self.tableView.scrollIndicatorInsets = contentInsets
             
-            let rect =
+            var rect = self.view.frame
+            rect.size.height -= size.height;
+            if (!CGRectContainsRect(rect, <#T##rect2: CGRect##CGRect#>))
         }
         
     }
@@ -232,9 +233,7 @@ class SettingsTableViewController: UITableViewController {
     }
     
     func resignText() {
-        for cell in textCells {
-            cell.resignTextField()
-        }
+      
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -273,10 +272,10 @@ class SettingsTableViewController: UITableViewController {
         
         
         let cell = tableView.dequeueReusableCellWithIdentifier(setting.type.reUseId(), forIndexPath: indexPath)
-        setting.setup(cell: cell,opts: options)
+        setting.setup(cell: cell, opts: options)
         
-        if let settingCell = cell as? SettingsCellProtocol {
-            textCells.append(settingCell)
+        if let settingCell = cell as? SettingsTextProtocol {
+            settingCell.getTextField().delegate = self
         }
         
         return cell

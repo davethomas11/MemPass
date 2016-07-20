@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		07FED87BE6DE686CDCD6C2DF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDD5A6E90B84503726D0C62 /* libPods.a */; };
-		55326E2C1C94CB2500AC3228 /* SettingsCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55326E2B1C94CB2500AC3228 /* SettingsCellProtocol.swift */; };
 		55326E2F1C9625AD00AC3228 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55326E2D1C9625AD00AC3228 /* AboutViewController.swift */; };
 		55326E301C9625AD00AC3228 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55326E2E1C9625AD00AC3228 /* AboutViewController.xib */; };
 		55326E331C9625C300AC3228 /* SyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55326E311C9625C300AC3228 /* SyncViewController.swift */; };
 		55326E341C9625C300AC3228 /* SyncViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55326E321C9625C300AC3228 /* SyncViewController.xib */; };
+		555035251CC0401A00E134B8 /* SettingsTextProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555035241CC0401A00E134B8 /* SettingsTextProtocol.swift */; };
 		55560BC21C1FF98B00B29D49 /* AAPTransitionDirector.m in Sources */ = {isa = PBXBuildFile; fileRef = 55560BBD1C1FF98B00B29D49 /* AAPTransitionDirector.m */; };
 		55560BC31C1FF98B00B29D49 /* UINavigationController+RadialTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 55560BBF1C1FF98B00B29D49 /* UINavigationController+RadialTransaction.m */; };
 		55560BC41C1FF98B00B29D49 /* UIView+Radial.m in Sources */ = {isa = PBXBuildFile; fileRef = 55560BC11C1FF98B00B29D49 /* UIView+Radial.m */; };
@@ -78,11 +78,11 @@
 
 /* Begin PBXFileReference section */
 		4DDD5A6E90B84503726D0C62 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		55326E2B1C94CB2500AC3228 /* SettingsCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCellProtocol.swift; sourceTree = "<group>"; };
 		55326E2D1C9625AD00AC3228 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		55326E2E1C9625AD00AC3228 /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
 		55326E311C9625C300AC3228 /* SyncViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncViewController.swift; sourceTree = "<group>"; };
 		55326E321C9625C300AC3228 /* SyncViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SyncViewController.xib; sourceTree = "<group>"; };
+		555035241CC0401A00E134B8 /* SettingsTextProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTextProtocol.swift; sourceTree = "<group>"; };
 		55560BBC1C1FF98B00B29D49 /* AAPTransitionDirector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPTransitionDirector.h; sourceTree = "<group>"; };
 		55560BBD1C1FF98B00B29D49 /* AAPTransitionDirector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPTransitionDirector.m; sourceTree = "<group>"; };
 		55560BBE1C1FF98B00B29D49 /* UINavigationController+RadialTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+RadialTransaction.h"; sourceTree = "<group>"; };
@@ -254,11 +254,11 @@
 				55F119831C2298680084C07B /* SettingsToggleTableViewCell.swift */,
 				55F119811C2298580084C07B /* SettingsSingleValueTableViewCell.swift */,
 				55F119851C2298810084C07B /* SettingsLongTableViewCell.swift */,
-				55326E2B1C94CB2500AC3228 /* SettingsCellProtocol.swift */,
 				55326E2D1C9625AD00AC3228 /* AboutViewController.swift */,
 				55326E2E1C9625AD00AC3228 /* AboutViewController.xib */,
 				55326E311C9625C300AC3228 /* SyncViewController.swift */,
 				55326E321C9625C300AC3228 /* SyncViewController.xib */,
+				555035241CC0401A00E134B8 /* SettingsTextProtocol.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -559,7 +559,6 @@
 				55F1197A1C2287CB0084C07B /* ToggleTorchButton.swift in Sources */,
 				55F1197F1C2294EB0084C07B /* SettingsTableViewController.swift in Sources */,
 				55F119841C2298680084C07B /* SettingsToggleTableViewCell.swift in Sources */,
-				55326E2C1C94CB2500AC3228 /* SettingsCellProtocol.swift in Sources */,
 				55A7061F1C1A960600063130 /* AppDelegate.swift in Sources */,
 				558DA4281C27D37800538933 /* Word.swift in Sources */,
 				558DA4181C27233300538933 /* MemPassDice.swift in Sources */,
@@ -569,6 +568,7 @@
 				55F119781C2287CB0084C07B /* ReaderOverlayView.swift in Sources */,
 				55A951571C1FDE34005C24AF /* Reachability.swift in Sources */,
 				55F119861C2298810084C07B /* SettingsLongTableViewCell.swift in Sources */,
+				555035251CC0401A00E134B8 /* SettingsTextProtocol.swift in Sources */,
 				55326E2F1C9625AD00AC3228 /* AboutViewController.swift in Sources */,
 				55560BC21C1FF98B00B29D49 /* AAPTransitionDirector.m in Sources */,
 				55F119821C2298580084C07B /* SettingsSingleValueTableViewCell.swift in Sources */,

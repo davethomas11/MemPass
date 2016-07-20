@@ -8,13 +8,12 @@
 
 import UIKit
 
-class SettingsLongTableViewCell: UITableViewCell, UITextFieldDelegate, SettingsCellProtocol {
+class SettingsLongTableViewCell: UITableViewCell, UITextFieldDelegate, SettingsTextProtocol {
 
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var textfield: UITextField!
     
     var textChanged: ((value:String?) -> Void)?
-    var isActive: Bool
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,8 +31,10 @@ class SettingsLongTableViewCell: UITableViewCell, UITextFieldDelegate, SettingsC
             textChanged(value: textfield.text)
         }
     }
+
     
     func textFieldDidEndEditing(textField: UITextField) {
+   
         
         valueChanged()
     }
@@ -43,11 +44,10 @@ class SettingsLongTableViewCell: UITableViewCell, UITextFieldDelegate, SettingsC
         return true
     }
     
-    func resignTextField() {
-        textfield.resignFirstResponder()
+    
+    func getTextField() -> UITextField {
+        return textfield
     }
     
-    func isCurrentlyActive() -> Bool {
-        return isActive
-    }
+   
 }
