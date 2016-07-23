@@ -8,7 +8,7 @@ import java.util.*
  * Created by dave on 2016-07-19.
  */
 
-class MemPass(mDice: Dice) {
+class MemPass(mDice: Dice?) {
 
     var mOptions = Options()
     private var seed: String = ""

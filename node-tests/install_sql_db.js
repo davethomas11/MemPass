@@ -1,6 +1,4 @@
-var memPassNode = require('./mempass_node');
-var injector = memPassNode.injector;
-var memPass = memPassNode.mempass;
+var memPass = require('./mempass_node').mempass();
 
 memPass.getDice().nodeSqlLite3Install("../word.json", function () {
 

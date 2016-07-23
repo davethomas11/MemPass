@@ -44,7 +44,7 @@ class MainActivityUI : AnkoComponent<MainActivity>  {
                 mEditText.setOnEditorActionListener { textView, i, keyEvent ->
 
                     if (i == EditorInfo.IME_ACTION_DONE || keyEvent.keyCode == KeyEvent.KEYCODE_ENTER) {
-                        ui.owner.MemPass(textView.text.toString())
+                        ui.owner.processMemPass(textView.text.toString())
                     }
 
                     false
