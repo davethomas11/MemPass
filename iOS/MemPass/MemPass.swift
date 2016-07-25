@@ -149,7 +149,7 @@ class MemPass: NSObject {
             if occurences[character] == nil {
                 occurences[character] = 1
             } else {
-                occurences[character]!++
+                occurences[character]! += 1
             }
             
         }
@@ -189,7 +189,7 @@ class MemPass: NSObject {
                 memPass = memPass.stringByReplacingCharactersInRange(range, withString: specialChar)
             }
             
-            index++
+            index += 1
             
             sorted.removeFirst()
             specialChars.removeAtIndex(specialCharIndex)
@@ -224,7 +224,7 @@ class MemPass: NSObject {
                     
                 }
                 
-                found++
+                found += 1
                 
                 if (target == found) {
                     break;

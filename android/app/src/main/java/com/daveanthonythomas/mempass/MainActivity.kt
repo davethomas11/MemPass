@@ -1,5 +1,6 @@
 package com.daveanthonythomas.mempass
 
+import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -10,6 +11,8 @@ import org.jetbrains.anko.*
 
 class MainActivity : AppCompatActivity() {
 
+    val SEED = "MemPassSeed"
+    val PREFERENCES = "MemPassPrefs"
     var mMemPass:MemPass? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,6 +20,11 @@ class MainActivity : AppCompatActivity() {
 
         mMemPass = MemPass(WordDB.getInstance(this))
 
+        val prefs = getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE)
+        mMemPass!!.reSeed(prefs.getString(SEED, null))
+
+        prefs.edit().putString(SEED, mMemPass!!.memPassSyncKey())
+        
         MainActivityUI().setContentView(this)
     }
 
